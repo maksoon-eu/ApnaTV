@@ -1,0 +1,69 @@
+@import '../../style/variables.scss';
+
+header {
+    height: 130px;
+    background: linear-gradient(180deg, #0B1220 12.29%, rgba(0, 0, 0, 0.07) 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.header__link {
+    cursor: pointer;
+    display: inline-block;
+    padding: 15px 20px;
+    color: #fff;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: 0.5s;
+    overflow: hidden;
+
+    &:hover{
+        background: $hover-color;
+        color: #050801;
+        box-shadow: 0 0 5px $hover-color,
+                    0 0 25px $hover-color,
+                    0 0 50px $hover-color,
+                    0 0 200px $hover-color;
+        -webkit-box-reflect:below 1px linear-gradient(transparent, #0005);
+    }
+}
+
+.header__inner {
+    max-width: 1440px;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header__item {
+    &-text {
+        font-weight: 600;
+        font-size: 20px;
+        line-height: 25px;
+        letter-spacing: 0.03em;
+    }
+
+    &-account {
+        display: flex;
+        align-items: center;
+    }
+}
+
+.header__account {
+    &-img {
+        width: 19px;
+        height: 19px;
+        cursor: pointer;
+        margin-right: 30px;
+
+        &:hover {
+            path {
+                transition: .1s linear;
+                fill: $hover-color;
+            }
+        }
+    }
+}

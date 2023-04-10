@@ -1,0 +1,88 @@
+@import '../../style/variables.scss';
+
+.dropdown {
+    max-width: 220px;
+    width: 100%;
+    position: relative;
+    z-index: 10;
+
+    &.active {
+        &:not(.catalog) .dropdown__menu {
+            height: 230px;
+        }
+
+        &.catalog .dropdown__menu{
+            height: 80px;
+        }
+
+        & img {
+            transform: rotate(180deg);
+        }
+    }
+}
+
+.dropdown__menu {
+    position: absolute;
+    top: 50px;
+    left: 0;
+    right: 0;
+    transition: 0.2s linear;
+    height: 0;
+    overflow: auto;
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px;
+
+    &-item {
+        font-size: 18px;
+        text-transform: capitalize;
+        padding: 8px 15px;
+        cursor: pointer;
+        background-color: $footer-bg;
+    }
+
+    img {
+        width: 20px;
+        height: 20px;
+        margin-right: 7px;
+    }
+}
+
+.dropdown__menu {
+    scrollbar-width: 4px;
+    scrollbar-color: $hover-color $scroll-bg;
+}
+
+.dropdown__menu::-webkit-scrollbar {
+    width: 4px;
+}
+
+.dropdown__menu::-webkit-scrollbar-track {
+    background: $scroll-bg;
+    border-radius: 3px;
+}
+
+.dropdown__menu::-webkit-scrollbar-thumb {
+    background-color: $hover-color;
+    border-radius: 3px;
+}
+
+.dropdown__current {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    font-size: 20px;
+    text-transform: capitalize;
+    background-color: $footer-bg;
+    padding: 8px 15px;
+    border-radius: 6px;
+    width: auto;
+
+    img {
+        transition: .2s linear;
+        width: 15px;
+        height: 10px;
+        margin-top: 4px;
+        margin-left: 7px;
+    }
+}

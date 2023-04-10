@@ -1,0 +1,147 @@
+@import '../../style/variables';
+
+footer {
+    margin-top: 100px;
+    width: 100%;
+    background-color: $footer-bg;
+    padding: 25px 20px 10px 20px;
+}
+
+.footer__inner {
+    display: flex;
+    justify-content: space-between;
+
+    .footer__list {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+}
+
+.footer__list {
+    &-item {
+        font-weight: 600;
+        font-size: 17px;
+        line-height: 27px;
+        transition: .1s linear;
+
+        &:hover {
+            color: $hover-color;
+        }
+    }
+}
+
+.footer__help {
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 27px;
+    text-align: center;
+}
+
+.footer__line {
+    background: $line-color;
+    width: 100%;
+    height: 1px;
+    margin: 20px 0;
+    margin-bottom: 10px;
+}
+
+.footer__underline {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &-block {
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 20px;
+        color: #FFFFFF;
+    }
+}
+
+.icons {
+    margin-top: 20px;
+
+    ul {
+        display: flex;
+    }
+}
+
+.icons ul li {
+    width: 39px;
+    height: 39px;
+    margin: 0 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border-radius: 50%;
+    border: 2px solid #D8E2DC;
+    transition: all 0.4s ease;
+
+    & .fa {
+        color: #D8E2DC;
+        transition: all 0.4s ease;
+        width: 18px;
+        height: 16px;
+        display: block;
+    }
+
+    & .w22 {
+        width: 22px;
+    }
+
+    & .w24 {
+        width: 24px;
+    }
+
+    &:hover.vk {
+        border-color: #3b5998;
+        box-shadow: 0 0 15px #3b5998;
+        transition: all 0.5s ease;
+    }
+
+    &:hover .fa-vk {
+        color: #3b5998;
+        text-shadow: 0 0 15px #3b5998;
+        transition: all 0.5s ease;
+    }
+
+    &:hover.telegram {
+        border-color: #00aced;
+        box-shadow: 0 0 15px #00aced;
+        transition: all 0.5s ease;
+    }
+
+    &:hover .fa-telegram {
+        color: #00aced;
+        text-shadow: 0 0 15px #00aced;
+        transition: all 0.5s ease;
+    }
+
+    &:hover.instagram {
+        border-color: #bc2a8d;
+        box-shadow: 0 0 15px #bc2a8d;
+        transition: all 0.5s ease;
+    }
+
+    &:hover .fa-instagram {
+        color: #bc2a8d;
+        text-shadow: 0 0 15px #bc2a8d;
+        transition: all 0.5s ease;
+    }
+
+    &:hover.google {
+        border-color: #dd4b39;
+        box-shadow: 0 0 15px #dd4b39;
+        transition: all 0.5s ease;
+    }
+
+    &:hover .fa-google {
+        color: #dd4b39;
+        text-shadow: 0 0 15px #dd4b39;
+        transition: all 0.5s ease;
+    }
+}
+  
