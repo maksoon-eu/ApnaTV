@@ -56,14 +56,141 @@ header {
     &-img {
         width: 19px;
         height: 19px;
-        cursor: pointer;
         margin-right: 30px;
 
-        &:hover {
-            path {
-                transition: .1s linear;
-                fill: $hover-color;
-            }
+        path {
+            transition: .1s linear;
         }
     }
+}
+
+.search {
+    position: relative;
+    z-index: 20;
+
+    &.active {
+        & .search__menu {
+            height: 365px;
+        }
+    }
+}
+
+.search__menu {
+    position: absolute;
+    top: 40px;
+    transition: 0.4s ease;
+    height: 0;
+    right: -50px;
+    left: -50px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px;
+    background-color: $dropdown-color;
+
+    &-item {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        background-color: $dropdown-color;
+        padding: 10px;
+        padding-bottom: 0;
+    }
+
+    .search__item-name {
+        font-size: 18px;
+        font-weight: 600;
+    }
+
+    .search__item-img {
+        margin-right: 20px;
+
+        img {
+            width: 80px;
+            height: 120px;
+            object-fit: cover;
+        }
+    }
+
+    .search__item-group {
+        margin-top: 8px;
+        display: flex;
+        align-items: center;
+    }
+
+    .search__item-rating {
+        margin-right: 10px;
+        font-size: 13px;
+        color: #f49f35;
+        font-weight: 600;
+    }
+
+    .search__item-year {
+        font-size: 13px;
+        color: #9a9a9a;
+        font-weight: 600;
+    }
+}
+
+.search__current {
+    position: relative;
+    transition: width .55s ease;
+
+    .header__account-img {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    input {
+        padding-left: 40px;
+        background-color: transparent;
+        border: none;
+        transition: width .55s ease;
+        width: 35px;
+        height: 35px;
+        color: #fff;
+        font-size: 16px;
+        &::placeholder {
+            font-size: 16px;
+        }
+
+        &.focus {
+            width: 200px;
+        }
+    }
+
+    &:hover {
+        input {
+            width: 200px;
+        }
+    }
+}
+
+.search__menu {
+    scrollbar-width: 4px;
+    scrollbar-color: $hover-color $scroll-bg;
+}
+
+.search__menu::-webkit-scrollbar {
+    width: 4px;
+}
+
+.search__menu::-webkit-scrollbar-track {
+    background: $scroll-bg;
+    border-radius: 3px;
+}
+
+.search__menu::-webkit-scrollbar-thumb {
+    background-color: $hover-color;
+    border-radius: 3px;
+}
+
+.noneTitle {
+    margin: auto 0;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 50%;
+    transform: translateX(-50%);
 }

@@ -3,6 +3,7 @@
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
+    min-height: 900px;
 }
 
 .filmList__item {
@@ -39,4 +40,11 @@
         font-weight: 600;
         font-size: 18px;
     }
+}
+
+.spinnerUpdate {
+    display: block;
+    margin: 0 auto;
+    margin-top: -20px;
+    margin-bottom: -100px;
 }

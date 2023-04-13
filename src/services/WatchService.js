@@ -9,19 +9,28 @@ const useWatchService = () => {
     const _baseCurrent = '%21null';
 
     const getAllFilms = async (offset = _baseOffset, type = _baseCurrent, year = _baseCurrent, rating = _baseCurrent, genre = _baseCurrent, country = _baseCurrent) => {
-        const res = await request(`${_apiBase}movie?selectFields=name%20id%20typeNumber%20genres.name%20year%20rating.imdb%20poster.previewUrl&page=${offset}&limit=20&typeNumber=${type}&year=${year}&rating.imdb=${rating}&premiere.country=${country}&poster.previewUrl=%21null&genres.name=${genre}`);
+        const res = await request(`${_apiBase}movie?selectFields=name%20id%20typeNumber%20genres.name%20year%20rating.imdb%20poster.previewUrl&page=${offset}&limit=28&typeNumber=${type}&year=${year}&rating.imdb=${rating}&premiere.country=${country}&poster.previewUrl=%21null&genres.name=${genre}`);
 
-        return res.docs.map(_transformGenreFilms)
+        return {
+            itemList: res.docs.map(_transformGenreFilms),
+            total: res.total
+        }
+    }
+
+    const getSearchedFilms = async (name = _baseCurrent) => {
+        const res = await request(`https://api.kinopoisk.dev/v1.2/movie/search?page=1&limit=10&query=${name}`);
+
+        return res.docs.map(_transformSearchedFilms)
     }
 
     const getTopFilms = async (offset = _baseOffset) => {
-        const res = await request(`${_apiBase}movie?selectFields=id%20name%20rating.imdb%20rating.kp%20description%20poster.previewUrl%20poster.url%20videos.trailers.url&page=${offset}&limit=50&typeNumber=1%203&year=2015-2100&poster.url=%21null&poster.previewUrl=%21null&videos.trailers=%21null&rating.kp=%21null&rating.imdb=%21null`);
+        const res = await request(`${_apiBase}movie?selectFields=id%20name%20rating.imdb%20rating.kp%20description%20poster.previewUrl%20poster.url%20videos.trailers.url&page=${offset}&limit=50&typeNumber=1&year=2015-2100&poster.url=%21null&poster.previewUrl=%21null&videos.trailers=%21null&rating.kp=%21null&rating.imdb=%21null`);
 
         return res.docs.map(_transformTopFilms)
     }
 
     const getGanreFilms = async (genre, offset = _baseOffset) => {
-        const res = await request(`${_apiBase}movie?selectFields=id%20name%20poster.previewUrl&page=${offset}&limit=24&year=2015-2100&poster.url=%21null&poster.previewUrl=%21null&typeNumber=1%203&rating.kp=%21null&rating.imdb=%21null&genres.name=${genre}`);
+        const res = await request(`${_apiBase}movie?selectFields=id%20name%20poster.previewUrl&page=${offset}&limit=24&year=2015-2100&poster.url=%21null&poster.previewUrl=%21null&typeNumber=1&rating.kp=%21null&rating.imdb=%21null&genres.name=${genre}`);
 
         return res.docs.map(_transformGenreFilms)
     }
@@ -43,6 +52,17 @@ const useWatchService = () => {
          return res.map(_transformGenres)
     }
 
+    const _transformSearchedFilms = (item) => {
+        return {
+            name: item.name,
+            alternativeName: item.alternativeName,
+            posterSmall: item.poster,
+            rating: item.rating,
+            year: item.year,
+            id: item.id
+        }
+    }
+
     const _transformTopFilms = (item) => {
         return {
             name: item.name, 
@@ -60,6 +80,7 @@ const useWatchService = () => {
         return {
             name: item.name,
             posterSmall: item.poster.previewUrl,
+            alternativeName: item.alternativeName,
             id: item.id
         }
     }
@@ -76,7 +97,7 @@ const useWatchService = () => {
         }
     }
 
-    return {getTopFilms, getAllFilms, getPoster, getGanreFilms, getAllFilters, loading, error, clearError}
+    return {getTopFilms, getAllFilms, getPoster, getGanreFilms, getAllFilters, loading, error, clearError, getSearchedFilms}
 }
 
 export default useWatchService;

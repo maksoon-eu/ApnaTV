@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import Slider from "react-slick";
 import useWatchService from "../../services/WatchService";
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import { motion } from 'framer-motion';
 
 import Skeleton from "../skeleton/Skeleton";
 import SkeletonSlider from "../skeleton/SkeletonSlider";
@@ -117,6 +118,7 @@ const View = ({activeItem}) => {
 
     useEffect(() => {
         onRequest()
+        // eslint-disable-next-line
     }, [activeItem])
 
     const onRequest = () => {
@@ -139,7 +141,7 @@ const View = ({activeItem}) => {
         return allRaiting
     }
 
-    const errorMessage = error ? <img className="alternative-img" src={activeItem.posterBig} alt={activeItem.name}/> : null
+    const errorMessage = error && !loading ? <img className="alternative-img" src={activeItem.posterBig} alt={activeItem.name}/> : null
     const spinner = loading ? <img className="loading-img" src={loadingImg} alt="loading"/> : null
     const content =  !(loading || error) ? <LazyLoadImage className="poster-img" effect="opacity" width='100%' height='100%' src={poster} alt={activeItem.name}/> : null
 
@@ -147,6 +149,10 @@ const View = ({activeItem}) => {
         <>
             {openModal ? <Modal url={activeItem.trailers}/> : null}
             <div className="activeSlider__item">
+                <motion.div
+                initial={{ opacity: 0, x: -100 }}
+                animate={{ opacity: 1, x: 0 }}
+                >
                 <div className="activeSlider__item-left">
                     <div className="activeSlider__item-title">{activeItem.name}</div>
                     <div className="activeSlider__item-subtitle">{activeItem.description}</div>
@@ -163,6 +169,7 @@ const View = ({activeItem}) => {
                     </button>
                 </div>
                 </div>
+                </motion.div>
                 <div className="activeSlider__item-img">
                     {errorMessage}
                     {spinner}

@@ -1,17 +1,23 @@
 import { useState, useEffect } from "react";
 import useWatchService from "../../services/WatchService";
-import { LazyLoadImage } from "react-lazy-load-image-component";
 
 import Filter from "../filter/Filter";
+import SkeletonSlider from "../skeleton/SkeletonSlider"
+import ErrorMessage from "../errorMessage/ErorrMessage"
 
 import loadingImg from "../../resources/img/loading.svg"
 
 import './filmList.scss'
+import FilmListItem from "../filmListItem/FilmListItem";
 
 const FilmList = () => {
     const [films, setFilms] = useState([])
-    const [filterArr, setFilterArr] = useState([])
+    const [offset, setOffset] = useState(2)
     const {error, loading, getAllFilms} = useWatchService();
+    const [fetching, setFetching] = useState(false)
+    const [totalCount, setTotalCount] = useState(1)
+
+    const skeletonArr = ['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '']
 
     const [genre, setGenre] = useState('%21null');
     const [type, setType] = useState('%21null');
@@ -20,36 +26,49 @@ const FilmList = () => {
     const [country, setCountry] = useState('%21null');
 
     useEffect(() => {
-        onRequest()
+        onRequest(offset)
         // eslint-disable-next-line
-    }, [])
+    }, [type, year, rating, genre, country])
 
     useEffect(() => {
-        onRequestFilter()
-    }, [genre, country, year, rating, type])
+        if (fetching) {
+            onUpdateRequest(offset)
+        }
+    }, [fetching])
+
+    useEffect(() => {
+        window.addEventListener('scroll', onScrollList);
+
+        return function() {
+            window.removeEventListener('scroll', onScrollList);
+        }
+    }, [films])
 
     const onRequest = () => {
-        getAllFilms()
+        getAllFilms(1, type, year, rating, genre, country)
             .then(onFilmsLoaded)
     }
 
     const onFilmsLoaded = (item) => {
-        setFilms(item)
+        setTotalCount(item.total)
+        setFilms(item.itemList)
+    }
+
+    const onUpdateRequest = (offset) => {
+        getAllFilms(offset, type, year, rating, genre, country)
+            .then(onUpdateFilmsLoaded)
+    }
+
+    const onUpdateFilmsLoaded = (item) => {
+        setTotalCount(item.total)
+        setFilms(films => [...films, ...item.itemList])
+        setOffset(offset => offset + 1)
+        setFetching(false)
     }
 
     const filmList = films.map(item => {
         return (
-            <div key={item.id} className="filmList__item">
-                <div className="filmList__item-img">
-                    <LazyLoadImage 
-                        width='100%' height='100%'
-                        placeholderSrc={loadingImg}
-                        src={item.posterSmall}
-                        alt={item.name}
-                    />
-                </div>
-                <div className="filmList__item-name">{item.name}</div>
-            </div>
+            <FilmListItem key={item.id} item={item}/>
         )
     })
 
@@ -57,7 +76,6 @@ const FilmList = () => {
         switch (Object.keys(filter)[0]) {
             case 'genre':
                 setGenre(genre => genre !== encodeURI(filter[Object.keys(filter)[0]]) ? encodeURI(filter[Object.keys(filter)[0]]) : '%21null')
-                console.log(1)
                 break;
             case 'year':
                 setYear(year => year !== filter[Object.keys(filter)[0]] ? filter[Object.keys(filter)[0]] : '%21null')
@@ -72,37 +90,34 @@ const FilmList = () => {
                 setType(type => type !== filter[Object.keys(filter)[1]] ? encodeURI(filter[Object.keys(filter)[1]]) : '%21null')
                 break;
         }
-        // if (filterArr.length !== 0) {
-        //     filterArr.forEach(item => {
-        //         if (Object.keys(item)[0] === Object.keys(filter)[0]) {
-        //             setFilterArr(filterArr => filterArr.filter(item => Object.keys(item)[0] !== Object.keys(filter)[0] ))
-        //             setFilterArr(filterArr => filterArr.concat(filter))
-        //         } 
-
-        //         if (item[Object.keys(item)[0]] === filter[Object.keys(filter)[0]]) {
-        //             setFilterArr(filterArr => filterArr.filter(item => Object.keys(item)[0] !== Object.keys(filter)[0] ))
-        //         }
-        //     })
-
-        //     if (!filterArr.some(item => Object.keys(item)[0] === Object.keys(filter)[0])) {
-        //         setFilterArr(filterArr => filterArr.concat(filter))
-        //     }
-        // } else {
-        //     setFilterArr(filterArr => filterArr.concat(filter))
-        // }
     }
 
-    const onRequestFilter = () => {
-        getAllFilms(1, type, year, rating, genre, country)
-            .then(onFilmsLoaded)
+    const onScrollList = (e) => {
+        if (e.target.documentElement.scrollHeight - (e.target.documentElement.scrollTop + window.innerHeight) < 300 && filmList.length !== 0 && filmList.length < totalCount) {
+            setFetching(true)
+        }
     }
+
+    const skeletonList = skeletonArr.map((item, i) => {
+        return (
+            <SkeletonSlider key={i}/>
+        )
+    })
+
+    const errorMessage = error ? <ErrorMessage/> : null
+    const spinner = loading && !fetching ? skeletonList : null
+    const spinnerUpdate = fetching ? <img src={loadingImg} className="spinnerUpdate" alt="Loading..." /> : null
+    const content = !(error || spinner) ? filmList : null
 
     return (
         <div>
             <Filter filterFilm={filterFilm}/>
             <div className="film__flex">
-                {filmList}
+                {errorMessage}  
+                {spinner}  
+                {content}
             </div>
+            {spinnerUpdate}
         </div>
     );
 };

@@ -16,7 +16,7 @@ import "../../style/btn.scss"
 
 const GenreSlider = ({genre}) => {
     const [films, setFilms] = useState([]);
-    const [skeletonArr] = useState(['', '', '', '', '', '', ''])
+    const skeletonArr = ['', '', '', '', '', '', '']
     const {error, loading, getGanreFilms} = useWatchService();
 
     useEffect(() => {
@@ -50,13 +50,13 @@ const GenreSlider = ({genre}) => {
                             alt={item.name}
                         />
                     </div>
-                    <div className="films__item-name">{item.name}</div>
+                    <div className="films__item-name">{item.name === '' ? item.alternativeName : item.name}</div>
                 </div>
             </div>
         )
     })
 
-    const skeletonList = skeletonArr.map(i => {
+    const skeletonList = skeletonArr.map((item, i) => {
         return (
             <SkeletonSlider key={i}/>
         )
@@ -75,6 +75,7 @@ const GenreSlider = ({genre}) => {
 
     return (
         <>
+        
             <div className="genre__title">{genre}</div>
             <Slider {...settings1} className="main__slider genre__slider">
                 {errorMessage}  

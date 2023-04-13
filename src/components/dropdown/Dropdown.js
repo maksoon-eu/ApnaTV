@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import upArrow from "../../resources/img/up-arrow.svg"
 
@@ -7,6 +7,22 @@ import './dropdown.scss'
 const Dropdown = ({initCurrent, list, filterFilm}) => {
     const [dropdownToggle, setDropdownToggle] = useState(false)
     const [currentDropdown, setCurrentDropdown] = useState(initCurrent)
+
+    const ref = useRef()
+
+    useEffect(() => {
+        const clickOutElement = (e) => {
+            if (dropdownToggle && ref.current && !ref.current.contains(e.target)) {
+                setDropdownToggle(false)
+            }
+        }
+    
+        document.addEventListener("mousedown", clickOutElement)
+    
+        return function() {
+          document.removeEventListener("mousedown", clickOutElement)
+        }
+    }, [dropdownToggle])
 
     const onDropdownActive = () => {
         setDropdownToggle(dropdownToggle => !dropdownToggle)
@@ -41,7 +57,7 @@ const Dropdown = ({initCurrent, list, filterFilm}) => {
     })
 
     return (
-        <div className={`dropdown ${dropdownToggle ? 'active' : ''} ${initCurrent === 'Каталог' ? 'catalog' : ''}`} tabIndex="1">
+        <div ref={ref} className={`dropdown ${dropdownToggle ? 'active' : ''} ${initCurrent === 'Каталог' ? 'catalog' : ''}`} tabIndex="1">
             <div className="dropdown__current" onClick={onDropdownActive}>
                 <div className="dropdown__current-item">{currentDropdown}</div>
                 <img src={upArrow} alt="" />
