@@ -4,7 +4,7 @@
     max-width: 220px;
     width: 100%;
     position: relative;
-    z-index: 10;
+    z-index: 2;
 
     &.active {
         &:not(.catalog) .dropdown__menu {

@@ -44,7 +44,7 @@ const FilmListItem = ({item}) => {
                     />
                     <div className="films__hover">
                         <div className="films__hover-bg"></div>
-                        <div className={`films__hover-rating ${item.ratingImdb >= 7 ? 'green' : ''} ${item.ratingImdb <= 7 && item.ratingImdb >= 5 ? 'yellow' : ''} ${item.ratingImdb <= 5 ? 'red' : ''}`}>{item.ratingImdb}</div>
+                        <div className={`films__hover-rating ${item.ratingImdb >= 7 ? 'green' : ''} ${item.ratingImdb <= 7 && item.ratingImdb >= 5 ? 'yellow' : ''} ${item.ratingImdb <= 5 ? 'red' : ''}`}>{item.ratingImdb.toFixed(1)}</div>
                         <div className="films__hover-descr">{item.year}, {item.country[0].name}, {item.genre[0].name}</div>
                         <div className="films__hover-length">{item.movieLength} мин</div>
                         <div className="films__hover-ageRating">{item.ageRating}+</div>

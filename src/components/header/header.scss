@@ -7,7 +7,7 @@ header {
     justify-content: center;
     align-items: center;
     position: relative;
-    z-index: 2;
+    z-index: 5;
 }
 
 .header__link {
@@ -43,7 +43,7 @@ header {
 .header__item {
     &-text {
         font-weight: 600;
-        font-size: 18px;
+        font-size: 20px;
         line-height: 25px;
         letter-spacing: 0.03em;
     }
@@ -79,6 +79,7 @@ header {
 
 .search__menu {
     position: absolute;
+    z-index: 20;
     top: 40px;
     transition: 0.4s ease;
     height: 0;
@@ -96,6 +97,15 @@ header {
         cursor: pointer;
         padding: 10px;
         padding-bottom: 0;
+        transition: .2s linear;
+
+        &:hover {
+            color: $hover-color;
+            
+            .search__item-name {
+                transform: translateY(-5px);
+            }
+        }
     }
 
     .mb {
@@ -105,8 +115,9 @@ header {
     }
 
     .search__item-name {
-        font-size: 16px;
+        font-size: 18px;
         font-weight: 600;
+        transition: .2s linear;
     }
 
     .search__item-img {
@@ -129,15 +140,27 @@ header {
 
     .search__item-rating {
         margin-right: 10px;
-        font-size: 13px;
+        font-size: 15px;
         color: #f49f35;
         font-weight: 600;
     }
 
     .search__item-year {
-        font-size: 13px;
+        font-size: 15px;
         color: #9a9a9a;
         font-weight: 600;
+    }
+
+    .green {
+        color: #00b00c;
+    }
+
+    .yellow {
+        color: #d69d16;
+    }
+
+    .red {
+        color: #cf2727;
     }
 }
 
@@ -159,10 +182,12 @@ header {
         width: 35px;
         height: 35px;
         color: #fff;
-        font-size: 16px;
+        font-weight: 500;
+        font-size: 17px;
 
         &::placeholder {
-            font-size: 16px;
+            font-size: 17px;
+            font-weight: 500;
         }
 
         &.focus {

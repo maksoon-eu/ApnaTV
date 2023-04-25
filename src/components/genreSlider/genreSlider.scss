@@ -13,6 +13,11 @@
 }
 
 .films__item {
+    transition: .2s linear;
+    &:hover {
+        transform: translateY(-10px);
+    }
+
     &:hover &-name {
         color: $hover-color;
     }
@@ -28,7 +33,7 @@
         border-radius: 10px;
 
         .green {
-            background-color: rgb(0, 176, 12);
+            background-color: #00b00c;
         }
 
         .yellow {
@@ -36,7 +41,7 @@
         }
 
         .red {
-            background-color: red;
+            background-color: #cf2727;
         }
 
         &-rating {
