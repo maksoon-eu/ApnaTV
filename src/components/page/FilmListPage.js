@@ -1,8 +1,11 @@
+import React from "react";
 import FilmList from "../filmList/FilmList";
 
 const FilmListPage = () => {
     return (
-        <FilmList/>
+        <div className="app__inner">
+            <FilmList/>
+        </div>
     );
 };
 

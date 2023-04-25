@@ -1,3 +1,4 @@
+import React from "react";
 import { useState, useEffect } from "react";
 import Slider from "react-slick";
 import useWatchService from "../../services/WatchService";
@@ -41,7 +42,7 @@ const GenreSlider = ({genre}) => {
     const filmList = films.map(item => {
         return (
             <div key={item.id} className="film__height">
-                <div className="films__item">
+                <div className="films__item films__item-after">
                     <div className="films__item-img">
                         <LazyLoadImage 
                             width='100%' height='100%'
@@ -51,6 +52,13 @@ const GenreSlider = ({genre}) => {
                         />
                     </div>
                     <div className="films__item-name">{item.name === '' ? item.alternativeName : item.name}</div>
+                    <div className="films__hover">
+                        <div className="films__hover-bg"></div>
+                        <div className={`films__hover-rating ${item.ratingImdb >= 7 ? 'green' : ''} ${item.ratingImdb <= 7 && item.ratingImdb >= 5 ? 'yellow' : ''} ${item.ratingImdb <= 5 ? 'red' : ''}`}>{item.ratingImdb}</div>
+                        <div className="films__hover-descr">{item.year}, {item.country[0].name}</div>
+                        <div className="films__hover-length">{item.movieLength} мин</div>
+                        <div className="films__hover-ageRating">{item.ageRating}+</div>
+                    </div>
                 </div>
             </div>
         )

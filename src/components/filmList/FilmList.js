@@ -1,3 +1,4 @@
+import React from "react";
 import { useState, useEffect } from "react";
 import useWatchService from "../../services/WatchService";
 
@@ -75,19 +76,19 @@ const FilmList = () => {
     const filterFilm = (filter) => {
         switch (Object.keys(filter)[0]) {
             case 'genre':
-                setGenre(genre => genre !== encodeURI(filter[Object.keys(filter)[0]]) ? encodeURI(filter[Object.keys(filter)[0]]) : '%21null')
+                setGenre(genre => genre !== encodeURI(filter[Object.keys(filter)[0]]) && filter[Object.keys(filter)[0]] !== 'Все' ? encodeURI(filter[Object.keys(filter)[0]]) : '%21null')
                 break;
             case 'year':
-                setYear(year => year !== filter[Object.keys(filter)[0]] ? filter[Object.keys(filter)[0]] : '%21null')
+                setYear(year => year !== filter[Object.keys(filter)[0]] && filter[Object.keys(filter)[0]] !== 'Все' ? filter[Object.keys(filter)[0]] : '%21null')
                 break;
             case 'country':
-                setCountry(country => country !== encodeURI(filter[Object.keys(filter)[0]]) ? encodeURI(filter[Object.keys(filter)[0]]) : '%21null')
+                setCountry(country => country !== encodeURI(filter[Object.keys(filter)[0]]) && filter[Object.keys(filter)[0]] !== 'Все' ? encodeURI(filter[Object.keys(filter)[0]]) : '%21null')
                 break;
             case 'rating':
-                setRating(rating => rating !== `${filter[Object.keys(filter)[0]].slice(3, filter[Object.keys(filter)[0]].length-2)}-10` ? `${filter[Object.keys(filter)[0]].slice(3, filter[Object.keys(filter)[0]].length-2)}-10` : '%21null')
+                setRating(rating => rating !== `${filter[Object.keys(filter)[0]].slice(3, filter[Object.keys(filter)[0]].length-2)}-10` && filter[Object.keys(filter)[0]] !== 'Все' ? `${filter[Object.keys(filter)[0]].slice(3, filter[Object.keys(filter)[0]].length-2)}-10` : '%21null')
                 break;
             case 'type':
-                setType(type => type !== filter[Object.keys(filter)[1]] ? encodeURI(filter[Object.keys(filter)[1]]) : '%21null')
+                setType(type => type !== filter[Object.keys(filter)[1]] && filter[Object.keys(filter)[0]] !== 'Все' ? encodeURI(filter[Object.keys(filter)[1]]) : '%21null')
                 break;
         }
     }

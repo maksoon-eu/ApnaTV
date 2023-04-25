@@ -79,6 +79,13 @@ input {
 
 .app {
     color: #fff;
+    position: relative;
+
+    &__global {
+        max-width: 1710px;
+        width: 100%;
+        margin: 0 auto;
+    }
     
     &__inner {
         max-width: 1440px;
@@ -92,7 +99,7 @@ input {
 .slick-next {
     width: 20px;
     height: 35px;
-    right: -4px;
+    right: 10px;
     &:before {
         transition: .1s linear;
         content: url(../resources/img/right-arrow.svg) !important;
@@ -102,12 +109,37 @@ input {
 .slick-prev {
     width: 20px;
     height: 35px;
-    left: -4px;
+    left: 10px;
     &:before {
         transition: .1s linear;
         content: url(../resources/img/left-arrow.svg) !important;
     }
 }
+
+.poster__slider {
+    .slick-next {
+        width: 20px;
+        height: 35px;
+        right: 10px;
+        &:before {
+            transition: .1s linear;
+            content: url(../resources/img/right-poster-arrow.svg) !important;
+        }
+    }
+    
+    .slick-prev {
+        width: 20px;
+        height: 35px;
+        left: 10px;
+        position: relative;
+        z-index: 2;
+        &:before {
+            transition: .1s linear;
+            content: url(../resources/img/left-poster-arrow.svg) !important;
+        }
+    }
+}
+
 
 .pulse {
     animation: pulse 1.5s ease-in-out .5s infinite

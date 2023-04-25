@@ -1,3 +1,4 @@
+import React from "react";
 import { useEffect, useRef, useState } from 'react';
 
 import upArrow from "../../resources/img/up-arrow.svg"
@@ -46,7 +47,12 @@ const Dropdown = ({initCurrent, list, filterFilm}) => {
                 filterFilm({year: e.currentTarget.textContent})
                 break;
         }
-        setCurrentDropdown(e.currentTarget.textContent === currentDropdown ? initCurrent : e.currentTarget.textContent)
+        
+        if (e.currentTarget.textContent === 'Все')  {
+            setCurrentDropdown(initCurrent)
+        } else {
+            setCurrentDropdown(e.currentTarget.textContent === currentDropdown ? initCurrent : e.currentTarget.textContent)
+        }
         setDropdownToggle(false)
     }
 
@@ -63,6 +69,7 @@ const Dropdown = ({initCurrent, list, filterFilm}) => {
                 <img src={upArrow} alt="" />
             </div>
             <ul className="dropdown__menu">
+                <li onClick={onSetCurrentDropdown} className="dropdown__menu-item">Все</li>
                 {filterList}
             </ul>
         </div>

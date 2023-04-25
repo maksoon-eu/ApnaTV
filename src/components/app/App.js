@@ -1,3 +1,4 @@
+import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import Header from "../header/Header";
@@ -12,13 +13,13 @@ const App = () => {
         <Router>
             <div className="app">
                 <Header/>
-                <div className="app__inner">
+                <div className="app__global">
                     <Routes>
                         <Route path="/" element={<MainPage/>}/>
                         <Route path="/films" element={<FilmListPage/>}/>
-                    </Routes>   
-                </div>
+                    </Routes>
                 <Footer/>
+                </div>
             </div>
         </Router>
     );

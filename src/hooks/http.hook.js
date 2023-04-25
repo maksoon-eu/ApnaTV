@@ -16,14 +16,7 @@ export const useHttp = () => {
             throw new Error(`Could not fetch ${url}, status: ${response.status}`);
         }
 
-        let data;
-
-        if (response.url.slice(-3) === 'jpg' || response.url.at(-5) === 'x' || response.url.slice(-4) === 'orig') {
-            data = response.url
-        } else {
-            data = await response.json()
-        }
-
+        const data = await response.json()
 
         setLoading(false)
 

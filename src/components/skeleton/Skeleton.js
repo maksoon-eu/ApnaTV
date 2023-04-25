@@ -1,13 +1,14 @@
+import React from "react";
 import { motion } from 'framer-motion';
 
 import './skeleton.scss';
 
 const Skeleton = () => {
     return (
-        <div className="skeleton">
+        <div className="skeleton skeleton--main">
             <motion.div
-            initial={{ opacity: 0, x: -100 }}
-            animate={{ opacity: 1, x: 0 }}>
+            initial={{ opacity: 0, y: -200 }}
+            animate={{ opacity: 1, y: 0 }}>
                 <div className="pulse skeleton__header">
                     <div className="pulse skeleton__title"></div>
                     <div className="pulse skeleton__text"></div>

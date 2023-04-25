@@ -1,3 +1,5 @@
+@import '../../style/variables';
+
 .genre__slider {
     margin-top: 0;
 }
@@ -11,7 +13,106 @@
 }
 
 .films__item {
+    &:hover &-name {
+        color: $hover-color;
+    }
+
+    .films__hover {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        opacity: 0;
+        transition: .2s linear;
+        border-radius: 10px;
+
+        .green {
+            background-color: rgb(0, 176, 12);
+        }
+
+        .yellow {
+            background-color: #d69d16;
+        }
+
+        .red {
+            background-color: red;
+        }
+
+        &-rating {
+            position: relative;
+            z-index: 2;
+            width: 40px;
+            height: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 17px;
+            border-top-left-radius: 9px;
+            border-bottom-right-radius: 9px;
+            font-weight: 600;
+        }
+
+        &-length {
+            position: absolute;
+            z-index: 2;
+            font-size: 18px;
+            color: $skeleton-bg;
+            font-weight: 500;
+            bottom: 5px;
+            left: 10px;
+        }
+
+        &-descr {
+            position: absolute;
+            z-index: 2;
+            font-size: 18px;
+            color: $skeleton-bg;
+            font-weight: 500;
+            bottom: 25px;
+            left: 10px;
+        }
+
+        &-ageRating {
+            position: absolute;
+            z-index: 2;
+            font-size: 20px;
+            color: $skeleton-bg;
+            font-weight: 600;
+            bottom: 13px;
+            right: 10px;
+        }
+
+        &-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            opacity: 0;
+            transition: .2s linear;
+            border-radius: 10px;
+            background-color: #000;
+        }
+    }
+
+    &-after {
+        &:hover {
+            img {
+                transform: scale(1.05);
+            }
+        .films__hover {
+                opacity: 1;
+
+                &-bg {
+                    opacity: .7;
+                }
+            }
+        }
+    }
+
     &-name {
+        transition: .2s linear;
         margin-top: 10px;
         text-align: center;
         font-weight: 600;
