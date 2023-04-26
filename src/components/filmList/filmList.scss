@@ -3,7 +3,16 @@
     justify-content: space-between;
     flex-wrap: wrap;
     min-height: 900px;
+    position: relative;
 }
+
+.nothing {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 100px;
+}
+
 .spinnerUpdate {
     display: block;
     margin: 0 auto;

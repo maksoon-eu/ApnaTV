@@ -2,59 +2,8 @@
 
 .poster__slider {
     margin-top: -130px;
-    height: 100vh;
+    height: 105vh;
     max-height: 1000px;
-}
-
-.main__slider {
-    margin-top: 10px;
-    padding: 0 25px;
-    height: 355px;
-}
-
-.films__item {
-    width: 182px;
-    height: 256px;
-    cursor: pointer;
-    border-radius: 15px;
-    margin: 0 auto;
-    transition: .2s linear;
-    border: 4px solid transparent;
-    top: 20px;
-    position: relative;
-
-    &--active {
-        width: 227px;
-        height: 337px;
-        border-color: rgba(250, 71, 118, 0.5);
-        border-radius: 24px;
-        margin-top: -50px;
-    }
-
-    &:hover {
-        border-color: rgba(250, 71, 118, 0.5);
-    }
-
-    &-img {
-        overflow: hidden;
-        border-radius: 10px;
-        width: 100%;
-        height: 100%;
-
-        img {
-            transition: .2s linear;
-        }
-
-        &--active {
-            border-radius: 20px;
-        }
-    }
-}
-
-.film__height {
-    margin-top: 50px;
-    width: 227px;
-    height: 337px;
 }
 
 .activeSlider__item {
@@ -67,6 +16,7 @@
         max-width: 585px;
         width: 100%;
         height: 100vh;
+        max-height: 1000px;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -108,6 +58,7 @@
     &-img {
         position: absolute;
         height: 100vh;
+        max-height: 1000px;
         width: 100%;
         z-index: -1;
         left: 0;
@@ -154,10 +105,4 @@
             width: 100%;
         }
     }
-}
-
-.alternative-img {
-    width: auto;
-    height: 100%;
-    display: block;
 }

@@ -6,6 +6,10 @@
     position: relative;
     z-index: 2;
 
+    &:hover img {
+        transform: rotate(180deg);
+    }
+
     &.active {
         &:not(.catalog) .dropdown__menu {
             height: 230px;
@@ -31,19 +35,29 @@
     overflow: auto;
     border-top-left-radius: 6px;
     border-bottom-left-radius: 6px;
+    background-color: $dropdown-color;
 
     &-item {
         font-size: 18px;
         text-transform: capitalize;
         padding: 8px 15px;
         cursor: pointer;
-        background-color: $dropdown-color;
+        transition: .2s linear;
+
+        &:hover {
+            color: $hover-color;
+            transform: translateY(-3px);
+        }
     }
 
     img {
         width: 20px;
         height: 20px;
         margin-right: 7px;
+    }
+
+    .active {
+        color: $hover-color;
     }
 }
 

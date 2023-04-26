@@ -1,4 +1,4 @@
-@import '../../style/variables.scss';
+@import '../../style/variables';
 
 header {
     height: 100px;
@@ -97,7 +97,6 @@ header {
         cursor: pointer;
         padding: 10px;
         padding-bottom: 0;
-        transition: .2s linear;
 
         &:hover {
             color: $hover-color;
@@ -175,7 +174,7 @@ header {
     }
 
     input {
-        padding-left: 40px;
+        padding-left: 30px;
         background-color: transparent;
         border: none;
         transition: width .55s ease;
@@ -184,6 +183,7 @@ header {
         color: #fff;
         font-weight: 500;
         font-size: 17px;
+        padding-right: 26px;
 
         &::placeholder {
             font-size: 17px;
@@ -228,4 +228,29 @@ header {
     transform: translateY(-50%);
     left: 50%;
     transform: translateX(-50%);
+}
+
+.cleanInput {
+    position: absolute;
+    opacity: 0;
+    right: 0px;
+    width: 16px;
+    height: 16px;
+    top: 11px;
+    cursor: pointer;
+    transition: .2s linear;
+
+    &:hover img {
+        transform: rotate(90deg);
+    }
+    
+    img {
+        transition: .2s linear;
+        width: 16px;
+        height: 16px;
+    }
+
+    &--active {
+        opacity: 1;
+    }
 }

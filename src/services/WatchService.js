@@ -3,12 +3,12 @@ import { useHttp } from "../hooks/http.hook";
 const useWatchService = () => {
     const {loading, request, error, clearError} = useHttp()
 
-    const _apiBase = 'https://api.kinopoisk.dev/v1/';
+    const _apiBase = 'https://api.kinopoisk.dev/v1.3/';
     const _baseOffset = 1;
     const _baseCurrent = '%21null';
 
     const getAllFilms = async (offset = _baseOffset, type = _baseCurrent, year = _baseCurrent, rating = _baseCurrent, genre = _baseCurrent, country = _baseCurrent) => {
-        const res = await request(`${_apiBase}movie?selectFields=name%20id%20typeNumber%20movieLength%20ageRating%20countries.name%20genres.name%20year%20rating.imdb%20poster.previewUrl&page=${offset}&limit=28&typeNumber=${type}&year=${year}&rating.imdb=${rating}&premiere.country=${country}&poster.previewUrl=%21null&genres.name=${genre}`);
+        const res = await request(`${_apiBase}movie?selectFields=name%20id%20typeNumber%20movieLength%20ageRating%20countries.name%20genres.name%20year%20rating.imdb%20poster.previewUrl&page=${offset}&limit=28&type=${type}&year=${year}&rating.imdb=${rating}&countries.name=${country}&poster.previewUrl=%21null&name=%21null&genres.name=${genre}`);
 
         return {
             itemList: res.docs.map(_transformGenreFilms),
@@ -35,7 +35,7 @@ const useWatchService = () => {
     }
 
     const getAllFilters = async (url) => {
-        const res = await request(`${_apiBase}movie/${url}`);
+        const res = await request(`https://api.kinopoisk.dev/v1/movie/${url}`);
 
         return res.map(_transformGenres)
     }

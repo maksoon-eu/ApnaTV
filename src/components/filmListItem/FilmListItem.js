@@ -5,6 +5,8 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 import { motion, useAnimation } from 'framer-motion';
 import { useOnScreen } from "../../hooks/screen.hook";
 
+import loadingImg from "../../resources/img/loading.svg";
+
 import 'react-lazy-load-image-component/src/effects/blur.css';
 import './filmListItem.scss'
 
@@ -38,6 +40,7 @@ const FilmListItem = ({item}) => {
                     <LazyLoadImage 
                         width='100%' height='100%'
                         effect="blur"
+                        placeholderSrc={loadingImg}
                         src={item.posterSmall}
                         alt={item.name}
                         style={{transition: '.2s linear'}}

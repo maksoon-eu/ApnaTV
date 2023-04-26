@@ -4,12 +4,14 @@ import useWatchService from "../../services/WatchService";
 
 import Dropdown from "../dropdown/Dropdown";
 
+import clean from "../../resources/img/clean.svg"
+
 import './filter.scss'
 
-const Filter = ({filterFilm}) => {
+const Filter = ({filterFilm, fetching, cleanAllFilters, genreFilter, typeFilter, yearFilter, ratingFilter, countryFilter}) => {
     const [genres, setGenres] = useState([]);
     const [country, setCountry] = useState([]);
-    const type = [{filter: 'Фильмы', filterNum: 1}, {filter: 'Сериалы', filterNum: 2}, {filter: 'Мультики', filterNum: 3}]
+    const type = [{filter: 'Фильмы', filterNum: 'movie'}, {filter: 'Сериалы', filterNum: 'tv-series'}, {filter: 'Мультики', filterNum: 'cartoon'}]
     const year = [{filter: '2022-2023'}, {filter: '2020-2021'}, {filter: '2018-2019'}, {filter: '2016-2017'}, {filter: '2014-2015'}, {filter: '2012-2013'}, {filter: '2000-2011'}]
     const rating = [{filter: 'От 9.0'}, {filter: 'От 8.0'}, {filter: 'От 7.0'}, {filter: 'От 6.0'}, {filter: 'От 5.0'}, {filter: 'От 4.0'}, {filter: 'От 3.0'}]
     const {error, loading, getAllFilters} = useWatchService();
@@ -36,11 +38,17 @@ const Filter = ({filterFilm}) => {
     
     return (
         <div className="filter">
-            <Dropdown filterFilm={filterFilm} initCurrent={'Жанры'} list={genres}/>
-            <Dropdown filterFilm={filterFilm} initCurrent={'Страны'} list={country}/>
-            <Dropdown filterFilm={filterFilm} initCurrent={'Каталог'} list={type}/>
-            <Dropdown filterFilm={filterFilm} initCurrent={'Рейтинг'} list={rating}/>
-            <Dropdown filterFilm={filterFilm} initCurrent={'Год выхода'} list={year}/>
+            <Dropdown filter={genreFilter} fetching={fetching} filterFilm={filterFilm} initCurrent={'Жанры'} list={genres}/>
+            <Dropdown filter={countryFilter} fetching={fetching} filterFilm={filterFilm} initCurrent={'Страны'} list={country}/>
+            <Dropdown filter={typeFilter} fetching={fetching} filterFilm={filterFilm} initCurrent={'Каталог'} list={type}/>
+            <Dropdown filter={ratingFilter} fetching={fetching} filterFilm={filterFilm} initCurrent={'Рейтинг'} list={rating}/>
+            <Dropdown filter={yearFilter} fetching={fetching} filterFilm={filterFilm} initCurrent={'Год выхода'} list={year}/>
+            <div onClick={cleanAllFilters} className="clean">
+                <div className="clean__text">Очистить</div>
+                <div className="clean__img">
+                    <img src={clean} alt="" />
+                </div>
+            </div>
         </div>
     );
 };

@@ -4,4 +4,33 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-top: 40px;
+}
+
+.clean {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+
+    &:hover img {
+        transform: rotate(180deg);
+    }
+
+    &__text {
+        font-weight: 600;
+        margin-right: 10px;
+        font-size: 18px;
+    }
+
+    &__img {
+        width: 26px;
+        height: 26px;
+
+        img {
+            transition: .2s linear;
+            margin-top: 2px;
+            width: 26px;
+            height: 26px;
+        }
+    }
 }

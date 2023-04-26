@@ -5,11 +5,17 @@ import upArrow from "../../resources/img/up-arrow.svg"
 
 import './dropdown.scss'
 
-const Dropdown = ({initCurrent, list, filterFilm}) => {
+const Dropdown = ({initCurrent, list, filterFilm, fetching, filter}) => {
     const [dropdownToggle, setDropdownToggle] = useState(false)
     const [currentDropdown, setCurrentDropdown] = useState(initCurrent)
 
     const ref = useRef()
+
+    useEffect(() => {
+        if (filter === '%21null') {
+            setCurrentDropdown(initCurrent)
+        }
+    }, [filter])
 
     useEffect(() => {
         const clickOutElement = (e) => {
@@ -30,35 +36,36 @@ const Dropdown = ({initCurrent, list, filterFilm}) => {
     }
 
     const onSetCurrentDropdown = (e) => {
-        switch (initCurrent) {
-            case 'Жанры':
-                filterFilm({genre: e.currentTarget.textContent})
-                break;
-            case 'Страны':
-                filterFilm({country: e.currentTarget.textContent})
-                break;
-            case 'Каталог':
-                filterFilm({type: e.currentTarget.textContent, typeNum: e.currentTarget.id})
-                break;
-            case 'Рейтинг':
-                filterFilm({rating: e.currentTarget.textContent})
-                break;
-            case 'Год выхода':
-                filterFilm({year: e.currentTarget.textContent})
-                break;
+        if (!fetching) {
+            switch (initCurrent) {
+                case 'Жанры':
+                    filterFilm({genre: e.currentTarget.textContent})
+                    break;
+                case 'Страны':
+                    filterFilm({country: e.currentTarget.textContent})
+                    break;
+                case 'Каталог':
+                    filterFilm({type: e.currentTarget.textContent, typeNum: e.currentTarget.id})
+                    break;
+                case 'Рейтинг':
+                    filterFilm({rating: e.currentTarget.textContent})
+                    break;
+                case 'Год выхода':
+                    filterFilm({year: e.currentTarget.textContent})
+                    break;
+            }
+            if (e.currentTarget.textContent === 'Все')  {
+                setCurrentDropdown(initCurrent)
+            } else {
+                setCurrentDropdown(e.currentTarget.textContent === currentDropdown ? initCurrent : e.currentTarget.textContent)
+            }
+            setDropdownToggle(false)
         }
-        
-        if (e.currentTarget.textContent === 'Все')  {
-            setCurrentDropdown(initCurrent)
-        } else {
-            setCurrentDropdown(e.currentTarget.textContent === currentDropdown ? initCurrent : e.currentTarget.textContent)
-        }
-        setDropdownToggle(false)
     }
 
     const filterList = list.map((item, i) => {
         return (
-            <li key={i} id={item.filterNum} onClick={onSetCurrentDropdown}className="dropdown__menu-item">{item.filter}</li>
+            <li key={i} id={item.filterNum} onClick={onSetCurrentDropdown}className={`dropdown__menu-item ${currentDropdown === item.filter ? 'active' : ''}`}>{item.filter}</li>
         )
     })
 
@@ -69,7 +76,7 @@ const Dropdown = ({initCurrent, list, filterFilm}) => {
                 <img src={upArrow} alt="" />
             </div>
             <ul className="dropdown__menu">
-                <li onClick={onSetCurrentDropdown} className="dropdown__menu-item">Все</li>
+                <li onClick={onSetCurrentDropdown} className={`dropdown__menu-item ${currentDropdown === initCurrent ? 'active' : ''}`}>Все</li>
                 {filterList}
             </ul>
         </div>
