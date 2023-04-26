@@ -5,7 +5,7 @@ import upArrow from "../../resources/img/up-arrow.svg"
 
 import './dropdown.scss'
 
-const Dropdown = ({initCurrent, list, filterFilm, fetching, filter}) => {
+const Dropdown = ({loading, error, initCurrent, list, filterFilm, fetching, filter}) => {
     const [dropdownToggle, setDropdownToggle] = useState(false)
     const [currentDropdown, setCurrentDropdown] = useState(initCurrent)
 
@@ -32,7 +32,9 @@ const Dropdown = ({initCurrent, list, filterFilm, fetching, filter}) => {
     }, [dropdownToggle])
 
     const onDropdownActive = () => {
-        setDropdownToggle(dropdownToggle => !dropdownToggle)
+        if (!(loading || error)) {
+            setDropdownToggle(dropdownToggle => !dropdownToggle)
+        }
     }
 
     const onSetCurrentDropdown = (e) => {

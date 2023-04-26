@@ -38,11 +38,11 @@ const Filter = ({filterFilm, fetching, cleanAllFilters, genreFilter, typeFilter,
     
     return (
         <div className="filter">
-            <Dropdown filter={genreFilter} fetching={fetching} filterFilm={filterFilm} initCurrent={'Жанры'} list={genres}/>
-            <Dropdown filter={countryFilter} fetching={fetching} filterFilm={filterFilm} initCurrent={'Страны'} list={country}/>
-            <Dropdown filter={typeFilter} fetching={fetching} filterFilm={filterFilm} initCurrent={'Каталог'} list={type}/>
-            <Dropdown filter={ratingFilter} fetching={fetching} filterFilm={filterFilm} initCurrent={'Рейтинг'} list={rating}/>
-            <Dropdown filter={yearFilter} fetching={fetching} filterFilm={filterFilm} initCurrent={'Год выхода'} list={year}/>
+            <Dropdown error={error} loading={loading} filter={genreFilter} fetching={fetching} filterFilm={filterFilm} initCurrent={'Жанры'} list={genres}/>
+            <Dropdown error={error} loading={loading} filter={countryFilter} fetching={fetching} filterFilm={filterFilm} initCurrent={'Страны'} list={country}/>
+            <Dropdown error={error} loading={loading} filter={typeFilter} fetching={fetching} filterFilm={filterFilm} initCurrent={'Каталог'} list={type}/>
+            <Dropdown error={error} loading={loading} filter={ratingFilter} fetching={fetching} filterFilm={filterFilm} initCurrent={'Рейтинг'} list={rating}/>
+            <Dropdown error={error} loading={loading} filter={yearFilter} fetching={fetching} filterFilm={filterFilm} initCurrent={'Год выхода'} list={year}/>
             <div onClick={cleanAllFilters} className="clean">
                 <div className="clean__text">Очистить</div>
                 <div className="clean__img">

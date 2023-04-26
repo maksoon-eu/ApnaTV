@@ -1,30 +1,40 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
+
+import './errorMessage.scss'
 
 const ErrorMessage = () => {
     const [rotate, setRotate] = useState(0)
 
-    // useEffect(() => {
-    //     window.addEventListener('mousemove', looking);
+    const ref = useRef()
 
-    //     return function() {
-    //         window.removeEventListener('mousemove', looking);
-    //     }
-    // }, [])
+    useEffect(() => {
+        window.addEventListener('mousemove', looking);
 
-    // const looking = (e) => {
-    //     var eye = $('.eye');
-    //     var x = (eye.offset().left) + (eye.width() / 2);
-    //     var y = (eye.offset().top) + (eye.height() / 2);
-    //     var rad = Math.atan2(e.pageX - x, e.pageY - y);
-    //     var rot = (rad * (180 / Math.PI) * -1) + 180;
-    //   }
+        return function() {
+            window.removeEventListener('mousemove', looking);
+        }
+    }, [])
+
+    const looking = (e) => {
+        const rect = ref.current.getBoundingClientRect();
+        const eyeX = (rect.left + rect.right) / 2;
+        const eyeY = (rect.top + rect.bottom) / 2;
+        setRotate(- Math.atan2(eyeX - e.pageX, eyeY - e.pageY));
+    }
+    
     return (
-        <div>
-            <span class='error-num'>5</span>
-            <div class='eye' style={{transform: 'rotate(' + rotate + 'deg)'}}></div>
-            <div class='eye' style={{transform: 'rotate(' + rotate + 'deg)'}}></div>
-            <p class='sub-text'>О нет, мои глаза! Что-то пошло не так. Мы уже смотрим, что произошло.</p>
+        <div className="eye__flex eye__margin">
+            <div className="error__eye">
+                <span class='error-num'>5</span>
+                <div className="eye__block">
+                    <div ref={ref} class='eye' style={{transform: 'rotate(' + rotate + 'rad)'}}></div>
+                    <div ref={ref} class='eye' style={{transform: 'rotate(' + rotate + 'rad)'}}></div>
+                </div>
+            </div>
+            <p class='sub-text'>О нет, мои глаза! Что-то пошло не так.
+            <br />
+            Мы уже смотрим, что произошло.</p>
         </div>
     )
 }

@@ -2,6 +2,25 @@
     font-size: 8em;
 }
 
+.eye__flex {
+    margin: 0 auto;
+    width: 264px;
+}
+
+.eye__margin {
+    margin-top: 100px;
+}
+
+.error__eye {
+    display: flex;
+    height: 145px;
+    width: 264px;
+}
+
+.eye__block {
+    padding-top: 30px;
+}
+
 .eye {
     background: #fff;
     border-radius: 50%;

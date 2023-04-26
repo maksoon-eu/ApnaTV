@@ -121,7 +121,7 @@ const FilmList = () => {
     const spinner = loading && !fetching ? skeletonList : null
     const spinnerUpdate = fetching ? <img src={loadingImg} className="spinnerUpdate" alt="Loading..." /> : null
     const content = !(error || spinner) ? filmList : null
-    const finalContent = !(filmList.length || loading) ? <h1 className="nothing">Ничего не найдено</h1> : content
+    const finalContent = filmList.length === 0 && !loading && !error ? <h1 className="nothing">Ничего не найдено</h1> : content
 
     return (
         <div>

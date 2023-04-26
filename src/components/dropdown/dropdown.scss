@@ -16,7 +16,9 @@
         }
 
         &.catalog .dropdown__menu{
-            height: 80px;
+            height: 160px;
+            border-radius: 6px;
+            overflow: hidden;
         }
 
         & img {
