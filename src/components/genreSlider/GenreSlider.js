@@ -1,7 +1,7 @@
-import React from "react";
 import { useState, useEffect } from "react";
 import Slider from "react-slick";
 import useWatchService from "../../services/WatchService";
+import { Link } from "react-router-dom";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 
 import SkeletonSlider from "../skeleton/SkeletonSlider"
@@ -17,7 +17,7 @@ import "../../style/btn.scss"
 
 const GenreSlider = ({genre}) => {
     const [films, setFilms] = useState([]);
-    const skeletonArr = ['', '', '', '', '', '', '']
+    const skeletonArr = ['', '', '', '', '', '']
     const {error, loading, getGanreFilms} = useWatchService();
 
     useEffect(() => {
@@ -41,7 +41,7 @@ const GenreSlider = ({genre}) => {
 
     const filmList = films.map(item => {
         return (
-            <div key={item.id}>
+            <Link to={`/films/${item.id}`} key={item.id}>
                 <div className="films__item films__item-after">
                     <div className="films__item-img">
                         <LazyLoadImage 
@@ -62,7 +62,7 @@ const GenreSlider = ({genre}) => {
                     </div>
                     <div className="films__item-name">{item.name === '' ? item.alternativeName : item.name}</div>
                 </div>
-            </div>
+            </Link>
         )
     })
 
@@ -72,7 +72,7 @@ const GenreSlider = ({genre}) => {
         )
     })
 
-    const settings1 = {
+    const settings = {
         dots: false,
         infinite: false,
         slidesToShow: 6,
@@ -87,7 +87,7 @@ const GenreSlider = ({genre}) => {
         <>
         
             <div className="genre__title">{genre}</div>
-            <Slider {...settings1} className="main__slider genre__slider">
+            <Slider {...settings} className="main__slider genre__slider">
                 {errorMessage}  
                 {spinner}  
                 {content}  

@@ -38,7 +38,7 @@ const Dropdown = ({loading, error, initCurrent, list, filterFilm, fetching, filt
     }
 
     const onSetCurrentDropdown = (e) => {
-        if (!fetching) {
+        if (!(loading || error || fetching)) {
             switch (initCurrent) {
                 case 'Жанры':
                     filterFilm({genre: e.currentTarget.textContent})

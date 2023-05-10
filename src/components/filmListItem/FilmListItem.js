@@ -1,5 +1,6 @@
 import React from "react";
 import { useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { motion, useAnimation } from 'framer-motion';
@@ -35,7 +36,7 @@ const FilmListItem = ({item}) => {
         exit={{ opacity: 0, y: 20 }}
         animate={controls}
         >
-            <div className="filmList__item">
+            <Link to={`/films/${item.id}`} className="filmList__item">
                 <div className="filmList__item-img">
                     <LazyLoadImage 
                         width='100%' height='100%'
@@ -54,7 +55,7 @@ const FilmListItem = ({item}) => {
                     </div>
                 </div>
                 <div className="filmList__item-name">{item.name}</div>
-            </div>
+            </Link>
         </motion.div>
     );
 };

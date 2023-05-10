@@ -31,22 +31,22 @@ const Footer = () => {
                     <div className="icons">
                         <ul>
                             <li className="vk">
-                                <Link>
+                                <Link to="https://vk.com/baranchek1">
                                     <i className="fa w24 fa-vk fa-lg" aria-hidden="true"/>
                                 </Link>
                             </li>
                             <li className="telegram">
-                                <Link>
+                                <Link to="https://t.me/makso0on">
                                     <i className="fa w22 fa-telegram fa-lg" aria-hidden="true"/>
                                 </Link>
                             </li>
                             <li className="instagram">
-                                <Link>
+                                <Link to="https://instagram.com/maksim.ka_bv?igshid=NTc4MTIwNjQ2YQ==">
                                     <i className="fa fa-instagram fa-lg" aria-hidden="true"/>
                                 </Link>
                             </li>
                             <li className="google">
-                                <Link>
+                                <Link to="https://baranovmaks05@gmail.com">
                                     <i className="fa fa-google fa-lg" aria-hidden="true"/>
                                 </Link>
                             </li>

@@ -16,6 +16,11 @@ const useWatchService = () => {
         }
     }
 
+    const getFilmForId = async (id) => {
+        const res = await request(`${_apiBase}movie/${id}`)
+        return [res].flat().map(_transformFilmForId)
+    }
+
     const getSearchedFilms = async (name = _baseCurrent) => {
         const res = await request(`https://api.kinopoisk.dev/v1.2/movie/search?page=1&limit=10&query=${name}`);
 
@@ -48,6 +53,33 @@ const useWatchService = () => {
             rating: item.rating,
             year: item.year,
             id: item.id
+        }
+    }
+
+    const _transformFilmForId = (item) => {
+        return {
+            name: item.name,
+            posterBig: item.poster.url,
+            id: item.id,
+            logo: item.logo.url,
+            trailers: item.videos.trailers,
+            ratingImdb: item.rating.imdb, 
+            ratingKp: item.rating.kp,
+            ratingFilmCritics: item.rating.filmCritics,
+            year: item.year,
+            country: item.countries,
+            genres: item.genres,
+            description: item.description,
+            budget: `${item.budget.value} ${item.budget.currency}`,
+            movieLength: item.movieLength,
+            ageRating: item.ageRating,
+            fees: `${item.fees.world.value} ${item.fees.world.currency}`,
+            persons: item.persons,
+            backdrop: item.backdrop.url,
+            similarMovies: item.similarMovies,
+            sequelsAndPrequels: item.sequelsAndPrequels,
+            alternativeName: item.alternativeName,
+            premiere: item.premiere.world
         }
     }
 
@@ -87,7 +119,7 @@ const useWatchService = () => {
         }
     }
 
-    return {getTopFilms, getAllFilms, getGanreFilms, getAllFilters, loading, error, clearError, getSearchedFilms}
+    return {getTopFilms, getAllFilms, getFilmForId, getGanreFilms, getAllFilters, loading, error, clearError, getSearchedFilms}
 }
 
 export default useWatchService;

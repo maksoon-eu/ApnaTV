@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import Slider from "react-slick";
 import useWatchService from "../../services/WatchService";
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import { Link } from "react-router-dom";
 import { motion } from 'framer-motion';
 
 import Skeleton from "../skeleton/Skeleton";
@@ -97,14 +98,16 @@ const MainSlider = () => {
                             <div className="rating-imdb">{addRaiting(item.ratingImdb)}</div>
                         </div>
                         <div className="btn__flex">
-                        <button className="watch__btn">
-                            <img src={watch} alt="" />
-                            Watch Now
-                        </button>
-                        <button onClick={() => {onOpenModal(true, item.trailers)}} className="trailer__btn">
-                            Trailer
-                        </button>
-                    </div>
+                            <Link to={`/films/${item.id}`}>
+                                <button className="watch__btn">
+                                    <img src={watch} alt="" />
+                                    Смотреть
+                                </button>
+                            </Link>
+                            <button onClick={() => {onOpenModal(true, item.trailers)}} className="trailer__btn">
+                                Трейлер
+                            </button>
+                        </div>
                     </div>
                     </motion.div>
                     <div className="activeSlider__item-img">

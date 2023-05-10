@@ -74,7 +74,7 @@ const Header = () => {
             className="mb"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}>
-                <div className="search__menu-item">
+                <Link to={`/films/${item.id}`} className="search__menu-item">
                     <div className="search__item-img">
                         <LazyLoadImage 
                             width='100%' height='100%'
@@ -91,7 +91,7 @@ const Header = () => {
                             <div className="search__item-year">{item.year}</div>
                         </div>
                     </div>
-                </div>
+                </Link>
             </motion.div>
         )
     })

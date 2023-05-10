@@ -3,6 +3,10 @@
 .genre__slider {
     padding: 0 25px;
     min-height: 368px;
+
+    .slick-prev, .slick-next {
+        top: 42%;
+    }
 }
 
 .genre__title {
