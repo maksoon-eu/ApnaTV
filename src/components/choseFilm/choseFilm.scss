@@ -95,26 +95,61 @@
         max-width: 600px;
         font-size: 19px;
         margin-top: 20px;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 10; /* number of lines to show */
+                line-clamp: 10;
+        -webkit-box-orient: vertical;
     }
 
     &__about {
         font-weight: 600;
         font-size: 40px;
+        text-align: left;
+        margin-bottom: 20px;
     }
 
     &__row {
-        display: flex;
-        align-items: flex-end;
+        text-align: left;
+    }
+
+    &__table {
+        max-width: 500px;
+        width: 100%;
+        margin-bottom: 40px;
     }
 
     &__title {
-        margin-right: 20px;
         font-weight: 600;
+        font-size: 20px;
+        color: #9a9a9a;
+        padding: 5px 0;
+    }
+
+    &__text {
         font-size: 18px;
     }
 
     &__content {
         transition: .3s linear;
+    }
+
+    &__rating {
+        font-size: 50px;
+        font-weight: 600;
+        margin-bottom: 280px;
+    }
+
+    .green {
+        color: rgb(0, 176, 12);
+    }
+    
+    .yellow {
+        color: #d69d16;
+    }
+    
+    .red {
+        color: red;
     }
 }
 

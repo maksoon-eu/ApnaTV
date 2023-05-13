@@ -89,10 +89,10 @@ const MainSlider = () => {
                     animate={{ opacity: 1, x: 0 }}
                     >
                     <div className="activeSlider__item-left">
-                        <div className="activeSlider__item-logo">
+                        <div className="activeSlider__item-logo" style={{display: item.logo === null ? 'none' : 'flex'}}>
                             <LazyLoadImage effect="opacity" src={item.logo} alt={item.name}/>
                         </div>
-                        {/* <div className="activeSlider__item-title">{activeItem.name}</div> */}
+                        <div className="activeSlider__item-title" style={{display: item.logo === null ? 'block' : 'none'}}>{item.name}</div>
                         <div className="activeSlider__item-subtitle">{item.description}</div>
                         <div className="activeSlider__item-rating">
                             <div className="rating-imdb">{addRaiting(item.ratingImdb)}</div>

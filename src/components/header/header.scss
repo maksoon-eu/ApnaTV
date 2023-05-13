@@ -184,7 +184,7 @@ header {
         color: #fff;
         font-weight: 500;
         font-size: 17px;
-        padding-right: 26px;
+        padding-right: 50px;
 
         &::placeholder {
             font-size: 17px;
@@ -192,13 +192,13 @@ header {
         }
 
         &.focus {
-            width: 200px;
+            width: 188px;
         }
     }
 
     &:hover {
         input {
-            width: 200px;
+            width: 188px;
         }
     }
 }
@@ -234,7 +234,7 @@ header {
 .cleanInput {
     position: absolute;
     opacity: 0;
-    right: 0px;
+    right: 20px;
     width: 16px;
     height: 16px;
     top: 11px;

@@ -187,7 +187,7 @@ const ChoseFilm = () => {
     
     return (
         <>
-            {film.trailers !== undefined ? <ModalWindow key={filmId} openModal={openModal} onOpenModal={onOpenModal} url={film.trailers}/> : null}
+            {film.trailers !== undefined ? <ModalWindow openModal={openModal} onOpenModal={onOpenModal} url={film.trailers}/> : null}
             <div className="choseFilm">
                 <div style={{display: loading ? 'block' : 'none'}}>
                     <motion.div
@@ -207,7 +207,7 @@ const ChoseFilm = () => {
                     </motion.div>
                 </div>
                 <div className="choseFilm__content" style={{opacity: !(loading || error) ? '1' : '0'}}>
-                    <div className="choseFilm__backdrop">
+                    <div className="choseFilm__backdrop" key={film.backdrop}>
                         <LazyLoadImage 
                             width='99%' height='99%'
                             effect="blur"
@@ -218,7 +218,7 @@ const ChoseFilm = () => {
                     </div>
                     <div className="choseFilm__flex">
                         <div className="choseFilm__left">
-                            <div className="choseFilm__img">
+                            <div className="choseFilm__img" key={film.posterBig}>
                                 <LazyLoadImage 
                                     width='100%' height='100%'
                                     effect="blur"
@@ -229,7 +229,7 @@ const ChoseFilm = () => {
                             </div>
                         </div>
                         <div className="choseFilm__right">
-                            <div className="choseFilm__logo" style={{display: film.logo === null ? 'none' : 'block'}}>
+                            <div className="choseFilm__logo" style={{display: film.logo === null ? 'none' : 'block'}} key={film.logo}>
                                 <LazyLoadImage effect="opacity" src={film.logo} alt={film.name}/>
                             </div>
                             <div className="choseFilm__name" style={{display: film.logo === null ? 'block' : 'none'}}>{film.name}</div>
@@ -248,36 +248,43 @@ const ChoseFilm = () => {
                                 </button>
                             </div>
                         </div>
+                        <div className={`choseFilm__rating ${film.ratingImdb >= 7 ? 'green' : ''} ${film.ratingImdb <= 7 && film.ratingImdb >= 5 ? 'yellow' : ''} ${film.ratingImdb <= 5 ? 'red' : ''}`}>
+                            {film.ratingImdb}
+                        </div>
                     </div>
-                    <div className="choseFilm__about">О фильме</div>
-                    <div className="choseFilm__row">
-                        <div className="choseFilm__title">Год</div>
-                        <div className="choseFilm__text">{film.year}</div>
-                    </div>
-                    <div className="choseFilm__row">
-                        <div className="choseFilm__title">Страна</div>
-                        <div className="choseFilm__text">{country}</div>
-                    </div>
-                    <div className="choseFilm__row">
-                        <div className="choseFilm__title">Жанр</div>
-                        <div className="choseFilm__text">{genres}</div>
-                    </div>
-                    <div className="choseFilm__row">
-                        <div className="choseFilm__title">Длительность</div>
-                        <div className="choseFilm__text">{film.movieLength} мин / {Math.floor(film.movieLength / 60)} ч {film.movieLength % 60} мин</div>
-                    </div>
-                    <div className="choseFilm__row">
-                        <div className="choseFilm__title">Бюджет</div>
-                        <div className="choseFilm__text">{film.budget === 'undefined undefined' ? '...' : film.budget}</div>
-                    </div>
-                    <div className="choseFilm__row">
-                        <div className="choseFilm__title">Сборы в мире</div>
-                        <div className="choseFilm__text">{film.fees === 'undefined undefined' ? '...' : film.fees}</div>
-                    </div>
-                    <div className="choseFilm__row">
-                        <div className="choseFilm__title">Премьера в мире</div>
-                        <div className="choseFilm__text">{premiere}</div>
-                    </div>
+                    <table className="choseFilm__table">
+                        <caption className="choseFilm__about">О фильме</caption>
+                        <tbody> 
+                            <tr className="choseFilm__row">
+                                <th className="choseFilm__title">Год</th>
+                                <td className="choseFilm__text">{film.year}</td>
+                            </tr>
+                            <tr className="choseFilm__row">
+                                <th className="choseFilm__title">Страна</th>
+                                <td className="choseFilm__text">{country}</td>
+                            </tr>
+                            <tr className="choseFilm__row">
+                                <th className="choseFilm__title">Жанр</th>
+                                <td className="choseFilm__text">{genres}</td>
+                            </tr>
+                            <tr className="choseFilm__row">
+                                <th className="choseFilm__title">Длительность</th>
+                                <td className="choseFilm__text">{film.movieLength} мин / {Math.floor(film.movieLength / 60)} ч {film.movieLength % 60} мин</td>
+                            </tr>
+                            <tr className="choseFilm__row">
+                                <th className="choseFilm__title">Бюджет</th>
+                                <td className="choseFilm__text">{film.budget === 'undefined undefined' ? '...' : film.budget}</td>
+                            </tr>
+                            <tr className="choseFilm__row">
+                                <th className="choseFilm__title">Сборы в мире</th>
+                                <td className="choseFilm__text">{film.fees === 'undefined undefined' ? '...' : film.fees}</td>
+                            </tr>
+                            <tr className="choseFilm__row">
+                                <th className="choseFilm__title">Премьера в мире</th>
+                                <td className="choseFilm__text">{premiere}</td>
+                            </tr>
+                        </tbody>
+                    </table>
 
                     <Film filmId={filmId} key={filmId}/>
                     
@@ -289,7 +296,7 @@ const ChoseFilm = () => {
                     </div>
                     
                     <div className="choseFilm__slider" style={{display: sequelAndPrequelList.length !== 0 ? 'block' : 'none'}}>
-                        <div className="genre__title">Продолжение фильма</div>
+                        <div className="genre__title">Сиквелы и приквелы</div>
                         <Slider {...settings} className="main__slider genre__slider"> 
                             {sequelAndPrequelList}  
                         </Slider>

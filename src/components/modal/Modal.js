@@ -29,8 +29,12 @@ const ModalWindow = ({url, onOpenModal, openModal}) => {
     }, [])
 
     useEffect(() => {
-        setUrlsList(url.filter(item => item.site === 'youtube' && item.type === 'TRAILER'))
-        setRusUrl(url.filter(item => /[а-яА-ЯЁё]/.test(item.name) && item.site === 'youtube' && item.type === 'TRAILER'))
+        if (url.length !== 0) {
+            const filteredUrl = url.filter(item => item.site === 'youtube' && item.type === 'TRAILER')
+            const filteredUrlRus = filteredUrl.filter(item => /[а-яА-ЯЁё]/.test(item.name))
+            setUrlsList(filteredUrl.length !== 0 ? filteredUrl[0].url : '')
+            setRusUrl(filteredUrlRus.length !== 0 ? filteredUrlRus[0].url : '')
+        }
     }, [url])
 
     const modalStyles = {
@@ -52,7 +56,7 @@ const ModalWindow = ({url, onOpenModal, openModal}) => {
                             <button onClick={() => {onOpenModal(false)}} className="close">
                                 <img src={close} alt="close" />
                             </button>
-                            <iframe width="100%" height="100%" src={rusUrl.length === 0 ? urlsList[0].url : rusUrl[0].url} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
+                            <iframe width="100%" height="100%" src={rusUrl.length === 0 ? urlsList : rusUrl} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
                         </div>
                     </div>
                 </Modal>
