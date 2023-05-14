@@ -111,23 +111,46 @@
 
     &__row {
         text-align: left;
+        vertical-align: top;
     }
 
     &__table {
-        max-width: 500px;
+        max-width: 580px;
         width: 100%;
         margin-bottom: 40px;
+
+        &--top {
+            margin-top: 70px;
+        }
+    }
+
+    &__tables {
+        display: flex;
+        justify-content: space-between;
+        min-height: 520px;
     }
 
     &__title {
         font-weight: 600;
         font-size: 20px;
         color: #9a9a9a;
-        padding: 5px 0;
+        min-width: 190px;
     }
 
     &__text {
         font-size: 18px;
+        vertical-align: top;
+        padding-top: 2px;
+
+        &-flex {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .actors__text:not(:last-child):after {
+            content: ',';
+            margin-right: 4px;
+          }
     }
 
     &__content {
