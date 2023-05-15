@@ -10,6 +10,18 @@ import Footer from "../footer/Footer";
 import '../../style/style.scss'
 
 const App = () => {
+    
+    const now = new Date().getTime()
+    const setupTime = localStorage.getItem('setupTime')
+    if (setupTime === null) {
+        localStorage.setItem('setupTime', now)
+    } else {
+        if (now-setupTime > 3*60*60*1000) {
+            localStorage.clear()
+            localStorage.setItem('setupTime', now)
+        }
+    }
+
     return (
         <Router>
             <div className="app">

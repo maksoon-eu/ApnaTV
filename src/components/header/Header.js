@@ -57,6 +57,10 @@ const Header = () => {
         setSearchActive(true)
     }
 
+    const onSearchNoneActive = () => {
+        setSearchActive(false)
+    }
+
     const onValueChange = (e) => {
         setName(e.target.value)
     }
@@ -72,9 +76,9 @@ const Header = () => {
             <motion.div
             key={item.id}
             className="mb"
-            initial={{ opacity: 0, y: 10 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}>
-                <Link to={`/films/${item.id}`} className="search__menu-item">
+                <Link to={`/films/${item.id}`} className="search__menu-item" onClick={() => {removeInputValue(); onSearchNoneActive()}}>
                     <div className="search__item-img">
                         <LazyLoadImage 
                             width='100%' height='100%'
