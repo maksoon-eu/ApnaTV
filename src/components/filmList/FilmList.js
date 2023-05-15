@@ -123,8 +123,6 @@ const FilmList = () => {
     const content = !(error || spinner) ? filmList : null
     const finalContent = !(totalCount || loading || error) ? <h1 className="nothing">Ничего не найдено</h1> : content
 
-    console.log(filmList)
-
     return (
         <div>
             <Filter genreFilter={genre} typeFilter={type} yearFilter={year} ratingFilter={rating} countryFilter={country} cleanAllFilters={cleanAllFilters} fetching={fetching} filterFilm={filterFilm}/>

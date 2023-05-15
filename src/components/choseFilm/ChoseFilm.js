@@ -320,7 +320,7 @@ const ChoseFilm = () => {
                                 <tr className="choseFilm__row">
                                     <th className="choseFilm__title">Режиссер</th>
                                     <td className="choseFilm__text">
-                                        <div className="choseFilm__text-flex">
+                                        <div className="choseFilm__text-fle">
                                             {persons.filter(item => item.profession === 'режиссеры').length !== 0 ? persons.filter(item => item.profession === 'режиссеры').map(item => <div className="actors__text" key={item.id}>{item.name}</div>) : '...'}
                                         </div>
                                     </td>
@@ -328,7 +328,7 @@ const ChoseFilm = () => {
                                 <tr className="choseFilm__row">
                                     <th className="choseFilm__title">Редактор</th>
                                     <td className="choseFilm__text">
-                                        <div className="choseFilm__text-flex">
+                                        <div className="choseFilm__text-fle">
                                             {persons.filter(item => item.profession === 'редакторы').length !== 0 ? persons.filter(item => item.profession === 'редакторы').map(item => <div className="actors__text" key={item.id}>{item.name}</div>) : '...'}
                                         </div>
                                     </td>
@@ -336,7 +336,7 @@ const ChoseFilm = () => {
                                 <tr className="choseFilm__row">
                                     <th className="choseFilm__title">Продюсер</th>
                                     <td className="choseFilm__text">
-                                        <div className="choseFilm__text-flex">
+                                        <div className="choseFilm__text-fle">
                                             {persons.filter(item => item.profession === 'продюсеры').length !== 0 ? persons.filter(item => item.profession === 'продюсеры').map(item => <div className="actors__text" key={item.id}>{item.name}</div>) : '...'}
                                         </div>
                                     </td>
@@ -344,7 +344,7 @@ const ChoseFilm = () => {
                                 <tr className="choseFilm__row">
                                     <th className="choseFilm__title">Оператор</th>
                                     <td className="choseFilm__text">
-                                        <div className="choseFilm__text-flex">
+                                        <div className="choseFilm__text-fle">
                                             {persons.filter(item => item.profession === 'операторы').length !== 0 ? persons.filter(item => item.profession === 'операторы').map(item => <div className="actors__text" key={item.id}>{item.name}</div>) : '...'}
                                         </div>
                                     </td>
