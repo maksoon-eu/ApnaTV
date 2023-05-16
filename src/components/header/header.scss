@@ -2,7 +2,7 @@
 
 header {
     height: 100px;
-    background: linear-gradient(180deg, #0B1220 12.29%, rgba(0, 0, 0, 0.07) 100%);
+    background: linear-gradient(180deg, #000 12.29%, rgba(0, 0, 0, 0.07) 100%);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -42,6 +42,10 @@ header {
 }
 
 .header__item {
+    &-logo {
+        margin-right: 65px;
+    }
+
     &-text {
         font-weight: 600;
         font-size: 20px;
@@ -84,8 +88,8 @@ header {
     top: 40px;
     transition: 0.4s ease;
     height: 0;
-    right: -50px;
-    left: -50px;
+    right: 10px;
+    width: 288px;
     overflow-y: auto;
     overflow-x: hidden;
     border-top-left-radius: 6px;
@@ -184,7 +188,7 @@ header {
         color: #fff;
         font-weight: 500;
         font-size: 17px;
-        padding-right: 50px;
+        padding-right: 4px;
 
         &::placeholder {
             font-size: 17px;
@@ -253,5 +257,85 @@ header {
 
     &--active {
         opacity: 1;
+    }
+}
+
+@media (max-width: 768px) {
+    .header__item {
+        &-logo {
+            margin-right: 55px;
+        }
+    
+        &-text {
+            font-size: 16px;
+        }
+    }
+}
+
+@media (max-width: 415px) {
+    header {
+        height: 70px;
+    }
+
+    .header__item {
+        &-text {
+            font-size: 15px;
+        }
+        &-logo {
+            img {
+                max-width: 130px;
+            }
+        }
+    }
+
+    .cleanInput {
+        right: 10px;
+        width: 14px;
+        height: 14px;
+        top: 11px;
+    
+        &:hover img {
+            transform: rotate(90deg);
+        }
+        
+        img {
+            transition: .2s linear;
+            width: 16px;
+            height: 16px;
+        }
+    
+        &--active {
+            opacity: 1;
+        }
+    }
+
+    .search__current {
+        input {
+            padding-left: 24px;
+            background-color: transparent;
+            border: none;
+            transition: width .55s ease;
+            width: 0;
+            height: 35px;
+            color: #fff;
+            font-weight: 500;
+            font-size: 15px;
+            padding-right: 4px;
+    
+            &::placeholder {
+                font-size: 15px;
+                font-weight: 500;
+            }
+    
+            &.focus {
+                width: 126px;
+            }
+        }
+    
+        &:hover {
+            input {
+                width: 126px;
+            }
+        }
     }
 }

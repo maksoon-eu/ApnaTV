@@ -132,3 +132,54 @@
         font-size: 18px;
     }
 }
+
+@media (max-width: 768px) {
+    .filmList__item {
+        margin-top: 20px;
+        width: 154px;
+        border-radius: 10px;
+    
+        &-img {
+            overflow: hidden;
+            border-radius: 10px;
+            width: 100%;
+            height: 222px;
+            border: 2px solid transparent;
+            transition: .2s linear;
+            position: relative;
+    
+            &--active {
+                border-radius: 20px;
+            }
+    
+            .films__hover {
+                &-rating {
+                    width: 35px;
+                    height: 25px;
+                    font-size: 15px;
+                    font-weight: 600;
+                }
+                
+                &-length {
+                    font-size: 15px;
+                    left: 5px;
+                }
+                
+                &-descr {
+                    font-size: 15px;
+                    left: 5px;
+                }
+                
+                &-ageRating {
+                    font-size: 18px;
+                    right: 8px;
+                }
+            }
+        }
+    
+        &-name {
+            margin-top: 5px;
+            font-size: 16px;
+        }
+    }
+}

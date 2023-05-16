@@ -4,13 +4,16 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
     margin-top: 40px;
 }
 
 .clean {
+    margin-bottom: 10px;
     display: flex;
     align-items: center;
     cursor: pointer;
+    padding: 8px 15px;
 
     &:hover img {
         transform: rotate(180deg);

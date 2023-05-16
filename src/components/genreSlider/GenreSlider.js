@@ -76,7 +76,27 @@ const GenreSlider = ({genre}) => {
         dots: false,
         infinite: false,
         slidesToShow: 6,
-        slidesToScroll: 1
+        slidesToScroll: 1,
+        responsive: [
+            {
+              breakpoint: 1230,
+              settings: {
+                slidesToShow: 4
+              }
+            },
+            {
+              breakpoint: 870,
+              settings: {
+                slidesToShow: 3
+              }
+            },
+            {
+              breakpoint: 550,
+              settings: {
+                slidesToShow: 2
+              }
+            }
+        ]
     };
 
     const errorMessage = error ? <ErrorMessage/> : null
@@ -87,11 +107,12 @@ const GenreSlider = ({genre}) => {
         <>
         
             <div className="genre__title">{genre}</div>
+            {filmList.length > 0 || error || loading ? 
             <Slider {...settings} className="main__slider genre__slider">
                 {errorMessage}  
                 {spinner}  
                 {content}  
-            </Slider>
+            </Slider> : <div className="genreSpinner"></div>}
         </>
     );
 };

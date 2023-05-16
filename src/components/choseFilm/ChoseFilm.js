@@ -9,6 +9,8 @@ import { Link } from "react-router-dom";
 import { motion } from 'framer-motion';
 
 import ModalWindow from "../modal/Modal";
+import SkeletonSlider from "../skeleton/SkeletonSlider"
+import ErrorMessage from "../errorMessage/ErorrMessage"
 
 import loadingImg from "../../resources/img/loading.svg";
 import watch from '../../resources/img/play-btn.svg';
@@ -34,7 +36,7 @@ const Film = ({filmId}) => {
 
     return (
         <div className="videoPlayer">
-                <div id="yohoho" data-resize="1" data-language="ru" data-country="RU" data-loading={loadingImg} data-bg="#000" data-kinopoisk={filmId}></div>
+            <div id="yohoho" data-resize="1" data-language="ru" data-country="RU" data-bg="#000" data-kinopoisk={filmId} data-loading={loadingImg}></div>
         </div>
     )
 }
@@ -49,6 +51,8 @@ const ChoseFilm = () => {
     const [genres, setGenres] = useState();
     const [country, setCountry] = useState();
     const [premiere, setPremiere] = useState();
+
+    const skeletonArr = ['', '', '', '', '', '']
 
     const {filmId} = useParams()
     const {error, loading, getFilmForId} = useWatchService();
@@ -206,13 +210,45 @@ const ChoseFilm = () => {
         )
     })
 
+    const skeletonList = skeletonArr.map((item, i) => {
+        return (
+            <SkeletonSlider key={i}/>
+        )
+    })
+
     const settings = {
         dots: false,
         infinite: false,
         slidesToShow: 6,
-        slidesToScroll: 1
+        slidesToScroll: 1,
+        initialSlide: 0,
+        responsive: [
+            {
+              breakpoint: 1230,
+              settings: {
+                slidesToShow: 4
+              }
+            },
+            {
+              breakpoint: 870,
+              settings: {
+                slidesToShow: 3
+              }
+            },
+            {
+              breakpoint: 550,
+              settings: {
+                slidesToShow: 2
+              }
+            }
+        ]
     };
     
+    const errorMessage = error ? <ErrorMessage/> : null
+    const spinner = loading ? skeletonList : null
+    const content =  !(loading || error) ? personsList : null
+    const content2 =  !(loading || error) ? similarMovieList : null
+    const content3 =  !(loading || error) ? sequelAndPrequelList : null
     return (
         <>
             {film.trailers !== undefined ? <ModalWindow openModal={openModal} onOpenModal={onOpenModal} url={film.trailers}/> : null}
@@ -234,7 +270,7 @@ const ChoseFilm = () => {
                         </div>
                     </motion.div>
                 </div>
-                <div className="choseFilm__content" style={{opacity: !(loading || error) ? '1' : '0'}}>
+                <div className="choseFilm__content" style={{opacity: !(loading || error) ? 1 : 0}}>
                     <div className="choseFilm__backdrop" key={film.backdrop}>
                         <LazyLoadImage 
                             width='99%' height='99%'
@@ -381,23 +417,29 @@ const ChoseFilm = () => {
 
                     <div className="choseFilm__slider" style={{display: personsList.length !== 0 ? 'block' : 'none'}}>
                         <div className="genre__title">Актеры и съемочная группа</div>
-                        <Slider {...settings} className="main__slider genre__slider"> 
-                            {personsList}  
-                        </Slider>
+                        {personsList.length > 0 ? <Slider {...settings} className="main__slider genre__slider"> 
+                            {errorMessage}  
+                            {spinner}  
+                            {content}    
+                        </Slider> : null}
                     </div>
                     
                     <div className="choseFilm__slider" style={{display: similarMovieList.length !== 0 ? 'block' : 'none'}}>
                         <div className="genre__title">Похожее</div>
-                        <Slider {...settings} className="main__slider genre__slider"> 
-                            {similarMovieList}  
-                        </Slider>
+                        {similarMovieList.length > 0 || error || loading ? <Slider {...settings} className="main__slider genre__slider"> 
+                            {errorMessage}  
+                            {spinner}  
+                            {content2}  
+                        </Slider> : null}
                     </div>
                     
                     <div className="choseFilm__slider" style={{display: sequelAndPrequelList.length !== 0 ? 'block' : 'none'}}>
                         <div className="genre__title">Сиквелы и приквелы</div>
-                        <Slider {...settings} className="main__slider genre__slider"> 
-                            {sequelAndPrequelList}  
-                        </Slider>
+                        {sequelAndPrequelList.length > 0 || error || loading ? <Slider {...settings} className="main__slider genre__slider"> 
+                            {errorMessage}  
+                            {spinner}  
+                            {content3}  
+                        </Slider> : null}
                     </div>
                 </div>
             </div>

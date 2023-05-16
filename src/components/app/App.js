@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import Header from "../header/Header";
@@ -10,17 +10,16 @@ import Footer from "../footer/Footer";
 import '../../style/style.scss'
 
 const App = () => {
-    
-    const now = new Date().getTime()
-    const setupTime = localStorage.getItem('setupTime')
-    if (setupTime === null) {
-        localStorage.setItem('setupTime', now)
-    } else {
-        if (now-setupTime > 3*60*60*1000) {
+
+    useEffect(() => {
+        const clearLocalStorage = () => {
             localStorage.clear()
-            localStorage.setItem('setupTime', now)
         }
-    }
+        window.addEventListener('beforeunload', clearLocalStorage)
+        return () => {
+            window.removeEventListener('beforeunload', clearLocalStorage)
+        }
+    }, [])
 
     return (
         <Router>

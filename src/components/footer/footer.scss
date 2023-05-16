@@ -12,6 +12,7 @@ footer {
 .footer__inner {
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
 
     .footer__list {
         height: 100%;
@@ -147,3 +148,16 @@ footer {
     }
 }
   
+@media (max-width: 768px) {
+    footer {
+        margin-top: 40px;
+    }
+}
+
+@media (max-width: 415px) {
+    .footer__logo {
+        img {
+            max-width: 130px;
+        }
+    }
+}

@@ -139,7 +139,7 @@ const Header = () => {
                                 {noneRes}
                             </ul>
                         </div>
-                        <div className="header__account-text header__link">
+                        <div className="header__account-text header__link" style={{display: 'none'}}>
                             <Link to="/">Аккаунт</Link>
                         </div>
                     </div>

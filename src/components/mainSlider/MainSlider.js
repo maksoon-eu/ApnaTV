@@ -141,7 +141,8 @@ const MainSlider = () => {
             <Slider {...settings} className="poster__slider">
                 {errorMessage}  
                 {spinner}  
-                {content}  
+                {content} 
+                 
             </Slider>
         </>
     );

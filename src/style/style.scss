@@ -99,7 +99,7 @@ input {
 .slick-next {
     width: 20px;
     height: 35px;
-    right: 10px;
+    right: 0px;
     &:before {
         transition: .1s linear;
         content: url(../resources/img/right-arrow.svg) !important;
@@ -109,7 +109,7 @@ input {
 .slick-prev {
     width: 20px;
     height: 35px;
-    left: 10px;
+    left: 0px;
     &:before {
         transition: .1s linear;
         content: url(../resources/img/left-arrow.svg) !important;
@@ -131,7 +131,6 @@ input {
         width: 20px;
         height: 35px;
         left: 10px;
-        position: relative;
         z-index: 2;
         &:before {
             transition: .1s linear;
@@ -178,4 +177,8 @@ html::-webkit-scrollbar-track {
 html::-webkit-scrollbar-thumb {
     background-color: $hover-color;
     border-radius: 8px;
+}
+
+@media (max-width: 415px) {
+    
 }
