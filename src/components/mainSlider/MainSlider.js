@@ -83,8 +83,8 @@ const MainSlider = () => {
             <div key={item.id} style={{position: 'relative'}}>
                 <div className="activeSlider__item">
                     <motion.div
-                    initial={{ opacity: 0, x: -50 }}
-                    animate={{ opacity: 1, x: 0 }}
+                    initial={{ opacity: 0}}
+                    animate={{ opacity: 1}}
                     >
                     <div className="activeSlider__item-left">
                         <div className="activeSlider__item-logo" style={{display: item.logo === null ? 'none' : 'flex'}}>
