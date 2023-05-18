@@ -249,8 +249,8 @@ const ChoseFilm = () => {
             <div className="choseFilm">
                 <div style={{display: loading ? 'block' : 'none'}}>
                     <motion.div
-                    initial={{ opacity: 0, y: -200 }}
-                    animate={{ opacity: 1, y: 0 }}>
+                    initial={{ opacity: 0}}
+                    animate={{ opacity: 1}}>
                         <div className="skeleton skeleton--main">
                             <div className="pulse skeleton__choseFilm"></div>
                             <div className="pulse skeleton__header">
