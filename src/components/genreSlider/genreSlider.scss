@@ -196,7 +196,7 @@
     
             .films__hover {
                 border-radius: 5px;
-                
+
                 &-rating {
                     width: 35px;
                     height: 25px;
@@ -217,6 +217,10 @@
                 &-ageRating {
                     font-size: 18px;
                     right: 8px;
+                }
+
+                &-bg {
+                    border-radius: 5px;
                 }
             }
         }

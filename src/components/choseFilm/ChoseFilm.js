@@ -129,7 +129,8 @@ const ChoseFilm = () => {
         if (bool) {
             setTimeout(() => {
                 document.body.style.position = 'fixed';
-                document.body.style.overflowY = 'scroll'
+                document.body.style.overflowY = 'scroll';
+                document.body.style.width = '100%';
             }, 300)
             document.body.scrollIntoView({
                 behavior: 'smooth',
