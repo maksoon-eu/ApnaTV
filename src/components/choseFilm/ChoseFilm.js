@@ -24,7 +24,7 @@ const Film = ({filmId}) => {
     useEffect(() => {
         const script = document.createElement('script');
 
-        script.src = "http://yohoho.cc/yo.js";
+        script.src = "https://yohoho.cc/yo.js";
         script.async = true;
 
         document.body.appendChild(script);
