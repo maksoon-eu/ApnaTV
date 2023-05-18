@@ -16,7 +16,7 @@ const Footer = () => {
                         </Link>
                     </div>
                 </div>
-                <div className="footer__inner-block">
+                <div className="footer__inner-block footer__inner-block-hide">
                     <ul className="footer__list">
                         <li className="footer__list-item">
                             <Link to="/">Главная</Link>

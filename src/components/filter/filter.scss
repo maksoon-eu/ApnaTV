@@ -13,7 +13,7 @@
     display: flex;
     align-items: center;
     cursor: pointer;
-    padding: 8px 15px;
+    padding: 3px 8px;
 
     &:hover img {
         transform: rotate(180deg);
@@ -35,5 +35,11 @@
             width: 26px;
             height: 26px;
         }
+    }
+}
+
+@media (max-width: 415px) {
+    .filter {
+        margin-top: 20px;
     }
 }

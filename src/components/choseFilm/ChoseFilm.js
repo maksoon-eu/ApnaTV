@@ -58,10 +58,6 @@ const ChoseFilm = () => {
     const {error, loading, getFilmForId} = useWatchService();
 
     useEffect(() => {
-        document.body.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
-        });
         onRequest()
         // eslint-disable-next-line
     }, [filmId])
@@ -133,9 +129,8 @@ const ChoseFilm = () => {
         if (bool) {
             setTimeout(() => {
                 document.body.style.position = 'fixed';
-                document.body.style.paddingRight = '6.5px';
+                document.body.style.overflowY = 'scroll'
             }, 300)
-            document.body.style.width = '100%';
             document.body.scrollIntoView({
                 behavior: 'smooth',
                 block: 'start'
@@ -143,7 +138,6 @@ const ChoseFilm = () => {
         } else {
             setTimeout(() => {
                 document.body.style.position = 'relative';
-                document.body.style.paddingRight = '';
             }, 250)
             document.body.style.top = '';
         }
@@ -238,7 +232,7 @@ const ChoseFilm = () => {
             {
               breakpoint: 550,
               settings: {
-                slidesToShow: 2
+                slidesToShow: 3
               }
             }
         ]

@@ -180,5 +180,19 @@ html::-webkit-scrollbar-thumb {
 }
 
 @media (max-width: 415px) {
+    .slick-next {
+        right: -10px;
+        &:before {
+            transition: .1s linear;
+            content: url(../resources/img/right-arrow-adaptive.svg) !important;
+        }
+    }
     
+    .slick-prev {
+        left: -10px;
+        &:before {
+            transition: .1s linear;
+            content: url(../resources/img/left-arrow-adaptive.svg) !important;
+        }
+    }
 }

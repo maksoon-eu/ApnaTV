@@ -1,0 +1,38 @@
+@import '../../style/variables.scss';
+
+.panel {
+    display: none;
+    height: 45px;
+    position: fixed;
+    bottom: -1px;
+    right: -1px;
+    left: -1px;
+    background-color: #1e1e1efa;
+}
+
+.panel__inner {
+    display: flex;
+    justify-content: space-around;
+    height: 100%;
+    align-items: center;
+}
+
+.panel__item {
+    &-svg {
+        width: 31px;
+        height: 31px;
+    }
+}
+
+.panel__item.active {
+    path {
+        transition: .2s linear;
+        fill: #FA4776;
+    }
+}
+
+@media (max-width: 415px) {
+    .panel {
+        display: block;
+    }
+}

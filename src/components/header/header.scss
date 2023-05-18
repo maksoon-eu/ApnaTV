@@ -277,6 +277,15 @@ header {
         height: 70px;
     }
 
+    .header__inner {
+        height: 70px;
+        padding-left: 10px;
+    }
+
+    .header__item-adaptive {
+        display: none;
+    }
+
     .header__item {
         &-text {
             font-size: 15px;
@@ -292,7 +301,7 @@ header {
         right: 10px;
         width: 14px;
         height: 14px;
-        top: 11px;
+        top: 10px;
     
         &:hover img {
             transform: rotate(90deg);
@@ -309,6 +318,19 @@ header {
         }
     }
 
+    .search.active .search__menu {
+        width: 220px;
+        height: 270px;
+    }
+
+    .search__menu {
+        width: 220px;
+    }
+
+    .search__menu .search__item-name {
+        font-size: 16px;
+    }
+
     .search__current {
         input {
             padding-left: 24px;
@@ -320,7 +342,7 @@ header {
             color: #fff;
             font-weight: 500;
             font-size: 15px;
-            padding-right: 4px;
+            padding-right: 37px;
     
             &::placeholder {
                 font-size: 15px;
@@ -328,13 +350,13 @@ header {
             }
     
             &.focus {
-                width: 126px;
+                width: 145px;
             }
         }
     
         &:hover {
             input {
-                width: 126px;
+                width: 145px;
             }
         }
     }

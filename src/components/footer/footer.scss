@@ -155,9 +155,31 @@ footer {
 }
 
 @media (max-width: 415px) {
+    footer {
+        padding-bottom: 50px;
+    }
+
     .footer__logo {
         img {
             max-width: 130px;
         }
+    }
+
+    .footer__inner-block-hide {
+        display: none;
+    }
+
+    .footer__underline {
+        &-block {
+            font-size: 12px;
+        }
+    }
+
+    .footer__help {
+        line-height: 25px;
+    }
+
+    .icons {
+        margin-top: 10px;
     }
 }

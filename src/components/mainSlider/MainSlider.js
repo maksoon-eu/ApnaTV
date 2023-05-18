@@ -38,9 +38,8 @@ const MainSlider = () => {
         if (bool) {
             setTimeout(() => {
                 document.body.style.position = 'fixed';
-                document.body.style.paddingRight = '6.5px';
+                document.body.style.overflowY = 'scroll'
             }, 300)
-            document.body.style.width = '100%';
             document.body.scrollIntoView({
                 behavior: 'smooth',
                 block: 'start'
@@ -49,7 +48,6 @@ const MainSlider = () => {
         } else {
             setTimeout(() => {
                 document.body.style.position = 'relative';
-                document.body.style.paddingRight = '';
             }, 250)
             document.body.style.top = '';
         }
@@ -85,7 +83,7 @@ const MainSlider = () => {
             <div key={item.id} style={{position: 'relative'}}>
                 <div className="activeSlider__item">
                     <motion.div
-                    initial={{ opacity: 0, x: -100 }}
+                    initial={{ opacity: 0, x: -50 }}
                     animate={{ opacity: 1, x: 0 }}
                     >
                     <div className="activeSlider__item-left">
@@ -138,12 +136,13 @@ const MainSlider = () => {
     return (
         <>
             {modal}
+            <div style={{minHeight: '500px'}}>
             <Slider {...settings} className="poster__slider">
                 {errorMessage}  
                 {spinner}  
                 {content} 
-                 
             </Slider>
+            </div>
         </>
     );
 };

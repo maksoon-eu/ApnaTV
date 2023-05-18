@@ -116,7 +116,7 @@
     
     .activeSlider__item {
         height: auto;
-        max-height: none;
+        max-height: 500px;
     
         &-left {
             padding-left: 10px;
@@ -137,8 +137,8 @@
     
         &-subtitle {
             font-weight: 400;
-            font-size: 19px;
-            line-height: 150%;
+            font-size: 18px;
+            line-height: 1.2;
             opacity: 0.9;
             overflow: hidden;
             max-height: 193px;

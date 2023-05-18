@@ -6,7 +6,7 @@ import { useOnScreen } from "../../hooks/screen.hook";
 
 import './skeleton.scss';
 
-const SkeletonSlider = () => {
+const SkeletonSliderFilms = () => {
     const controls = useAnimation();
     const rootRef = useRef(null);
     const onScreen = useOnScreen(rootRef);
@@ -29,9 +29,9 @@ const SkeletonSlider = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={controls}
         >
-            <div className="pulse skeleton__block2"></div>
+            <div className="pulse skeleton__block"></div>
         </motion.div>
     );
 }
 
-export default SkeletonSlider;
+export default SkeletonSliderFilms;

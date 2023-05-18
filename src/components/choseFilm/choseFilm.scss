@@ -275,6 +275,23 @@
     }
 }
 
+@media (max-width: 580px) {
+    .choseFilm {
+        &__table {
+            max-width: 580px;
+            margin-bottom: 15px;
+
+            &--top {
+                display: none;
+            }
+        }
+
+        &__tables {
+            min-height: 320px;
+        }
+    }
+}
+
 @media (max-width: 415px) {
     .choseFilm {
         &__backdrop {
@@ -321,19 +338,6 @@
         &__row {
             text-align: left;
             vertical-align: top;
-        }
-    
-        &__table {
-            max-width: 580px;
-            margin-bottom: 15px;
-    
-            &--top {
-                display: none;
-            }
-        }
-    
-        &__tables {
-            min-height: 320px;
         }
     
         &__title {

@@ -110,15 +110,23 @@
         max-width: 160px;
 
         &.active {
-            &.catalog .dropdown__menu{
-                height: 120px;
+            &:not(.catalog) .dropdown__menu {
+                height: 150px;
             }
+
+            &.catalog .dropdown__menu{
+                height: 124px;
+            }
+        }
+
+        &:hover img {
+            pointer-events: none;
         }
     }
 
     .dropdown__menu {
         position: absolute;
-        top: 50px;
+        top: 38px;
     
         &-item {
             font-size: 16px;

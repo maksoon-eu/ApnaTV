@@ -107,7 +107,7 @@ const Header = () => {
     return (
         <header>
             <div className="header__inner">
-                <Link to="/films" className="header__item">
+                <Link to="/films" className="header__item header__item-adaptive">
                     <div className="header__item-text header__link">
                         <div>Каталог</div>
                     </div>

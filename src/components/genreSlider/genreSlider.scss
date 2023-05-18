@@ -229,7 +229,29 @@
 }
 
 @media (max-width: 415px) {
+    .genre__slider {
+        padding: 0 15px;
+        min-height: auto;
+        height: 250px;
+    }
+
     .genre__title {
         font-size: 25px;
+    }
+
+    .films__item-name {
+        font-size: 15px;
+        margin-top: 0;
+    }
+
+    .films__item-img {
+        height: 180px;
+    }
+
+    .films__item {
+        margin-top: 0;
+        width: 114px;
+        border-radius: 8px;
+        height: auto;
     }
 }

@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import useWatchService from "../../services/WatchService";
 
 import Filter from "../filter/Filter";
-import SkeletonSlider from "../skeleton/SkeletonSlider"
+import SkeletonSliderFilms from "../skeleton/SkeletonSliderFilms"
 import ErrorMessage from "../errorMessage/ErorrMessage"
 
 import loadingImg from "../../resources/img/loading.svg"
@@ -113,7 +113,7 @@ const FilmList = () => {
 
     const skeletonList = skeletonArr.map((item, i) => {
         return (
-            <SkeletonSlider key={i}/>
+            <SkeletonSliderFilms key={i}/>
         )
     })
 

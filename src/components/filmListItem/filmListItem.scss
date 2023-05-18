@@ -183,3 +183,45 @@
         }
     }
 }
+
+@media (max-width: 415px) {
+    .filmList__item {
+        margin-top: 10px;
+        width: 124px;
+        border-radius: 8px;
+    
+        &-img {
+            border-radius: 8px;
+            height: 185px;
+    
+            .films__hover {
+                &-rating {
+                    width: 35px;
+                    height: 25px;
+                    font-size: 15px;
+                    font-weight: 600;
+                }
+                
+                &-length {
+                    font-size: 15px;
+                    left: 5px;
+                }
+                
+                &-descr {
+                    font-size: 15px;
+                    left: 5px;
+                }
+                
+                &-ageRating {
+                    font-size: 18px;
+                    right: 8px;
+                }
+            }
+        }
+    
+        &-name {
+            margin-top: 5px;
+            font-size: 15px;
+        }
+    }
+}
