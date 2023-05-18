@@ -49,7 +49,6 @@
 
     &-img {
         overflow: hidden;
-        border-radius: 10px;
         border: 4px solid transparent;
         transition: .2s linear;
         border-radius: 15px;
@@ -185,7 +184,7 @@
     
         &-img {
             overflow: hidden;
-            border-radius: 10px;
+            border-radius: 5px;
             width: 100%;
             height: 222px;
             border: 2px solid transparent;
@@ -251,7 +250,6 @@
     .films__item {
         margin-top: 0;
         width: 114px;
-        border-radius: 8px;
         height: auto;
     }
 }
