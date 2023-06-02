@@ -46,6 +46,7 @@ const FilmListItem = ({item}) => {
                         alt={item.name}
                         style={{transition: '.2s linear'}}
                     />
+                    <div className={`adaptive__rating ${item.ratingImdb >= 7 ? 'green' : ''} ${item.ratingImdb <= 7 && item.ratingImdb >= 5 ? 'yellow' : ''} ${item.ratingImdb <= 5 ? 'red' : ''}`}>{item.ratingImdb.toFixed(1)}</div>
                     <div className="films__hover">
                         <div className="films__hover-bg"></div>
                         <div className={`films__hover-rating ${item.ratingImdb >= 7 ? 'green' : ''} ${item.ratingImdb <= 7 && item.ratingImdb >= 5 ? 'yellow' : ''} ${item.ratingImdb <= 5 ? 'red' : ''}`}>{item.ratingImdb.toFixed(1)}</div>

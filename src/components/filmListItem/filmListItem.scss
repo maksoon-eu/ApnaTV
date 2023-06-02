@@ -6,6 +6,7 @@
     cursor: pointer;
     border-radius: 15px;
     transition: .2s linear;
+    position: relative;
 
     &:hover &-img {
         border-color: rgba(250, 71, 118, 0.5);
@@ -13,6 +14,33 @@
 
     &:hover &-name {
         color: $hover-color;
+    }
+
+    .adaptive__rating {
+        color: #fff;
+        display: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 2;
+        width: 40px;
+        height: 30px;
+        justify-content: center;
+        align-items: center;
+        border-top-left-radius: 6px;
+        border-bottom-right-radius: 6px;
+    }
+
+    .green {
+        background-color: rgb(0, 176, 12);
+    }
+    
+    .yellow {
+        background-color: #d69d16;
+    }
+    
+    .red {
+        background-color: red;
     }
 
     &:hover {
@@ -52,18 +80,6 @@
             opacity: 0;
             transition: .2s linear;
             border-radius: 5px;
-    
-            .green {
-                background-color: rgb(0, 176, 12);
-            }
-            
-            .yellow {
-                background-color: #d69d16;
-            }
-            
-            .red {
-                background-color: red;
-            }
             
             &-rating {
                 position: relative;
@@ -77,6 +93,7 @@
                 border-top-left-radius: 6px;
                 border-bottom-right-radius: 6px;
                 font-weight: 600;
+                color: #fff;
             }
             
             &-length {
@@ -189,33 +206,23 @@
         margin-top: 10px;
         width: 124px;
         border-radius: 8px;
+        position: relative;
+        pointer-events: none;
+
+        .adaptive__rating {
+            display: flex;
+            width: 35px;
+            height: 25px;
+            font-size: 15px;
+            font-weight: 600;
+        }
     
         &-img {
             border-radius: 8px;
             height: 185px;
     
             .films__hover {
-                &-rating {
-                    width: 35px;
-                    height: 25px;
-                    font-size: 15px;
-                    font-weight: 600;
-                }
-                
-                &-length {
-                    font-size: 15px;
-                    left: 5px;
-                }
-                
-                &-descr {
-                    font-size: 15px;
-                    left: 5px;
-                }
-                
-                &-ageRating {
-                    font-size: 18px;
-                    right: 8px;
-                }
+                display: none;
             }
         }
     

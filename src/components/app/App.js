@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect  } from "react";
+import React, { useEffect, useLayoutEffect, useContext } from "react";
 import { BrowserRouter as Router, Route, Routes, useLocation } from "react-router-dom";
 
 import Header from "../header/Header";
@@ -7,6 +7,7 @@ import FilmListPage from "../page/FilmListPage";
 import FilmPage from "../page/FilmPage";
 import BottomPanel from "../bottomPanel/BottomPanel";
 import Footer from "../footer/Footer";
+import { ThemeContext } from "../theme/Theme";
 
 import '../../style/style.scss'
 
@@ -24,6 +25,7 @@ const Wrapper = ({children}) => {
 } 
 
 const App = () => {
+    const { theme } = useContext(ThemeContext);
 
     useEffect(() => {
         const clearLocalStorage = () => {
@@ -37,7 +39,7 @@ const App = () => {
 
     return (
         <Router>
-            <div className="app">
+            <div className={`app ${theme}`}>
                 <Header/>
                 <div className="app__global">
                     <Wrapper>

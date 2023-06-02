@@ -67,7 +67,16 @@
         border: 4px solid transparent;
         background-color: $skeleton-bg;
     }
-
+    &__block2 {
+        width: 182px;
+        height: 256px;
+        border-radius: 15px;
+        margin: 0 auto;
+        margin-top: 50px;
+        margin-bottom: 20px;
+        border: 4px solid transparent;
+        background-color: $skeleton-bg;
+    }
     &__choseFilm {
         height: 525px;;
         width: 350px;

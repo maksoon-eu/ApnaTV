@@ -19,8 +19,9 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import 'react-lazy-load-image-component/src/effects/blur.css';
 import './choseFilm.scss'
+import { useRef } from "react";
 
-const Film = ({filmId}) => {
+const Film = ({filmId, componentRef}) => {
     useEffect(() => {
         const script = document.createElement('script');
 
@@ -35,7 +36,7 @@ const Film = ({filmId}) => {
     }, [])
 
     return (
-        <div className="videoPlayer">
+        <div ref={componentRef} className="videoPlayer">
             <div id="yohoho" data-resize="1" data-language="ru" data-country="RU" data-bg="#000" data-kinopoisk={filmId} data-loading={loadingImg}></div>
         </div>
     )
@@ -56,6 +57,9 @@ const ChoseFilm = () => {
 
     const {filmId} = useParams()
     const {error, loading, getFilmForId} = useWatchService();
+
+
+    const ref = useRef()
 
     useEffect(() => {
         onRequest()
@@ -205,6 +209,12 @@ const ChoseFilm = () => {
         )
     })
 
+    const onScrollToFilm = () => {
+        ref.current.scrollIntoView({
+            behavior: 'smooth'
+        });
+    };
+
     const skeletonList = skeletonArr.map((item, i) => {
         return (
             <SkeletonSlider key={i}/>
@@ -298,7 +308,7 @@ const ChoseFilm = () => {
                             </div>
                             <div className="choseFilm__descr">{film.description}</div>
                             <div className="btn__flex">
-                                <button className="watch__btn">
+                                <button onClick={onScrollToFilm} className="watch__btn">
                                     <img src={watch} alt="" />
                                     Смотреть
                                 </button>
@@ -307,7 +317,7 @@ const ChoseFilm = () => {
                                 </button>
                             </div>
                         </div>
-                        <div className={`choseFilm__rating ${film.ratingImdb >= 7 ? 'green' : ''} ${film.ratingImdb <= 7 && film.ratingImdb >= 5 ? 'yellow' : ''} ${film.ratingImdb <= 5 ? 'red' : ''}`}>
+                        <div className={`choseFilm__rating ${film.ratingImdb >= 7 ? 'greenText' : ''} ${film.ratingImdb <= 7 && film.ratingImdb >= 5 ? 'yellowText' : ''} ${film.ratingImdb <= 5 ? 'redText' : ''}`}>
                             {film.ratingImdb}
                         </div>
                     </div>
@@ -408,7 +418,7 @@ const ChoseFilm = () => {
                         </table>
                     </div>
 
-                    <Film filmId={filmId} key={filmId}/>
+                    <Film componentRef={ref} filmId={filmId} key={filmId}/>
 
                     <div className="choseFilm__slider" style={{display: personsList.length !== 0 ? 'block' : 'none'}}>
                         <div className="genre__title">Актеры и съемочная группа</div>

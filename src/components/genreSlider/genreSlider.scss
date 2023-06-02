@@ -28,6 +28,18 @@
     }
 }
 
+.green {
+    background-color: #00b00c;
+}
+
+.yellow {
+    background-color: #d69d16;
+}
+
+.red {
+    background-color: #cf2727;
+}
+
 .films__item {
     transition: .2s linear;
     cursor: pointer;
@@ -73,18 +85,6 @@
         transition: .2s linear;
         border-radius: 10px;
 
-        .green {
-            background-color: #00b00c;
-        }
-
-        .yellow {
-            background-color: #d69d16;
-        }
-
-        .red {
-            background-color: #cf2727;
-        }
-
         &-rating {
             position: relative;
             z-index: 2;
@@ -97,6 +97,7 @@
             border-top-left-radius: 9px;
             border-bottom-right-radius: 9px;
             font-weight: 600;
+            color: #fff;
         }
 
         &-length {
@@ -166,6 +167,21 @@
         font-size: 18px;
     }
 }
+
+.adaptive__rating {
+        display: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 2;
+        width: 40px;
+        height: 30px;
+        color: #fff;
+        justify-content: center;
+        align-items: center;
+        border-top-left-radius: 6px;
+        border-bottom-right-radius: 6px;
+    }
 
 @media (max-width: 768px) {
     .genre__slider {
@@ -250,11 +266,22 @@
 
     .films__item-img {
         height: 180px;
+        position: relative;
     }
 
     .films__item {
         margin-top: 0;
         width: 114px;
         height: auto;
+        pointer-events: none;
+        position: relative;
+    }
+
+    .adaptive__rating {
+        display: flex;
+        width: 35px;
+        height: 25px;
+        font-size: 15px;
+        font-weight: 600;
     }
 }

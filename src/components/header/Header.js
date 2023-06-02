@@ -1,9 +1,11 @@
 import React from "react";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useContext } from "react";
 import { motion } from 'framer-motion';
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { Link } from "react-router-dom";
 import useWatchService from "../../services/WatchService";
+import { ThemeContext } from "../theme/Theme";
+
 
 import ErrorMessage from "../errorMessage/ErorrMessage"
 import SkeletonSearch from "../skeleton/SkeletinSearch";
@@ -16,6 +18,7 @@ import image from '../../resources/img/image.jpg'
 import './header.scss';
 
 const Header = () => {
+    const { theme, toggleTheme } = useContext(ThemeContext);
     const {error, loading, getSearchedFilms} = useWatchService();
     
     const [searchActive, setSearchActive] = useState(false)
@@ -112,6 +115,7 @@ const Header = () => {
                         <div>Каталог</div>
                     </div>
                 </Link>
+                <button onClick={() => toggleTheme()}>{theme}</button>
                 <div className="header__item">
                     <div className="header__item-logo">
                         <Link to="/">
