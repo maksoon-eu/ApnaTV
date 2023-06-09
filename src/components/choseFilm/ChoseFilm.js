@@ -37,7 +37,7 @@ const Film = ({filmId, componentRef}) => {
 
     return (
         <div ref={componentRef} className="videoPlayer">
-            <div id="yohoho" data-resize="1" data-language="ru" data-country="RU" data-bg="#000" data-kinopoisk={filmId} data-loading={loadingImg}></div>
+            <div id="yohoho" style={{width: '100%'}} data-language="ru" data-country="RU" data-bg="#000" data-kinopoisk={filmId} data-loading={loadingImg}></div>
         </div>
     )
 }
@@ -58,13 +58,23 @@ const ChoseFilm = () => {
     const {filmId} = useParams()
     const {error, loading, getFilmForId} = useWatchService();
 
-
     const ref = useRef()
-
+    
     useEffect(() => {
         onRequest()
         // eslint-disable-next-line
     }, [filmId])
+
+    useEffect(() => {
+        const styles = () => {
+            document.querySelector('#yohoho').style.width = '100%'
+            document.querySelector('#yohoho-iframe').style.width = '100%'
+        }
+        window.addEventListener('load', styles)
+        return function() {
+            window.removeEventListener('load', styles);
+        } 
+    }, [])
 
     const onRequest = () => {
         getFilmForId(filmId)

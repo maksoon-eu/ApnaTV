@@ -94,7 +94,7 @@ const Header = () => {
                     <div className="search__item-info">
                         <div className="search__item-name">{item.name === '' ? item.alternativeName : item.name}</div>
                         <div className="search__item-group">
-                            <div className={`search__item-rating ${item.rating >= 7 ? 'green' : ''} ${item.rating <= 7 && item.rating >= 5 ? 'yellow' : ''} ${item.rating <= 5 ? 'red' : ''}`}>{item.rating.toFixed(1)}</div>
+                            <div className={`search__item-rating ${item.rating >= 7 ? 'rating__green' : ''} ${item.rating <= 7 && item.rating >= 5 ? 'rating__yellow' : ''} ${item.rating <= 5 ? 'rating__red' : ''}`}>{item.rating.toFixed(1)}</div>
                             <div className="search__item-year">{item.year}</div>
                         </div>
                     </div>

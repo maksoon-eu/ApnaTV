@@ -26,6 +26,7 @@ const Wrapper = ({children}) => {
 
 const App = () => {
     const { theme } = useContext(ThemeContext);
+    document.querySelector('html').className = theme
 
     useEffect(() => {
         const clearLocalStorage = () => {
