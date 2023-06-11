@@ -52,6 +52,7 @@ const ChoseFilm = () => {
     const [genres, setGenres] = useState();
     const [country, setCountry] = useState();
     const [premiere, setPremiere] = useState();
+    const [rating, setRating] = useState();
 
     const skeletonArr = ['', '', '', '', '', '']
 
@@ -88,6 +89,7 @@ const ChoseFilm = () => {
         setSimilarMovies(film[0].similarMovies)
         setSequelsAndPrequels(film[0].sequelsAndPrequels)
         setPersons(film[0].persons)
+        setRating(film[0].ratingKp.toFixed(1))
         setGenres(film[0].genres.map((item, i) => {
             return i === film[0].genres.length - 1 ? item.name : `${item.name}, `
         }))
@@ -331,8 +333,8 @@ const ChoseFilm = () => {
                                 </button>
                             </div>
                         </div>
-                        <div className={`choseFilm__rating ${film.ratingImdb >= 7 ? 'greenText' : ''} ${film.ratingImdb <= 7 && film.ratingImdb >= 5 ? 'yellowText' : ''} ${film.ratingImdb <= 5 ? 'redText' : ''}`}>
-                            {film.ratingImdb}
+                        <div className={`choseFilm__rating ${film.ratingKp >= 7 ? 'greenText' : ''} ${film.ratingKp <= 7 && film.ratingKp >= 5 ? 'yellowText' : ''} ${film.ratingKp <= 5 ? 'redText' : ''}`}>
+                            {rating}
                         </div>
                     </div>
 

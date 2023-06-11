@@ -207,7 +207,6 @@
         width: 124px;
         border-radius: 8px;
         position: relative;
-        pointer-events: none;
 
         .adaptive__rating {
             display: flex;
@@ -230,5 +229,23 @@
             margin-top: 5px;
             font-size: 15px;
         }
+
+        &:hover &-img {
+            border-color: transparent;
+        }
+    
+        &:hover &-name {
+            color: #fff;
+        }
+
+
+        &:hover {
+            img {
+                transform: scale(1);
+            }
+    
+            transform: translateY(0);
+        }
+        
     }
 }
