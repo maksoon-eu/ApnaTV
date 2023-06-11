@@ -69,12 +69,13 @@ const ChoseFilm = () => {
         const styles = () => {
             document.querySelector('#yohoho').style.width = '100%'
             document.querySelector('#yohoho-iframe').style.width = '100%'
+            document.querySelector('#yohoho-iframe').style.height = '100%'
         }
         window.addEventListener('load', styles)
         return function() {
             window.removeEventListener('load', styles);
         } 
-    }, [])
+    }, [filmId])
 
     const onRequest = () => {
         getFilmForId(filmId)
@@ -285,7 +286,10 @@ const ChoseFilm = () => {
                         </div>
                     </motion.div>
                 </div>
-                <div className="choseFilm__content" style={{opacity: !(loading || error) ? 1 : 0}}>
+                <div className="choseFilm__content" style={{display: !(loading || error) ? 'block' : 'none'}}>
+                <motion.div
+                initial={{ opacity: 0}}
+                animate={{ opacity: 1}}>
                     <div className="choseFilm__backdrop" key={film.backdrop}>
                         <LazyLoadImage 
                             width='99%' height='99%'
@@ -456,6 +460,7 @@ const ChoseFilm = () => {
                             {content3}  
                         </Slider> : null}
                     </div>
+                </motion.div>
                 </div>
             </div>
         </>
