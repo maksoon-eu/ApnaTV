@@ -6,9 +6,7 @@ import { Link } from "react-router-dom";
 import useWatchService from "../../services/WatchService";
 import { ThemeContext } from "../theme/Theme";
 
-
 import ErrorMessage from "../errorMessage/ErorrMessage"
-import SkeletonSearch from "../skeleton/SkeletinSearch";
 
 import clean from "../../resources/img/clean.svg"
 import loadingImg from "../../resources/img/loading.svg";
@@ -104,8 +102,9 @@ const Header = () => {
     })
 
     const errorMessage = error ? <ErrorMessage/> : null
-    const spinner = loading ? <SkeletonSearch/> : null
-    const noneRes = !(searchedFilms.length || loading || error) ? <h3 className="noneTitle">Не найдено</h3> : searchedFilms
+    const spinner = loading ? <img style={{margin: '0 auto', width: '160px', display: 'block', marginTop: '50px'}} src={loadingImg} alt="loading" /> : null
+    const content = !(loading || error) ? searchedFilms : null
+    const noneRes = !(searchedFilms.length || loading || error) ? <h3 className="noneTitle">Не найдено</h3> : content
 
     return (
         <header>

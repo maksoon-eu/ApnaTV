@@ -18,6 +18,7 @@ import watch from '../../resources/img/play-btn.svg';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import 'react-lazy-load-image-component/src/effects/blur.css';
+import 'react-lazy-load-image-component/src/effects/opacity.css';
 import './choseFilm.scss'
 import { useRef } from "react";
 
@@ -37,7 +38,7 @@ const Film = ({filmId, componentRef}) => {
 
     return (
         <div ref={componentRef} className="videoPlayer">
-            <div id="yohoho" style={{width: '100%'}} data-language="ru" data-country="RU" data-bg="#000" data-kinopoisk={filmId} data-loading={loadingImg}></div>
+            <div id="yohoho" data-resize="1" data-bazon="ba2b3ea3fa479d54e31b203ced60f366" style={{width: '100%'}} data-language="ru" data-country="RU" data-bg="#000" data-kinopoisk={filmId} data-loading={loadingImg}></div>
         </div>
     )
 }
@@ -66,25 +67,13 @@ const ChoseFilm = () => {
         // eslint-disable-next-line
     }, [filmId])
 
-    useEffect(() => {
-        const styles = () => {
-            document.querySelector('#yohoho').style.width = '100%'
-            document.querySelector('#yohoho-iframe').style.width = '100%'
-            document.querySelector('#yohoho-iframe').style.height = '100%'
-        }
-        window.addEventListener('load', styles)
-        return function() {
-            window.removeEventListener('load', styles);
-        } 
-    }, [filmId])
-
     const onRequest = () => {
         getFilmForId(filmId)
             .then(onFilmLoaded)
     }
 
     const onFilmLoaded = (film) => {
-        setFilm(film[0])
+        setFilm(film)
 
         setSimilarMovies(film[0].similarMovies)
         setSequelsAndPrequels(film[0].sequelsAndPrequels)
@@ -267,62 +256,44 @@ const ChoseFilm = () => {
     const content =  !(loading || error) ? personsList : null
     const content2 =  !(loading || error) ? similarMovieList : null
     const content3 =  !(loading || error) ? sequelAndPrequelList : null
-    return (
-        <>
-            {film.trailers !== undefined ? <ModalWindow openModal={openModal} onOpenModal={onOpenModal} url={film.trailers}/> : null}
-            <div className="choseFilm">
-                <div style={{display: loading ? 'block' : 'none'}}>
-                    <motion.div
-                    initial={{ opacity: 0}}
-                    animate={{ opacity: 1}}>
-                        <div className="skeleton skeleton--main">
-                            <div className="pulse skeleton__choseFilm"></div>
-                            <div className="pulse skeleton__header">
-                                <div className="pulse skeleton__title"></div>
-                                <div className="pulse skeleton__text"></div>
-                                <div className="skeleton__btns">
-                                    <div className="pulse skeleton__btn"></div>
-                                    <div className="pulse skeleton__btn2"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </motion.div>
-                </div>
-                <div className="choseFilm__content" style={{display: !(loading || error) ? 'block' : 'none'}}>
+
+    const mainContent = film.map(item => {
+        return (
+            <div className="choseFilm__content" key={filmId}>
                 <motion.div
                 initial={{ opacity: 0}}
                 animate={{ opacity: 1}}>
-                    <div className="choseFilm__backdrop" key={film.backdrop}>
+                    <div className="choseFilm__backdrop" key={item.backdrop}>
                         <LazyLoadImage 
-                            width='99%' height='99%'
+                            width='100%' height='100%'
                             effect="blur"
                             placeholderSrc={loadingImg}
-                            src={film.backdrop}
-                            alt={film.name}
+                            src={item.backdrop}
+                            alt={item.name}
                         />
                     </div>
                     <div className="choseFilm__flex">
                         <div className="choseFilm__left">
-                            <div className="choseFilm__img" key={film.posterBig}>
+                            <div className="choseFilm__img" key={item.posterBig}>
                                 <LazyLoadImage 
                                     width='100%' height='100%'
                                     effect="blur"
                                     placeholderSrc={loadingImg}
-                                    src={film.posterBig}
-                                    alt={film.name}
+                                    src={item.posterBig}
+                                    alt={item.name}
                                 />
                             </div>
                         </div>
                         <div className="choseFilm__right">
-                            <div className="choseFilm__logo" style={{display: film.logo === null ? 'none' : 'block'}} key={film.logo}>
-                                <LazyLoadImage effect="opacity" src={film.logo} alt={film.name}/>
+                            <div className="choseFilm__logo" style={{display: item.logo === null ? 'none' : 'block'}} key={item.logo}>
+                                <LazyLoadImage width='100%' height='100%' effect="opacity" src={item.logo} alt={item.name}/>
                             </div>
-                            <div className="choseFilm__name" style={{display: film.logo === null ? 'block' : 'none'}}>{film.name}</div>
+                            <div className="choseFilm__name" style={{display: item.logo === null ? 'block' : 'none'}}>{item.name}</div>
                             <div className="choseFilm__names">
-                                <div className="choseFilm__alternativeName">{film.alternativeName === null ? '...' : film.alternativeName}</div>
-                                <div className="choseFilm__ageRating">{film.ageRating}+</div>
+                                <div className="choseFilm__alternativeName">{item.alternativeName === null ? '...' : item.alternativeName}</div>
+                                <div className="choseFilm__ageRating">{item.ageRating}+</div>
                             </div>
-                            <div className="choseFilm__descr">{film.description}</div>
+                            <div className="choseFilm__descr">{item.description}</div>
                             <div className="btn__flex">
                                 <button onClick={onScrollToFilm} className="watch__btn">
                                     <img src={watch} alt="" />
@@ -333,7 +304,7 @@ const ChoseFilm = () => {
                                 </button>
                             </div>
                         </div>
-                        <div className={`choseFilm__rating ${film.ratingKp >= 7 ? 'greenText' : ''} ${film.ratingKp <= 7 && film.ratingKp >= 5 ? 'yellowText' : ''} ${film.ratingKp <= 5 ? 'redText' : ''}`}>
+                        <div className={`choseFilm__rating ${item.ratingKp >= 7 ? 'greenText' : ''} ${item.ratingKp <= 7 && item.ratingKp >= 5 ? 'yellowText' : ''} ${item.ratingKp <= 5 ? 'redText' : ''}`}>
                             {rating}
                         </div>
                     </div>
@@ -344,7 +315,7 @@ const ChoseFilm = () => {
                             <tbody> 
                                 <tr className="choseFilm__row">
                                     <th className="choseFilm__title">Год</th>
-                                    <td className="choseFilm__text">{film.year}</td>
+                                    <td className="choseFilm__text">{item.year}</td>
                                 </tr>
                                 <tr className="choseFilm__row">
                                     <th className="choseFilm__title">Страна</th>
@@ -356,15 +327,15 @@ const ChoseFilm = () => {
                                 </tr>
                                 <tr className="choseFilm__row">
                                     <th className="choseFilm__title">Длительность</th>
-                                    <td className="choseFilm__text">{film.movieLength === null ? '...' : film.movieLength + ' мин / ' + Math.floor(film.movieLength / 60) + ' ч ' + film.movieLength % 60 + ' мин'}</td>
+                                    <td className="choseFilm__text">{item.movieLength === null ? '...' : item.movieLength + ' мин / ' + Math.floor(item.movieLength / 60) + ' ч ' + item.movieLength % 60 + ' мин'}</td>
                                 </tr>
                                 <tr className="choseFilm__row">
                                     <th className="choseFilm__title">Бюджет</th>
-                                    <td className="choseFilm__text">{film.budget === 'undefined undefined' ? '...' : film.budget}</td>
+                                    <td className="choseFilm__text">{item.budget === 'undefined undefined' ? '...' : item.budget}</td>
                                 </tr>
                                 <tr className="choseFilm__row">
                                     <th className="choseFilm__title">Сборы в мире</th>
-                                    <td className="choseFilm__text">{film.fees === 'undefined undefined' ? '...' : film.fees}</td>
+                                    <td className="choseFilm__text">{item.fees === 'undefined undefined' ? '...' : item.fees}</td>
                                 </tr>
                                 <tr className="choseFilm__row">
                                     <th className="choseFilm__title">Премьера в мире</th>
@@ -463,7 +434,34 @@ const ChoseFilm = () => {
                         </Slider> : null}
                     </div>
                 </motion.div>
+            </div>
+        )
+    })
+
+    const contentMain =  !(loading || error) ? mainContent : null
+
+    return (
+        <>
+            {film.trailers !== undefined ? <ModalWindow openModal={openModal} onOpenModal={onOpenModal} url={film.trailers}/> : null}
+            <div className="choseFilm">
+                <div style={{display: loading ? 'block' : 'none'}}>
+                    <motion.div
+                    initial={{ opacity: 0}}
+                    animate={{ opacity: 1}}>
+                        <div className="skeleton skeleton--main">
+                            <div className="pulse skeleton__choseFilm"></div>
+                            <div className="pulse skeleton__header">
+                                <div className="pulse skeleton__title"></div>
+                                <div className="pulse skeleton__text"></div>
+                                <div className="skeleton__btns">
+                                    <div className="pulse skeleton__btn"></div>
+                                    <div className="pulse skeleton__btn2"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </motion.div>
                 </div>
+                {contentMain}
             </div>
         </>
     );

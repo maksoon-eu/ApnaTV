@@ -56,8 +56,8 @@ const Footer = () => {
             </div>
             <div className="footer__line"></div>
             <div className="footer__underline">
-                <div className="footer__underline-block">© 2003–2022 «ApnaTV». Все права защищены</div>
-                <div className="footer__underline-block">При полном или частичном использовании материалов с сайта ссылка на источник обязательна.</div>
+                <div className="footer__underline-block footer__underline-block--left">© 2003–2022 «ApnaTV». Все права защищены</div>
+                <div className="footer__underline-block footer__underline-block--right">При полном или частичном использовании материалов с сайта ссылка на источник обязательна.</div>
             </div>
         </footer>
     );
