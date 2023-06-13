@@ -8,7 +8,7 @@
 
     &__flex {
         display: flex;
-        height: calc(100vh - 100px);
+        height: calc(100vh - 110px);
         max-height: 900px;
         margin-bottom: 40px;
         align-items: flex-end;
@@ -21,6 +21,14 @@
         max-height: 100vh;
         top: -100px;
         z-index: 1;
+        width: 100%;
+        text-align: center;
+        
+        &-none {
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+        }
 
         img {
             width: 100%;

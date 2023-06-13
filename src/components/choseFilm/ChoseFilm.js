@@ -263,12 +263,21 @@ const ChoseFilm = () => {
                 <motion.div
                 initial={{ opacity: 0}}
                 animate={{ opacity: 1}}>
-                    <div className="choseFilm__backdrop" key={item.backdrop}>
-                        <LazyLoadImage 
+                    <div className="choseFilm__backdrop" key={`1_${item.backdrop}`} style={{display: item.backdrop == null ? 'none' : 'block'}}>
+                        <LazyLoadImage
                             width='100%' height='100%'
                             effect="blur"
                             placeholderSrc={loadingImg}
                             src={item.backdrop}
+                            alt={item.name}
+                        />
+                    </div>
+                    <div className="choseFilm__backdrop choseFilm__backdrop-none" key={item.backdrop} style={{display: item.backdrop == null ? 'block' : 'none'}}>
+                    <LazyLoadImage
+                            width='420px' height='600px'
+                            effect="blur"
+                            placeholderSrc={loadingImg}
+                            src={item.posterBig}
                             alt={item.name}
                         />
                     </div>

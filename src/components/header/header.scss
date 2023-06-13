@@ -2,12 +2,19 @@
 
 header {
     height: 100px;
-    background: linear-gradient(180deg, #000 12.29%, rgba(0, 0, 0, 0.07) 100%);
-    display: flex;
-    justify-content: center;
-    align-items: center;
     position: relative;
     z-index: 5;
+
+    &:after {
+        position: absolute;
+        content: '';
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: -120px;
+        background: linear-gradient(180deg,#000 3.31%,rgba(0,0,0,.99)7.71%,rgba(0,0,0,.96)12.11%,rgba(0,0,0,.91)16.51%,rgba(0,0,0,.85)20.91%,rgba(0,0,0,.76)25.31%,rgba(0,0,0,.67)29.71%,rgba(0,0,0,.55)34.11%,rgba(0,0,0,.44)38.52%,rgba(0,0,0,.33)42.92%,rgba(0,0,0,.23)47.32%,rgba(0,0,0,.15)51.72%,rgba(0,0,0,8%)56.12%,rgba(0,0,0,3%)60.52%,rgba(0,0,0,1%)64.92%,rgba(0,0,0,0)69.32%);
+        z-index: -1;
+    }
 }
 
 .header__link {
@@ -188,7 +195,7 @@ header {
         color: #fff;
         font-weight: 500;
         font-size: 17px;
-        padding-right: 4px;
+        padding-right: 5px;
 
         &::placeholder {
             font-size: 17px;
@@ -342,7 +349,6 @@ header {
             color: #fff;
             font-weight: 500;
             font-size: 15px;
-            padding-right: 37px;
     
             &::placeholder {
                 font-size: 15px;
