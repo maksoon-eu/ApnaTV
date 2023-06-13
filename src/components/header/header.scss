@@ -279,6 +279,25 @@ header {
     }
 }
 
+@media (max-width: 580px) {
+    header {
+        height: 75px;
+    }
+
+    .header__inner {
+        height: 75px;
+    }
+
+    .header__item {
+        &-logo {
+            img {
+                max-width: 150px;
+            }
+        }
+    }
+
+}
+
 @media (max-width: 415px) {
     header {
         height: 70px;

@@ -319,6 +319,23 @@
 
 @media (max-width: 580px) {
     .choseFilm {
+        &__backdrop {
+            height: 360px;
+    
+            img {
+                object-fit: cover;
+            }
+        }
+        &__left {
+            display: none;
+        }
+    
+        &__right {
+            max-width: 300px;
+            width: 100%;
+            margin-top: 60px;
+        }
+
         &__table {
             max-width: 580px;
             margin-bottom: 15px;
