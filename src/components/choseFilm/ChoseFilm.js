@@ -274,7 +274,7 @@ const ChoseFilm = () => {
                     </div>
                     <div className="choseFilm__backdrop choseFilm__backdrop-none" key={item.backdrop} style={{display: item.backdrop == null ? 'block' : 'none'}}>
                     <LazyLoadImage
-                            width='420px' height='600px'
+                            width='100%' height='100%'
                             effect="blur"
                             placeholderSrc={loadingImg}
                             src={item.posterBig}

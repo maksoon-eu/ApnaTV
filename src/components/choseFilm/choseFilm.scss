@@ -13,6 +13,7 @@
         margin-bottom: 40px;
         align-items: flex-end;
         position: relative;
+        justify-content: space-between;
         z-index: 2;
     }
 
@@ -28,6 +29,11 @@
             left: 50%;
             transform: translateX(-50%);
             width: 100%;
+
+            img {
+                max-width: 420px;
+                max-height: 600px;
+            }
         }
 
         img {
@@ -321,6 +327,7 @@
     .choseFilm {
         &__backdrop {
             height: 360px;
+            top: -75px;
     
             img {
                 object-fit: cover;
@@ -354,22 +361,9 @@
 @media (max-width: 415px) {
     .choseFilm {
         &__backdrop {
-            height: 360px;
-    
-            img {
-                object-fit: cover;
-            }
+            top: -70px;
         }
-        &__left {
-            display: none;
-        }
-    
-        &__right {
-            max-width: 300px;
-            width: 100%;
-            margin-top: 60px;
-        }
-    
+
         &__name {
             font-size: 32px;
         }
