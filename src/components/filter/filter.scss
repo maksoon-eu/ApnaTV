@@ -5,9 +5,9 @@
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
-    margin-top: 40px;
+    margin-top: 50px;
     position: relative;
-    z-index: 5;
+    z-index: 2;
 }
 
 .clean {
@@ -42,6 +42,6 @@
 
 @media (max-width: 415px) {
     .filter {
-        margin-top: 20px;
+        margin-top: 50px;
     }
 }
