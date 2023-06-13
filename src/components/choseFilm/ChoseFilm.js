@@ -457,16 +457,17 @@ const ChoseFilm = () => {
                     <motion.div
                     initial={{ opacity: 0}}
                     animate={{ opacity: 1}}>
-                        <div className="skeleton skeleton--main">
+                        <div className="skeleton skeleton--main skeleton--choose">
                             <div className="pulse skeleton__choseFilm"></div>
-                            <div className="pulse skeleton__header">
+                            <div className="pulse skeleton__header skeleton__header--choose">
                                 <div className="pulse skeleton__title"></div>
-                                <div className="pulse skeleton__text"></div>
+                                <div className="pulse skeleton__text skeleton__text--choose"></div>
                                 <div className="skeleton__btns">
                                     <div className="pulse skeleton__btn"></div>
                                     <div className="pulse skeleton__btn2"></div>
                                 </div>
                             </div>
+                            <div className="pulse skeleton__rating"></div>
                         </div>
                     </motion.div>
                 </div>
