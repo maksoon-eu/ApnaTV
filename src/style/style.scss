@@ -94,6 +94,21 @@ input {
     }
 }
 
+.page__animation-enter {
+    opacity: 0;
+    &-active {
+        opacity: 1;
+        transition: opacity 500ms;
+    }
+}
+.page__animation-exit {
+    opacity: 1;
+    &-active {
+        opacity: 0;
+        transition: opacity 500ms;
+    }
+}
+
 .light-theme {
     background-color: #fff;
     color: #000;

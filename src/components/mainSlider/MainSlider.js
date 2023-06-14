@@ -3,7 +3,7 @@ import Slider from "react-slick";
 import useWatchService from "../../services/WatchService";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { Link } from "react-router-dom";
-import { motion } from 'framer-motion';
+import { SwitchTransition, CSSTransition } from 'react-transition-group';
 
 import Skeleton from "../skeleton/Skeleton";
 import ErrorMessage from "../errorMessage/ErorrMessage";
@@ -15,6 +15,7 @@ import ratingPlus from '../../resources/img/ratingPlus.svg';
 import ratingNone from '../../resources/img/ratingNone.svg';
 
 import 'react-lazy-load-image-component/src/effects/blur.css';
+import 'react-lazy-load-image-component/src/effects/opacity.css';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./mainSlider.scss";
@@ -83,10 +84,6 @@ const MainSlider = () => {
         return (
             <div key={item.id} style={{position: 'relative'}}>
                 <div className="activeSlider__item">
-                    <motion.div
-                    initial={{ opacity: 0}}
-                    animate={{ opacity: 1}}
-                    >
                     <div className="activeSlider__item-left">
                         <div className="activeSlider__item-logo" style={{display: item.logo === null ? 'none' : 'flex'}}>
                             <LazyLoadImage effect="opacity" src={item.logo} alt={item.name}/>
@@ -108,7 +105,6 @@ const MainSlider = () => {
                             </button>
                         </div>
                     </div>
-                    </motion.div>
                     <div className="activeSlider__item-img">
                         <LazyLoadImage className="poster-img" placeholderSrc={loadingImg} effect="blur" width='100%' height='100%' src={item.backdrop} alt={item.name}/>
                     </div>
@@ -129,20 +125,25 @@ const MainSlider = () => {
         pauseOnHover: false
     };
 
-    const errorMessage = error ? <ErrorMessage/> : null
-    const spinner = loading ? <Skeleton/> : null
-    const content =  !(loading || error) ? posterSlider : null
     const modal = url !== '' ? <ModalWindow openModal={openModal} onOpenModal={onOpenModal} url={url}/> : null
 
     return (
         <>
             {modal}
             <div style={{minHeight: '500px'}}>
-            <Slider {...settings} className="poster__slider">
-                {errorMessage}  
-                {spinner}  
-                {content} 
-            </Slider>
+                <SwitchTransition mode="out-in">
+                    <CSSTransition
+                        key={loading}
+                        timeout={250}
+                        unmountOnExit
+                        unmountOnEnter
+                        classNames="poster__slider-content"
+                    >
+                        <Slider {...settings} className="poster__slider">
+                            {loading ? <Skeleton/>  : error ? <ErrorMessage/> : posterSlider}
+                        </Slider>
+                    </CSSTransition>
+                </SwitchTransition>
             </div>
         </>
     );

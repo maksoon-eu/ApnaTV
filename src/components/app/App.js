@@ -1,5 +1,6 @@
 import React, { useEffect, useLayoutEffect, useContext } from "react";
-import { BrowserRouter as Router, Route, Routes, useLocation } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
+import { TransitionGroup, CSSTransition } from "react-transition-group";
 
 import Header from "../header/Header";
 import MainPage from "../page/MainPage";
@@ -25,6 +26,8 @@ const Wrapper = ({children}) => {
 } 
 
 const App = () => {
+    const location = useLocation();
+
     const { theme } = useContext(ThemeContext);
     document.querySelector('html').className = theme
 
@@ -39,22 +42,30 @@ const App = () => {
     }, [])
 
     return (
-        <Router>
-            <div className={`app ${theme}`}>
-                <Header/>
-                <div className="app__global">
-                    <Wrapper>
-                    <Routes>
-                        <Route path="/" element={<MainPage/>}/>
-                        <Route path="/films" element={<FilmListPage/>}/>
-                        <Route path="/films/:filmId" element={<FilmPage/>}/>
-                    </Routes>
-                    </Wrapper>
-                <BottomPanel/>
-                <Footer/>
-                </div>
+        <div className={`app ${theme}`}>
+            <Header/>
+            <div className="app__global">
+                <Wrapper>
+                    <TransitionGroup component={null}>
+                        <CSSTransition 
+                            key={location.key} 
+                            classNames="page__animation" 
+                            timeout={250}
+                            unmountOnExit
+                            mountOnEnter
+                        >
+                            <Routes location={location}>
+                                <Route path="/" element={<MainPage/>}/>
+                                <Route path="/films" element={<FilmListPage/>}/>
+                                <Route path="/films/:filmId" element={<FilmPage/>}/>
+                            </Routes>
+                        </CSSTransition>
+                    </TransitionGroup>
+                </Wrapper>
+            <BottomPanel/>
+            <Footer/>
             </div>
-        </Router>
+        </div>
     );
 }
 
