@@ -108,12 +108,14 @@ const GenreSlider = ({genre}) => {
 
     return (
         <>
+        
             <div className="genre__title">{genre}</div>
+            {filmList.length > 0 || error || loading ? 
             <Slider {...settings} className="main__slider genre__slider">
                 {errorMessage}
                 {spinner}
                 {content}
-            </Slider>
+            </Slider> : <div className="genreSpinner"></div>}
         </>
     );
 };
