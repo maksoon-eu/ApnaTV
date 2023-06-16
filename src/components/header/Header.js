@@ -114,7 +114,6 @@ const Header = () => {
                         <div>Каталог</div>
                     </div>
                 </Link>
-                <button onClick={() => toggleTheme()}>{theme}</button>
                 <div className="header__item">
                     <div className="header__item-logo">
                         <Link to="/">
@@ -122,7 +121,10 @@ const Header = () => {
                         </Link>
                     </div>
                 </div>
-                <div className="header__item">
+                <div className="header__item header__item--theme">
+                    <div className="theme">
+                        <input onClick={() => toggleTheme()}className="input__theme" type="checkbox" id="switch" /><label className="label__theme" htmlFor="switch">Toggle</label>
+                    </div>
                     <div className="header__item-account">
                         <div ref={ref} className={`search ${searchActive ? 'active' : ''}`} tabIndex="1">
                             <div className="search__current" onClick={onSearchActive}>

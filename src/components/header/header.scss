@@ -17,6 +17,50 @@ header {
     }
 }
 
+.theme {
+    width: 45px;
+	height: 21px;
+    margin-right: 20px;
+}
+
+.input__theme[type=checkbox]{
+	height: 0;
+	width: 0;
+	visibility: hidden;
+}
+
+.label__theme {
+    margin-top: -20px;
+	cursor: pointer;
+	text-indent: -9999px;
+	width: 45px;
+	height: 21px;
+	background: $hover-color;
+	display: block;
+	border-radius: 100px;
+	position: relative;
+}
+
+.label__theme:after {
+	content: '';
+	position: absolute;
+	top: 1px;
+	left: 1px;
+	width: 19px;
+	height: 19px;
+	background: #fff;
+	border-radius: 90px;
+	transition: 0.3s;
+}
+
+.input__theme:checked + .label__theme {
+	background: gray;
+}
+
+.input__theme:checked + .label__theme:after {
+	left: calc(100% - 20px);
+}
+
 .header__link {
     cursor: pointer;
     display: inline-block;
@@ -49,8 +93,13 @@ header {
 }
 
 .header__item {
+    &--theme {
+        display: flex;
+        align-items: center;
+    }
+
     &-logo {
-        margin-right: 65px;
+        margin-right: 45px;
     }
 
     &-text {

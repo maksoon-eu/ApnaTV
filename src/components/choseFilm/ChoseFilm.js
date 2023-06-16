@@ -1,6 +1,6 @@
 import React from "react";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 import useWatchService from "../../services/WatchService";
 import Slider from "react-slick";
@@ -20,7 +20,7 @@ import "slick-carousel/slick/slick-theme.css";
 import 'react-lazy-load-image-component/src/effects/blur.css';
 import 'react-lazy-load-image-component/src/effects/opacity.css';
 import './choseFilm.scss'
-import { useRef } from "react";
+import '../genreSlider/genreSlider.scss'
 
 const Film = ({filmId, componentRef}) => {
     useEffect(() => {
@@ -415,33 +415,6 @@ const ChoseFilm = () => {
                     </div>
 
                     <Film componentRef={ref} filmId={filmId} key={filmId}/>
-
-                    <div className="choseFilm__slider" style={{display: personsList.length !== 0 ? 'block' : 'none'}}>
-                        <div className="genre__title">Актеры и съемочная группа</div>
-                        {personsList.length > 0 ? <Slider {...settings} className="main__slider genre__slider"> 
-                            {errorMessage}  
-                            {spinner}  
-                            {content}    
-                        </Slider> : null}
-                    </div>
-                    
-                    <div className="choseFilm__slider" style={{display: similarMovieList.length !== 0 ? 'block' : 'none'}}>
-                        <div className="genre__title">Похожее</div>
-                        {similarMovieList.length > 0 || error || loading ? <Slider {...settings} className="main__slider genre__slider"> 
-                            {errorMessage}  
-                            {spinner}  
-                            {content2}  
-                        </Slider> : null}
-                    </div>
-                    
-                    <div className="choseFilm__slider" style={{display: sequelAndPrequelList.length !== 0 ? 'block' : 'none'}}>
-                        <div className="genre__title">Сиквелы и приквелы</div>
-                        {sequelAndPrequelList.length > 0 || error || loading ? <Slider {...settings} className="main__slider genre__slider"> 
-                            {errorMessage}  
-                            {spinner}  
-                            {content3}  
-                        </Slider> : null}
-                    </div>
                 </motion.div>
             </div>
         )
@@ -469,9 +442,99 @@ const ChoseFilm = () => {
                             </div>
                             <div className="pulse skeleton__rating"></div>
                         </div>
+                        <div className="skeleton__title skeleton__title--choose"></div>
+                        <div className="skeleton__table">
+                            <div className="skeleton__table-left">
+                                <div className="skeleton__table-row">
+                                    <div className="skeleton__table-item"></div>
+                                    <div className="skeleton__table-item"></div>
+                                </div>
+                                <div className="skeleton__table-row">
+                                    <div className="skeleton__table-item"></div>
+                                    <div className="skeleton__table-item"></div>
+                                </div>
+                                <div className="skeleton__table-row">
+                                    <div className="skeleton__table-item"></div>
+                                    <div className="skeleton__table-item"></div>
+                                </div>
+                                <div className="skeleton__table-row">
+                                    <div className="skeleton__table-item"></div>
+                                    <div className="skeleton__table-item"></div>
+                                </div>
+                                <div className="skeleton__table-row">
+                                    <div className="skeleton__table-item"></div>
+                                    <div className="skeleton__table-item"></div>
+                                </div>
+                                <div className="skeleton__table-row">
+                                    <div className="skeleton__table-item"></div>
+                                    <div className="skeleton__table-item"></div>
+                                </div>
+                                <div className="skeleton__table-row">
+                                    <div className="skeleton__table-item"></div>
+                                    <div className="skeleton__table-item"></div>
+                                </div>
+                            </div>
+                            <div className="skeleton__table-right">
+                                <div className="skeleton__table-row">
+                                    <div className="skeleton__table-item"></div>
+                                    <div className="skeleton__table-item"></div>
+                                </div>
+                                <div className="skeleton__table-row">
+                                    <div className="skeleton__table-item"></div>
+                                    <div className="skeleton__table-item"></div>
+                                </div>
+                                <div className="skeleton__table-row">
+                                    <div className="skeleton__table-item"></div>
+                                    <div className="skeleton__table-item"></div>
+                                </div>
+                                <div className="skeleton__table-row">
+                                    <div className="skeleton__table-item"></div>
+                                    <div className="skeleton__table-item"></div>
+                                </div>
+                                <div className="skeleton__table-row">
+                                    <div className="skeleton__table-item"></div>
+                                    <div className="skeleton__table-item"></div>
+                                </div>
+                                <div className="skeleton__table-row">
+                                    <div className="skeleton__table-item"></div>
+                                    <div className="skeleton__table-item"></div>
+                                </div>
+                                <div className="skeleton__table-row">
+                                    <div className="skeleton__table-item"></div>
+                                    <div className="skeleton__table-item"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="skeleton__video"></div>
                     </motion.div>
                 </div>
                 {contentMain}
+                <div className="choseFilm__slider" style={{display: personsList.length !== 0 ? 'block' : 'none'}}>
+                    <div className="genre__title">Актеры и съемочная группа</div>
+                    {personsList.length > 0 || error || loading ? <Slider {...settings} className="main__slider genre__slider"> 
+                        {errorMessage}  
+                        {spinner}  
+                        {content}    
+                    </Slider> : <div className="genreSpinner"></div>}
+                </div>
+                    
+                <div className="choseFilm__slider" style={{display: similarMovieList.length !== 0 ? 'block' : 'none'}}>
+                    <div className="genre__title">Похожее</div>
+                    {similarMovieList.length > 0 || error || loading ? <Slider {...settings} className="main__slider genre__slider"> 
+                        {errorMessage}  
+                        {spinner}  
+                        {content2}  
+                    </Slider> : <div className="genreSpinner"></div>}
+                </div>
+                
+                <div className="choseFilm__slider" style={{display: sequelAndPrequelList.length !== 0 ? 'block' : 'none'}}>
+                    <div className="genre__title">Сиквелы и приквелы</div>
+                    {sequelAndPrequelList.length > 0 || error || loading ? <Slider {...settings} className="main__slider genre__slider"> 
+                        {errorMessage}  
+                        {spinner}  
+                        {content3}  
+                    </Slider> : <div className="genreSpinner"></div>}
+                </div>
             </div>
         </>
     );

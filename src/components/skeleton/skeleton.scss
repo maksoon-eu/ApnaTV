@@ -12,6 +12,7 @@
     }
 
     &--choose {
+        padding: 0;
         align-items: flex-end;
         margin-top: 0;
     }
@@ -33,6 +34,11 @@
         background-color: $skeleton-bg;
         border-radius: 10px;
         margin-bottom: 30px;
+        &--choose {
+            margin-top: 50px;
+            height: 50px;
+            width: 200px;
+        }
     }
     &__text {
         width: 500px;
@@ -106,6 +112,34 @@
         margin-right: 60px;
         margin-bottom: 0;
     }
+    &__table {
+        display: flex;
+        justify-content: space-between;
+        &-left, &-right {
+            max-width: 300px;
+            width: 100%;
+        }
+        &-row {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+        }
+        &-item {
+            background-color: $skeleton-bg;
+            height: 20px;
+            width: 70px;
+            margin-bottom: 30px;
+            border-radius: 5px;
+        }
+    }
+    &__video {
+        max-width: 1420px;
+        width: 100%;
+        margin-top: 10px;
+        background-color: $skeleton-bg;
+        height: 550px;
+        border-radius: 10px;
+    }
 }
 
 .skeleton__search-block {
@@ -153,6 +187,10 @@
         &--choose {
             height: 350px;
         }
+
+        &__video {
+            height: 350px;
+        }
     }
 }
 
@@ -161,6 +199,14 @@
         &__choseFilm {
             display: none;
         }
+        &__table {
+            &-left {
+                display: none;
+            }
+            &-right{
+                max-width: none;
+            }
+        }
     }
 }
 
@@ -168,12 +214,16 @@
     .skeleton {
         display: flex;
         justify-content: space-between;
-    
         &--main {
             margin-top: 0px;
-            padding: 0 15px;
             height: 500px;
             max-height: none;
+        }
+        &__rating {
+            display: none;
+        }
+        &__video {
+            height: 250px;
         }
         &--choose {
             height: 350px;
@@ -195,6 +245,10 @@
             background-color: $skeleton-bg;
             border-radius: 10px;
             margin-bottom: 10px;
+
+            &--choose {
+                margin-bottom: 20px;
+            }
         }
         &__text {
             width: 370px;
