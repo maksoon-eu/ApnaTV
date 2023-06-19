@@ -85,7 +85,7 @@ const ChoseFilm = () => {
         setCountry(film[0].country.map((item, i) => {
             return i === film[0].country.length - 1 ? item.name : `${item.name}, `
         }))
-        const premiere = film[0].premiere.slice(0, 10).split('-')
+        const premiere = film[0].premiere === undefined ? '...' : film[0].premiere.slice(0, 10).split('-')
         switch (premiere[1]) {
             case '01':
                 setPremiere([premiere[2], ' января ', premiere[0]])
@@ -123,8 +123,8 @@ const ChoseFilm = () => {
             case '12':
                 setPremiere([premiere[2], ' декабря ', premiere[0]])
                 break;
-        
             default:
+                setPremiere('...')
                 break;
         }
     }

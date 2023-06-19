@@ -5,9 +5,9 @@ import upArrow from "../../resources/img/up-arrow.svg"
 
 import './dropdown.scss'
 
-const Dropdown = ({loading, error, initCurrent, list, filterFilm, fetching, filter}) => {
+const Dropdown = ({loading, error, initCurrent, localStr, list, filterFilm, fetching, filter}) => {
     const [dropdownToggle, setDropdownToggle] = useState(false)
-    const [currentDropdown, setCurrentDropdown] = useState(initCurrent)
+    const [currentDropdown, setCurrentDropdown] = useState(localStorage.getItem(localStr) === null ? initCurrent : decodeURIComponent(localStorage.getItem(localStr)))
 
     const ref = useRef()
 
@@ -42,18 +42,23 @@ const Dropdown = ({loading, error, initCurrent, list, filterFilm, fetching, filt
             switch (initCurrent) {
                 case 'Жанры':
                     filterFilm({genre: e.currentTarget.textContent})
+                    localStorage.setItem('viewGenre', e.currentTarget.textContent)
                     break;
                 case 'Страны':
                     filterFilm({country: e.currentTarget.textContent})
+                    localStorage.setItem('viewCountry', e.currentTarget.textContent)
                     break;
                 case 'Каталог':
                     filterFilm({type: e.currentTarget.textContent, typeNum: e.currentTarget.id})
+                    localStorage.setItem('viewType', e.currentTarget.textContent)
                     break;
                 case 'Рейтинг':
                     filterFilm({rating: e.currentTarget.textContent})
+                    localStorage.setItem('viewRating', e.currentTarget.textContent)
                     break;
                 case 'Год выхода':
                     filterFilm({year: e.currentTarget.textContent})
+                    localStorage.setItem('viewYear', e.currentTarget.textContent)
                     break;
             }
             if (e.currentTarget.textContent === 'Все')  {

@@ -13,21 +13,26 @@ import FilmListItem from "../filmListItem/FilmListItem";
 
 const FilmList = () => {
     const [films, setFilms] = useState([])
-    const [offset, setOffset] = useState(2)
+    const [offset, setOffset] = useState(localStorage.getItem('offset') === null ? 2 : +localStorage.getItem('offset'))
     const {error, loading, getAllFilms} = useWatchService();
     const [fetching, setFetching] = useState(false)
     const [totalCount, setTotalCount] = useState(1)
 
     const skeletonArr = ['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '']
 
-    const [genre, setGenre] = useState('%21null');
-    const [type, setType] = useState('%21null');
-    const [year, setYear] = useState('%21null');
-    const [rating, setRating] = useState('%21null');
-    const [country, setCountry] = useState('%21null');
+    const [genre, setGenre] = useState(localStorage.getItem('genre') === null ? '%21null' : localStorage.getItem('genre'));
+    const [type, setType] = useState(localStorage.getItem('type') === null ? '%21null' : localStorage.getItem('type'));
+    const [year, setYear] = useState(localStorage.getItem('year') === null ? '%21null' : localStorage.getItem('year'));
+    const [rating, setRating] = useState(localStorage.getItem('rating') === null ? '%21null' : localStorage.getItem('rating'));
+    const [country, setCountry] = useState(localStorage.getItem('country') === null ? '%21null' : localStorage.getItem('country'))
 
     useEffect(() => {
         onRequest(offset)
+        localStorage.setItem('genre', genre)
+        localStorage.setItem('year', year)
+        localStorage.setItem('country', country)
+        localStorage.setItem('rating', rating)
+        localStorage.setItem('type', type)
         // eslint-disable-next-line
     }, [type, year, rating, genre, country])
 
@@ -38,6 +43,10 @@ const FilmList = () => {
     }, [fetching])
 
     useEffect(() => {
+        if (films.length !== 0) {
+            localStorage.setItem('films', JSON.stringify(films))
+        }
+
         window.addEventListener('scroll', onScrollList);
 
         return function() {
@@ -52,17 +61,27 @@ const FilmList = () => {
 
     const onFilmsLoaded = (item) => {
         setTotalCount(item.total)
-        setFilms(item.itemList)
+        if (JSON.parse(localStorage.getItem('films')) !== null && films.length === 0) {
+            setFilms(JSON.parse(localStorage.getItem('films')))
+        } else { 
+            setFilms(item.itemList)
+        }
     }
 
     const onUpdateRequest = (offset) => {
+        localStorage.setItem('offset', +offset+1)
         getAllFilms(offset, type, year, rating, genre, country)
             .then(onUpdateFilmsLoaded)
     }
 
     const onUpdateFilmsLoaded = (item) => {
         setTotalCount(item.total)
-        setFilms(films => [...films, ...item.itemList])
+        if (JSON.parse(localStorage.getItem('films')) !== null && films.length === 0) {
+            setFilms(JSON.parse(localStorage.getItem('films')))
+            console.log(1)
+        } else { 
+            setFilms(films => [...films, ...item.itemList])
+        }
         setOffset(offset => offset + 1)
         setFetching(false)
     }
