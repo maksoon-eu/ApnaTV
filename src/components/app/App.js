@@ -6,6 +6,7 @@ import Header from "../header/Header";
 import MainPage from "../page/MainPage";
 import FilmListPage from "../page/FilmListPage";
 import FilmPage from "../page/FilmPage";
+import ActorPage from "../page/ActorPage";
 import BottomPanel from "../bottomPanel/BottomPanel";
 import Footer from "../footer/Footer";
 import { ThemeContext } from "../theme/Theme";
@@ -58,6 +59,7 @@ const App = () => {
                                 <Route path="/" element={<MainPage/>}/>
                                 <Route path="/films" element={<FilmListPage/>}/>
                                 <Route path="/films/:filmId" element={<FilmPage/>}/>
+                                <Route path="/actors/:actorId" element={<ActorPage/>}/>
                             </Routes>
                         </CSSTransition>
                     </TransitionGroup>

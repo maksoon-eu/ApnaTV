@@ -4,6 +4,7 @@ const useWatchService = () => {
     const {loading, request, error, clearError} = useHttp()
 
     const _apiBase = 'https://api.kinopoisk.dev/v1.3/';
+    const _oldApiBase = 'https://api.kinopoisk.dev/v1/';
     const _baseOffset = 1;
     const _baseCurrent = '%21null';
 
@@ -19,6 +20,11 @@ const useWatchService = () => {
     const getFilmForId = async (id) => {
         const res = await request(`${_apiBase}movie/${id}`)
         return [res].flat().map(_transformFilmForId)
+    }
+
+    const getActorForId = async (id) => {
+        const res = await request(`${_oldApiBase}person/${id}`)
+        return [res].flat().map(_transformActorForId)
     }
 
     const getSearchedFilms = async (name = _baseCurrent) => {
@@ -59,7 +65,7 @@ const useWatchService = () => {
     const _transformFilmForId = (item) => {
         return {
             name: item.name,
-            posterBig: item.poster.url,
+            posterBig: item.poster === null ? '' : item.poster.url,
             id: item.id,
             logo: item.logo.url,
             trailers: item.videos.trailers,
@@ -80,6 +86,22 @@ const useWatchService = () => {
             sequelsAndPrequels: item.sequelsAndPrequels,
             alternativeName: item.alternativeName,
             premiere: item.premiere.world
+        }
+    }
+
+    const _transformActorForId = (item) => {
+        return {
+            id: item.id,
+            age: item.age,
+            birthPlace: item.birthPlace,
+            birthday: item.birthday,
+            death: item.death,
+            enName: item.enName,
+            movies: item.movies, 
+            name: item.name,
+            photo: item.photo,
+            profession: item.profession,
+            spouses: item.spouses
         }
     }
 
@@ -119,7 +141,7 @@ const useWatchService = () => {
         }
     }
 
-    return {getTopFilms, getAllFilms, getFilmForId, getGanreFilms, getAllFilters, loading, error, clearError, getSearchedFilms}
+    return {getTopFilms, getAllFilms, getFilmForId, getActorForId, getGanreFilms, getAllFilters, loading, error, clearError, getSearchedFilms}
 }
 
 export default useWatchService;

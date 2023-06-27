@@ -17,6 +17,14 @@
         margin-top: 0;
     }
 
+    &--actor {
+        margin-top: 0;
+        padding: 0;
+        height: auto;
+        align-items: flex-end;
+        justify-content: initial;
+    }
+
     &__header {
         display: flex;
         flex-direction: column;
@@ -39,6 +47,18 @@
             height: 50px;
             width: 200px;
         }
+        &--actor {
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+    }
+    &__subtitle {
+        width: 170px;
+        height: 33px;
+        margin-bottom: 40px;
+        margin-top: 10px;
+        background-color: $skeleton-bg;
+        border-radius: 10px;
     }
     &__text {
         width: 500px;
@@ -83,6 +103,13 @@
         width: 550px;
         background-color: $skeleton-bg;
         border-radius: 10px;
+        &-actor {
+            width: 350px;
+            height: 520px;
+            background-color: $skeleton-bg;
+            border-radius: 10px;
+            margin-right: 40px;
+        }
     }
     &__block {
         width: 182px;
@@ -157,6 +184,9 @@
         &__title {
             width: 200px;
         }
+        &__subtitle {
+            width: 100px;
+        }
         &__choseFilm {
             margin-right: 10px;
         }
@@ -174,6 +204,10 @@
         &__title {
             width: 100px;
             height: 60px;
+        }
+        &__subtitle {
+            width: 60px;
+            height: 30px;
         }
     }
 }
@@ -210,6 +244,39 @@
     }
 }
 
+@media (max-width: 558px) {
+    .skeleton {
+        flex-direction: column;
+
+        &--actor {
+            align-items: center;
+            justify-content: center;
+        }
+
+        &__img {
+            &-actor {
+                margin-right: 0;
+                height: 400px;
+            }
+        }
+    }
+    
+}
+
+@media (max-width: 535px) {
+    .skeleton {
+        &__block2 {
+            width: 124px;
+            height: 185px;
+            border-radius: 8px;
+            margin: 0 auto;
+            margin-top: 10px;;
+            border: 2px solid transparent;
+            background-color: $skeleton-bg;
+        }
+    }
+}
+
 @media (max-width: 415px) {
     .skeleton {
         display: flex;
@@ -218,6 +285,10 @@
             margin-top: 0px;
             height: 500px;
             max-height: none;
+        }
+        &--actor {
+            height: auto;
+            justify-content: center;
         }
         &__rating {
             display: none;
@@ -237,6 +308,10 @@
             justify-content: flex-end;
             padding-bottom: 20px;
             height: 500px;
+            &--actor {
+                justify-content: center;
+                height: auto;
+            }
         }
         &__title {
             margin-top: 60px;

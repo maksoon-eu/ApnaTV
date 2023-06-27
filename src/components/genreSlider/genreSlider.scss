@@ -30,6 +30,7 @@
     margin-bottom: 10px;
     font-weight: 600;
     text-transform: capitalize;
+    transition: .2s linear;
 }
 
 .genreSpinner {
@@ -263,7 +264,7 @@
     }
 }
 
-@media (max-width: 415px) {
+@media (max-width: 535px) {
     .genre__slider {
         padding: 0 15px;
         min-height: auto;

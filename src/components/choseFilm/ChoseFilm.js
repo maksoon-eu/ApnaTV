@@ -11,9 +11,11 @@ import { motion } from 'framer-motion';
 import ModalWindow from "../modal/Modal";
 import SkeletonSlider from "../skeleton/SkeletonSlider"
 import ErrorMessage from "../errorMessage/ErorrMessage"
+import SkeletonChoose from "../skeleton/SkeletonChoose";
 
 import loadingImg from "../../resources/img/loading.svg";
 import watch from '../../resources/img/play-btn.svg';
+import image from '../../resources/img/image.jpg'
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -50,6 +52,7 @@ const ChoseFilm = () => {
     const [persons, setPersons] = useState([]);
     const [sequelsAndPrequels, setSequelsAndPrequels] = useState([]);
     const [openModal, setOpenModal] = useState(false);
+    const [url, setUrl] = useState('');
     const [genres, setGenres] = useState();
     const [country, setCountry] = useState();
     const [premiere, setPremiere] = useState();
@@ -75,6 +78,7 @@ const ChoseFilm = () => {
     const onFilmLoaded = (film) => {
         setFilm(film)
 
+        setUrl(film[0].trailers)
         setSimilarMovies(film[0].similarMovies)
         setSequelsAndPrequels(film[0].sequelsAndPrequels)
         setPersons(film[0].persons)
@@ -129,6 +133,12 @@ const ChoseFilm = () => {
         }
     }
 
+    const onScrollToFilm = () => {
+        ref.current.scrollIntoView({
+            behavior: 'smooth'
+        });
+    };
+
     const onOpenModal = (bool) => {
         setOpenModal(bool)
 
@@ -152,7 +162,7 @@ const ChoseFilm = () => {
 
     const personsList = persons.map(item => {
         return (
-            <div key={item.id}>
+            <Link to={`/actors/${item.id}`} key={item.id}>
                 <div className="films__item films__item-after">
                     <div className="films__item-img">
                         <LazyLoadImage 
@@ -167,7 +177,7 @@ const ChoseFilm = () => {
                     </div>
                     <div className="films__item-name">{item.name === '' ? item.enName : item.name}</div>
                 </div>
-            </div>
+            </Link>
         )
     })
 
@@ -211,51 +221,11 @@ const ChoseFilm = () => {
         )
     })
 
-    const onScrollToFilm = () => {
-        ref.current.scrollIntoView({
-            behavior: 'smooth'
-        });
-    };
-
     const skeletonList = skeletonArr.map((item, i) => {
         return (
             <SkeletonSlider key={i}/>
         )
     })
-
-    const settings = {
-        dots: false,
-        infinite: false,
-        slidesToShow: 6,
-        slidesToScroll: 1,
-        initialSlide: 0,
-        responsive: [
-            {
-              breakpoint: 1230,
-              settings: {
-                slidesToShow: 4
-              }
-            },
-            {
-              breakpoint: 870,
-              settings: {
-                slidesToShow: 3
-              }
-            },
-            {
-              breakpoint: 550,
-              settings: {
-                slidesToShow: 3
-              }
-            }
-        ]
-    };
-    
-    const errorMessage = error ? <ErrorMessage/> : null
-    const spinner = loading ? skeletonList : null
-    const content =  !(loading || error) ? personsList : null
-    const content2 =  !(loading || error) ? similarMovieList : null
-    const content3 =  !(loading || error) ? sequelAndPrequelList : null
 
     const mainContent = film.map(item => {
         return (
@@ -272,12 +242,12 @@ const ChoseFilm = () => {
                             alt={item.name}
                         />
                     </div>
-                    <div className="choseFilm__backdrop choseFilm__backdrop-none" key={item.backdrop} style={{display: item.backdrop == null ? 'block' : 'none'}}>
+                    <div className="choseFilm__backdrop choseFilm__backdrop-none" key={item.backdrop} style={{display: item.backdrop === null ? 'block' : 'none'}}>
                     <LazyLoadImage
                             width='100%' height='100%'
                             effect="blur"
                             placeholderSrc={loadingImg}
-                            src={item.posterBig}
+                            src={item.posterBig === '' ? image : item.posterBig}
                             alt={item.name}
                         />
                     </div>
@@ -288,7 +258,7 @@ const ChoseFilm = () => {
                                     width='100%' height='100%'
                                     effect="blur"
                                     placeholderSrc={loadingImg}
-                                    src={item.posterBig}
+                                    src={item.posterBig === '' ? image : item.posterBig}
                                     alt={item.name}
                                 />
                             </div>
@@ -300,7 +270,7 @@ const ChoseFilm = () => {
                             <div className="choseFilm__name" style={{display: item.logo === null ? 'block' : 'none'}}>{item.name}</div>
                             <div className="choseFilm__names">
                                 <div className="choseFilm__alternativeName">{item.alternativeName === null ? '...' : item.alternativeName}</div>
-                                <div className="choseFilm__ageRating">{item.ageRating}+</div>
+                                <div className="choseFilm__ageRating">{item.ageRating === null ? '...' : item.ageRating}+</div>
                             </div>
                             <div className="choseFilm__descr">{item.description}</div>
                             <div className="btn__flex">
@@ -324,7 +294,7 @@ const ChoseFilm = () => {
                             <tbody> 
                                 <tr className="choseFilm__row">
                                     <th className="choseFilm__title">Год</th>
-                                    <td className="choseFilm__text">{item.year}</td>
+                                    <td className="choseFilm__text">{item.year === null ? '...' : item.year}</td>
                                 </tr>
                                 <tr className="choseFilm__row">
                                     <th className="choseFilm__title">Страна</th>
@@ -420,119 +390,76 @@ const ChoseFilm = () => {
         )
     })
 
+    const settings = {
+        dots: false,
+        infinite: false,
+        slidesToShow: 6,
+        slidesToScroll: 1,
+        initialSlide: 0,
+        responsive: [
+            {
+              breakpoint: 1230,
+              settings: {
+                slidesToShow: 4
+              }
+            },
+            {
+              breakpoint: 870,
+              settings: {
+                slidesToShow: 3
+              }
+            },
+            {
+              breakpoint: 550,
+              settings: {
+                slidesToShow: 3
+              }
+            }
+        ]
+    };
+
+    const errorMessage = error ? <ErrorMessage/> : null
+    const spinnerSlider = loading ? skeletonList : null
+    const contentSliderActor =  !(loading || error) ? personsList : null
+    const contentSliderSimilar =  !(loading || error) ? similarMovieList : null
+    const contentSliderSequel =  !(loading || error) ? sequelAndPrequelList : null
+
+    const spinner = loading ? <SkeletonChoose/> : null
     const contentMain =  !(loading || error) ? mainContent : null
+
+    const modal = url !== '' ? <ModalWindow openModal={openModal} onOpenModal={onOpenModal} url={url}/> : null
 
     return (
         <>
-            {film.trailers !== undefined ? <ModalWindow openModal={openModal} onOpenModal={onOpenModal} url={film.trailers}/> : null}
+            {modal}
             <div className="choseFilm">
-                <div style={{display: loading ? 'block' : 'none'}}>
-                    <motion.div
-                    initial={{ opacity: 0}}
-                    animate={{ opacity: 1}}>
-                        <div className="skeleton skeleton--main skeleton--choose">
-                            <div className="pulse skeleton__choseFilm"></div>
-                            <div className="pulse skeleton__header skeleton__header--choose">
-                                <div className="pulse skeleton__title"></div>
-                                <div className="pulse skeleton__text skeleton__text--choose"></div>
-                                <div className="skeleton__btns">
-                                    <div className="pulse skeleton__btn"></div>
-                                    <div className="pulse skeleton__btn2"></div>
-                                </div>
-                            </div>
-                            <div className="pulse skeleton__rating"></div>
-                        </div>
-                        <div className="skeleton__title skeleton__title--choose"></div>
-                        <div className="skeleton__table">
-                            <div className="skeleton__table-left">
-                                <div className="skeleton__table-row">
-                                    <div className="skeleton__table-item"></div>
-                                    <div className="skeleton__table-item"></div>
-                                </div>
-                                <div className="skeleton__table-row">
-                                    <div className="skeleton__table-item"></div>
-                                    <div className="skeleton__table-item"></div>
-                                </div>
-                                <div className="skeleton__table-row">
-                                    <div className="skeleton__table-item"></div>
-                                    <div className="skeleton__table-item"></div>
-                                </div>
-                                <div className="skeleton__table-row">
-                                    <div className="skeleton__table-item"></div>
-                                    <div className="skeleton__table-item"></div>
-                                </div>
-                                <div className="skeleton__table-row">
-                                    <div className="skeleton__table-item"></div>
-                                    <div className="skeleton__table-item"></div>
-                                </div>
-                                <div className="skeleton__table-row">
-                                    <div className="skeleton__table-item"></div>
-                                    <div className="skeleton__table-item"></div>
-                                </div>
-                                <div className="skeleton__table-row">
-                                    <div className="skeleton__table-item"></div>
-                                    <div className="skeleton__table-item"></div>
-                                </div>
-                            </div>
-                            <div className="skeleton__table-right">
-                                <div className="skeleton__table-row">
-                                    <div className="skeleton__table-item"></div>
-                                    <div className="skeleton__table-item"></div>
-                                </div>
-                                <div className="skeleton__table-row">
-                                    <div className="skeleton__table-item"></div>
-                                    <div className="skeleton__table-item"></div>
-                                </div>
-                                <div className="skeleton__table-row">
-                                    <div className="skeleton__table-item"></div>
-                                    <div className="skeleton__table-item"></div>
-                                </div>
-                                <div className="skeleton__table-row">
-                                    <div className="skeleton__table-item"></div>
-                                    <div className="skeleton__table-item"></div>
-                                </div>
-                                <div className="skeleton__table-row">
-                                    <div className="skeleton__table-item"></div>
-                                    <div className="skeleton__table-item"></div>
-                                </div>
-                                <div className="skeleton__table-row">
-                                    <div className="skeleton__table-item"></div>
-                                    <div className="skeleton__table-item"></div>
-                                </div>
-                                <div className="skeleton__table-row">
-                                    <div className="skeleton__table-item"></div>
-                                    <div className="skeleton__table-item"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="skeleton__video"></div>
-                    </motion.div>
-                </div>
+                {errorMessage}
+                {spinner}
                 {contentMain}
-                <div className="choseFilm__slider" style={{display: personsList.length !== 0 ? 'block' : 'none'}}>
+                <div className="choseFilm__slider" style={{display: personsList.length === 0 && !loading ? 'none' : 'block'}}>
                     <div className="genre__title">Актеры и съемочная группа</div>
                     {personsList.length > 0 || error || loading ? <Slider {...settings} className="main__slider genre__slider"> 
                         {errorMessage}  
-                        {spinner}  
-                        {content}    
+                        {spinnerSlider}  
+                        {contentSliderActor}    
                     </Slider> : <div className="genreSpinner"></div>}
                 </div>
                     
-                <div className="choseFilm__slider" style={{display: similarMovieList.length !== 0 ? 'block' : 'none'}}>
+                <div className="choseFilm__slider" style={{display: similarMovieList.length === 0 && !loading ? 'none' : 'block'}}>
                     <div className="genre__title">Похожее</div>
                     {similarMovieList.length > 0 || error || loading ? <Slider {...settings} className="main__slider genre__slider"> 
                         {errorMessage}  
-                        {spinner}  
-                        {content2}  
+                        {spinnerSlider}  
+                        {contentSliderSimilar}  
                     </Slider> : <div className="genreSpinner"></div>}
                 </div>
                 
-                <div className="choseFilm__slider" style={{display: sequelAndPrequelList.length !== 0 ? 'block' : 'none'}}>
+                <div className="choseFilm__slider" style={{display: sequelAndPrequelList.length === 0 && !loading ? 'none' : 'block'}}>
                     <div className="genre__title">Сиквелы и приквелы</div>
                     {sequelAndPrequelList.length > 0 || error || loading ? <Slider {...settings} className="main__slider genre__slider"> 
                         {errorMessage}  
-                        {spinner}  
-                        {content3}  
+                        {spinnerSlider}  
+                        {contentSliderSequel}  
                     </Slider> : <div className="genreSpinner"></div>}
                 </div>
             </div>

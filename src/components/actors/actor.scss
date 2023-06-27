@@ -1,0 +1,82 @@
+@import '../../style/variables';
+
+.actor {
+    min-height: 600px;
+}
+
+.actorInfo {
+    &__flex {
+        display: flex;
+        align-items: flex-end;
+
+        &-left {
+            max-width: 350px;
+            width: 100%;
+            height: auto;
+            margin-right: 30px;
+        }
+
+        &-rigth {
+            max-width: 600px;
+            width: 100%;
+        }
+    }
+
+    &__photo {
+        img {
+            border-radius: 10px;
+        }
+    }
+
+    &__ruName {
+        font-weight: 600;
+        font-size: 62px;
+    }
+
+    &__enName {
+        color: $skeleton-bg;
+        font-size: 22px;
+        margin-bottom: 40px;
+    }
+}
+
+@media (max-width: 658px) {
+    .actorInfo {
+        &__ruName {
+            font-size: 40px;
+        }
+
+        &__enName {
+            font-size: 19px;
+        }
+    }
+}
+
+@media (max-width: 558px) {
+    .actorInfo {
+        &__photo {
+            max-width: 250px;
+        }
+        &__flex {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            &-left {
+                width: auto;
+            }
+        }
+        &__ruName {
+            text-align: center;
+            font-weight: 600;
+            font-size: 30px;
+        }
+
+        &__enName {
+            text-align: center;
+            color: $skeleton-bg;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+    }
+}

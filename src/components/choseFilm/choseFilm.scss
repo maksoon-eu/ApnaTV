@@ -1,5 +1,15 @@
 @import '../../style/variables';
 
+.error__film {
+    font-size: 30px;
+    text-align: center;
+    position: absolute;
+    font-weight: 700;
+    right: 0;
+    left: 0;
+    top: 25%;
+}
+
 .choseFilm {
     position: relative;
     min-height: 800px;
@@ -143,6 +153,7 @@
     &__row {
         text-align: left;
         vertical-align: top;
+        overflow: hidden;
     }
 
     &__table {
