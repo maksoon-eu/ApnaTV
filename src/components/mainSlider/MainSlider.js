@@ -120,7 +120,7 @@ const MainSlider = () => {
         slidesToScroll: 1,
         autoplay: true,
         autoplaySpeed: 4000,
-        lazyLoad: true,
+        // lazyLoad: true,
         speed: 700,
         pauseOnHover: false
     };
