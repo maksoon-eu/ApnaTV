@@ -15,7 +15,6 @@ import ratingPlus from '../../resources/img/ratingPlus.svg';
 import ratingNone from '../../resources/img/ratingNone.svg';
 
 import 'react-lazy-load-image-component/src/effects/blur.css';
-import 'react-lazy-load-image-component/src/effects/opacity.css';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./mainSlider.scss";
@@ -86,7 +85,7 @@ const MainSlider = () => {
                 <div className="activeSlider__item">
                     <div className="activeSlider__item-left">
                         <div className="activeSlider__item-logo" style={{display: item.logo === null ? 'none' : 'flex'}}>
-                            <LazyLoadImage effect="opacity" src={item.logo} alt={item.name}/>
+                            <LazyLoadImage effect="blur" placeholderSrc={loadingImg} src={item.logo} alt={item.name}/>
                         </div>
                         <div className="activeSlider__item-title" style={{display: item.logo === null ? 'block' : 'none'}}>{item.name}</div>
                         <div className="activeSlider__item-subtitle">{item.description}</div>
