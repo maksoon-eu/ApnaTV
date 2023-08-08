@@ -16,7 +16,7 @@ import image from '../../resources/img/image.jpg'
 import './header.scss';
 
 const Header = () => {
-    const { theme, toggleTheme } = useContext(ThemeContext);
+    const { toggleTheme } = useContext(ThemeContext);
     const {error, loading, getSearchedFilms} = useWatchService();
     
     const [searchActive, setSearchActive] = useState(false)
@@ -26,6 +26,12 @@ const Header = () => {
     const ref = useRef()
     const refinput = useRef()
 
+    const spring = {
+        type: "spring",
+        stiffness: 700,
+        damping: 30
+    };
+    
     useEffect(() => {
         onRequest(name)
         // eslint-disable-next-line
@@ -123,7 +129,7 @@ const Header = () => {
                 </div>
                 <div className="header__item header__item--theme">
                     <div className="theme">
-                        <input onClick={() => toggleTheme()}className="input__theme" type="checkbox" id="switch" /><label className="label__theme" htmlFor="switch">Toggle</label>
+                    <motion.div layout transition={spring}><input onClick={() => toggleTheme()} className="input__theme" type="checkbox" id="switch" /><label className="label__theme" htmlFor="switch">Toggle</label></motion.div>
                     </div>
                     <div className="header__item-account">
                         <div ref={ref} className={`search ${searchActive ? 'active' : ''}`} tabIndex="1">

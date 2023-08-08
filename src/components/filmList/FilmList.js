@@ -11,7 +11,7 @@ import loadingImg from "../../resources/img/loading.svg"
 import './filmList.scss'
 import FilmListItem from "../filmListItem/FilmListItem";
 
-const FilmList = () => {
+const FilmList = ({onLicked}) => {
     const [films, setFilms] = useState([])
     const [offset, setOffset] = useState(localStorage.getItem('offset') === null ? 2 : +localStorage.getItem('offset'))
     const {error, loading, getAllFilms} = useWatchService();
@@ -88,7 +88,7 @@ const FilmList = () => {
 
     const filmList = films.map(item => {
         return (
-            <FilmListItem key={item.id} item={item}/>
+            <FilmListItem key={item.id} item={item} onLicked={onLicked}/>
         )
     })
 

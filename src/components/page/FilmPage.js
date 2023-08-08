@@ -1,10 +1,16 @@
 import ChoseFilm from "../choseFilm/ChoseFilm";
+import { motion } from "framer-motion";
 
 const FilmPage = () => {
     return (
-        <div className="app__inner">
+        <motion.div
+        className="app__inner"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        >
             <ChoseFilm/>
-        </div>
+        </motion.div>
     );
 };
 

@@ -1,7 +1,39 @@
 @import '../../style/variables';
 
-.filmList__item {
+.filmList__licked {
+    width: 182px;
+    position: relative;
     margin-top: 40px;
+    transition: .2s linear;
+
+    &:hover {
+        transform: translateY(-10px);
+    }
+}
+
+.licked {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    cursor: pointer;
+    z-index: 5;
+
+    svg {
+        width: 20px;
+        height: 18px;
+        path {
+            transition: .2s linear;
+        }
+    }
+
+    &:hover {
+        path {
+            fill: $hover-color;
+        }
+    }
+}
+
+.filmList__item {
     width: 182px;
     cursor: pointer;
     border-radius: 15px;
@@ -54,8 +86,6 @@
                 opacity: .7;
             }
         }
-
-        transform: translateY(-10px);
     }
 
     &-img {
@@ -80,6 +110,7 @@
             opacity: 0;
             transition: .2s linear;
             border-radius: 5px;
+            z-index: 4;
             
             &-rating {
                 position: relative;
@@ -151,8 +182,12 @@
 }
 
 @media (max-width: 768px) {
-    .filmList__item {
+    .filmList__licked {
+        width: 154px;
         margin-top: 20px;
+    }
+
+    .filmList__item {
         width: 154px;
         border-radius: 10px;
     
@@ -202,8 +237,12 @@
 }
 
 @media (max-width: 415px) {
-    .filmList__item {
+    .filmList__licked {
         margin-top: 10px;
+        width: 124px;
+    }
+
+    .filmList__item {
         width: 124px;
         border-radius: 8px;
         position: relative;

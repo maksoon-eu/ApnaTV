@@ -1,11 +1,17 @@
 import React from "react";
 import FilmList from "../filmList/FilmList";
+import { motion } from "framer-motion";
 
-const FilmListPage = () => {
+const FilmListPage = ({onLicked}) => {
     return (
-        <div className="app__inner">
-            <FilmList/>
-        </div>
+        <motion.div
+        className="app__inner"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        >
+            <FilmList onLicked={onLicked}/>
+        </motion.div>
     );
 };
 
