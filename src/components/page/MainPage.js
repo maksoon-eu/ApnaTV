@@ -66,6 +66,7 @@ const MainPage = ({onLicked}) => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
+        transition={{ duration: 0.2 }}
         >
             <MainSlider/>
             <div className="app__inner">
