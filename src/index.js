@@ -4,6 +4,7 @@ import App from './components/app/App';
 import { BrowserRouter as Router } from "react-router-dom";
 import './style/style.scss';
 import { ThemeProvider } from "../src/components/theme/Theme";
+import { LickedProvider } from "../src/components/licked/Licked";
 
 import WebFont from 'webfontloader';
 
@@ -18,7 +19,9 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     // <React.StrictMode>
     <ThemeProvider>
+      <LickedProvider>
         <Root/>
+      </LickedProvider>
     </ThemeProvider>
     // </React.StrictMode>
 );

@@ -19,12 +19,12 @@ const Header = () => {
     const { toggleTheme } = useContext(ThemeContext);
     const {error, loading, getSearchedFilms} = useWatchService();
     
-    const [searchActive, setSearchActive] = useState(false)
+    const [searchActive, setSearchActive] = useState(false);
     const [films, setFilms] = useState([]);
-    const [name, setName] = useState('%21null')
+    const [name, setName] = useState('%21null');
 
-    const ref = useRef()
-    const refinput = useRef()
+    const ref = useRef();
+    const refinput = useRef();
 
     const spring = {
         type: "spring",

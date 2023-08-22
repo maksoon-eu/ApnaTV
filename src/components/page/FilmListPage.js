@@ -2,7 +2,7 @@ import React from "react";
 import FilmList from "../filmList/FilmList";
 import { motion } from "framer-motion";
 
-const FilmListPage = ({onLicked}) => {
+const FilmListPage = () => {
     return (
         <motion.div
         className="app__inner"
@@ -11,7 +11,7 @@ const FilmListPage = ({onLicked}) => {
         exit={{ opacity: 0 }}
         transition={{ duration: 0.2 }}
         >
-            <FilmList onLicked={onLicked}/>
+            <FilmList/>
         </motion.div>
     );
 };
