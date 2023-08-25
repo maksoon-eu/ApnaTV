@@ -33,7 +33,13 @@ const Dropdown = ({loading, error, initCurrent, localStr, list, filterFilm, fetc
 
     const onDropdownActive = () => {
         if (!(loading || error)) {
-            setDropdownToggle(dropdownToggle => !dropdownToggle)
+            if (!dropdownToggle) {
+                setTimeout(() => {
+                    setDropdownToggle(true)
+                }, 200)
+            } else {
+                setDropdownToggle(false)
+            }
         }
     }
 
