@@ -27,6 +27,22 @@
         z-index: 2;
     }
 
+    &__licked {
+        text-align: center;
+        cursor: pointer;
+        margin-left: 20px;
+
+        path {
+            transition: .15s linear;
+        }
+
+        &:hover {
+            path {
+                fill: #FA4776;
+            }
+        }
+    }
+
     &__backdrop {
         position: absolute;
         max-height: 100vh;

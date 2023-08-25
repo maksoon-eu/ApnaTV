@@ -3,10 +3,14 @@
 .btn__flex {
     margin-top: 40px;
     display: flex;
-    max-width: 340px;
+    max-width: 425px;
     width: 100%;
     justify-content: space-between;
     align-items: center;
+
+    &--main {
+        max-width: 340px;
+    }
 }
 
 .watch__btn {

@@ -92,7 +92,7 @@ const MainSlider = () => {
                         <div className="activeSlider__item-rating">
                             <div className="rating-imdb">{addRaiting(item.ratingImdb)}</div>
                         </div>
-                        <div className="btn__flex">
+                        <div className="btn__flex btn__flex--main">
                             <Link to={`/films/${item.id}`}>
                                 <button className="watch__btn">
                                     <img src={watch} alt="" />
