@@ -56,7 +56,8 @@ const ModalWindow = ({url, onOpenModal, openModal}) => {
                             <button onClick={() => {onOpenModal(false)}} className="close">
                                 <img src={close} alt="close" />
                             </button>
-                            <iframe width="100%" height="100%" src={rusUrl.length === 0 ? urlsList : rusUrl} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
+                            {rusUrl.length === 0 ? <h1 style={{textAlign: 'center'}}>Трейлеры не найдены</h1> :
+                            <iframe width="100%" height="100%" src={rusUrl.length === 0 ? urlsList : rusUrl} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>}
                         </div>
                     </div>
                 </Modal>

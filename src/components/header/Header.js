@@ -16,7 +16,7 @@ import image from '../../resources/img/image.jpg'
 import './header.scss';
 
 const Header = () => {
-    const { toggleTheme } = useContext(ThemeContext);
+    const { theme, toggleTheme } = useContext(ThemeContext);
     const {error, loading, getSearchedFilms} = useWatchService();
     
     const [searchActive, setSearchActive] = useState(false);
@@ -25,6 +25,7 @@ const Header = () => {
 
     const ref = useRef();
     const refinput = useRef();
+    const refCheckbox = useRef();
 
     const spring = {
         type: "spring",
@@ -50,6 +51,15 @@ const Header = () => {
           document.removeEventListener("mousedown", clickOutElement)
         }
     }, [searchActive])
+
+    useEffect(() => {
+        if (theme === 'dark-theme') {
+            refCheckbox.current.checked = false;
+        } else {
+            refCheckbox.current.checked = true;
+        }
+        
+    }, [theme])
 
     const onRequest = (name) => {
         getSearchedFilms(encodeURI(name))
@@ -129,7 +139,7 @@ const Header = () => {
                 </div>
                 <div className="header__item header__item--theme">
                     <div className="theme">
-                    <motion.div layout transition={spring}><input onClick={() => toggleTheme()} className="input__theme" type="checkbox" id="switch" /><label className="label__theme" htmlFor="switch">Toggle</label></motion.div>
+                    <motion.div layout transition={spring}><input onClick={() => toggleTheme()} className="input__theme" type="checkbox" id="switch" ref={refCheckbox}/><label className="label__theme" htmlFor="switch">Toggle</label></motion.div>
                     </div>
                     <div className="header__item-account">
                         <div ref={ref} className={`search ${searchActive ? 'active' : ''}`} tabIndex="1">

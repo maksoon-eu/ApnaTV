@@ -67,8 +67,8 @@ const useWatchService = () => {
             name: item.name,
             posterBig: item.poster === null ? '' : item.poster.url,
             id: item.id,
-            logo: item.logo.url,
-            trailers: item.videos.trailers,
+            logo: item.logo === undefined ? null : item.logo.url,
+            trailers: item.videos  === undefined ? [] : item.videos.trailers,
             ratingImdb: item.rating.imdb, 
             ratingKp: item.rating.kp,
             ratingFilmCritics: item.rating.filmCritics,
@@ -79,13 +79,13 @@ const useWatchService = () => {
             budget: `${item.budget.value} ${item.budget.currency}`,
             movieLength: item.movieLength,
             ageRating: item.ageRating,
-            fees: `${item.fees.world.value} ${item.fees.world.currency}`,
+            fees: item.fees.world === undefined ? '...' : `${item.fees.world.value} ${item.fees.world.currency}`,
             persons: item.persons,
             backdrop: item.backdrop.url,
             similarMovies: item.similarMovies,
             sequelsAndPrequels: item.sequelsAndPrequels,
             alternativeName: item.alternativeName,
-            premiere: item.premiere.world
+            premiere: item.premiere === undefined ? '...' : item.premiere.world
         }
     }
 
