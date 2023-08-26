@@ -109,7 +109,7 @@
 
     &__img {
         width: 100%;
-        height: auto;
+        min-height: 500px;
         img {
             width: 100%;
             height: auto;
@@ -119,6 +119,8 @@
 
     &__logo {
         max-width: 600px;
+        min-width: 200px;
+        min-height: 100px;
 
         img {
             width: 100%;

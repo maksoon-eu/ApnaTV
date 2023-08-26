@@ -266,7 +266,7 @@ const ChoseFilm = () => {
                         </div>
                         <div className="choseFilm__right">
                             <div className="choseFilm__logo" style={{display: item.logo === null ? 'none' : 'block'}} key={item.logo}>
-                                <LazyLoadImage width='100%' height='100%' effect="opacity" src={item.logo} alt={item.name}/>
+                                <LazyLoadImage placeholderSrc={loadingImg} width='100%' height='100%' effect="blur" src={item.logo} alt={item.name}/>
                             </div>
                             <div className="choseFilm__name" style={{display: item.logo === null ? 'block' : 'none'}}>{item.name}</div>
                             <div className="choseFilm__names">
