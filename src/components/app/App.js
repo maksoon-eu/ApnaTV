@@ -2,7 +2,6 @@ import React, { useEffect, useLayoutEffect, useContext } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import { ThemeContext } from "../theme/Theme";
-import { LickedContext } from "../licked/Licked";
 
 import Header from "../header/Header";
 import MainPage from "../page/MainPage";
@@ -31,7 +30,6 @@ const App = () => {
     const location = useLocation();
 
     const { theme } = useContext(ThemeContext);
-    const { toggleLicked } = useContext(LickedContext);
     document.querySelector('html').className = theme;
 
     useEffect(() => {

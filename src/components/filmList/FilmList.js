@@ -1,7 +1,6 @@
 import React from "react";
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import useWatchService from "../../services/WatchService";
-import { LickedContext } from "../licked/Licked";
 
 import Filter from "../filter/Filter";
 import SkeletonSliderFilms from "../skeleton/SkeletonSliderFilms";
@@ -44,16 +43,20 @@ const FilmList = () => {
     }, [fetching])
 
     useEffect(() => {
-        if (films.length !== 0) {
+        if (films.length) {
             localStorage.setItem('films', JSON.stringify(films))
+            const scrollPosition = sessionStorage.getItem('scrollPosition');
+            if (scrollPosition) {
+                window.scrollTo(0, parseInt(scrollPosition, 10));
+                sessionStorage.removeItem('scrollPosition');
+            }
         }
-
         window.addEventListener('scroll', onScrollList);
 
         return function() {
             window.removeEventListener('scroll', onScrollList);
         }
-    }, [films])
+    }, [films]);
 
     const onRequest = () => {
         getAllFilms(1, type, year, rating, genre, country)

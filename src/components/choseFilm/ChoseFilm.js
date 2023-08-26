@@ -230,10 +230,10 @@ const ChoseFilm = () => {
 
     const mainContent = film.map(item => {
         return (
-            <div className="choseFilm__content" key={filmId}>
                 <motion.div
                 initial={{ opacity: 0}}
-                animate={{ opacity: 1}}>
+                animate={{ opacity: 1}}
+                className="choseFilm__content" key={filmId}>
                     <div className="choseFilm__backdrop" key={`1_${item.backdrop}`} style={{display: item.backdrop == null ? 'none' : 'block'}}>
                         <LazyLoadImage
                             width='100%' height='100%'
@@ -393,7 +393,6 @@ const ChoseFilm = () => {
 
                     <Film componentRef={ref} filmId={filmId} key={filmId}/>
                 </motion.div>
-            </div>
         )
     })
 
