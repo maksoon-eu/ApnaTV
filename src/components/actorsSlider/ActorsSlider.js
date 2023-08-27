@@ -1,6 +1,7 @@
 import Slider from "react-slick";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { Link } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
 
 import SkeletonSlider from "../skeleton/SkeletonSlider"
 import ErrorMessage from "../errorMessage/ErorrMessage"
@@ -68,15 +69,27 @@ const ActorsSlider = ({actorFilmList, loading, error, name}) => {
     const spinner = loading ? skeletonList : null
     const contentSlider =  !(loading || error) ? thisActorFilmList : null
     return (
-        <div style={{display: thisActorFilmList.length === 0 && !loading ? 'none' : 'block'}}>
-            <div className="genre__title" style={{opacity: name === undefined ? '0' : '1'}}>{`Фильмы с участием ${name}`}</div>
-            {thisActorFilmList.length > 0 || error || loading ? 
-            <Slider {...settings} className="main__slider genre__slider"> 
-                {errorMessage}  
-                {spinner}  
-                {contentSlider}  
-            </Slider> : <div className="genreSpinner"></div>}
-        </div>
+        <>
+            {thisActorFilmList.length === 0 && !loading ? null :
+            <>
+                {thisActorFilmList.length > 0 || error || loading ? 
+                <AnimatePresence mode="wait">
+                    <motion.div
+                        initial={{ opacity: 0}}
+                        animate={{ opacity: 1}}
+                        exit={{opacity: 0}}
+                        key={loading}
+                    >
+                        <div className="genre__title" style={{opacity: name === undefined ? '0' : '1'}}>{`Фильмы с участием ${name}`}</div>
+                        <Slider {...settings} className="main__slider genre__slider"> 
+                            {errorMessage}  
+                            {spinner}  
+                            {contentSlider}  
+                        </Slider>
+                    </motion.div>
+                </AnimatePresence> : ''}
+            </>}
+        </>
     );
 };
 

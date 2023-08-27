@@ -3,6 +3,10 @@
     justify-content: space-between;
     flex-wrap: wrap;
     min-height: 900px;
+}
+
+.film__minHeight {
+    min-height: 900px;
     position: relative;
 }
 
@@ -11,6 +15,7 @@
     left: 50%;
     transform: translateX(-50%);
     top: 100px;
+    text-align: center;
 }
 
 .spinnerUpdate {

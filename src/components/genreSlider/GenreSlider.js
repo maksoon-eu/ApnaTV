@@ -4,18 +4,19 @@ import useWatchService from "../../services/WatchService";
 import { Link } from "react-router-dom";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { LickedContext } from "../licked/Licked";
+import { motion, AnimatePresence } from "framer-motion";
 
-import SkeletonSlider from "../skeleton/SkeletonSlider"
-import ErrorMessage from "../errorMessage/ErorrMessage"
+import SkeletonSlider from "../skeleton/SkeletonSlider";
+import ErrorMessage from "../errorMessage/ErorrMessage";
 
-import loadingImg from "../../resources/img/loading.svg"
+import loadingImg from "../../resources/img/loading.svg";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import "../mainSlider/mainSlider.scss"
-import "./genreSlider.scss"
-import '../filmListItem/filmListItem.scss'
-import "../../style/btn.scss"
+import "../mainSlider/mainSlider.scss";
+import "./genreSlider.scss";
+import '../filmListItem/filmListItem.scss';
+import "../../style/btn.scss";
 
 const GenreSlider = ({genre, img}) => {
     const [films, setFilms] = useState([]);
@@ -114,19 +115,25 @@ const GenreSlider = ({genre, img}) => {
         ]
     };
 
-    const errorMessage = error ? <ErrorMessage/> : null
     const spinner = loading ? skeletonList : null
     const content =  !(loading || error) ? filmList : null
 
     return (
         <>
-            <div className="genre__title">{genre} <img src={img} alt="" /></div>
             {filmList.length > 0 || error || loading ? 
-            <Slider {...settings} className="main__slider genre__slider">
-                {errorMessage}
-                {spinner}
-                {content}
-            </Slider> : <div className="genreSpinner"></div>}
+            <AnimatePresence mode="wait">
+                <motion.div
+                    initial={{ opacity: 0}}
+                    animate={{ opacity: 1}}
+                    exit={{opacity: 0}}
+                    key={loading}
+                >
+                    <div className="genre__title">{genre} <img src={img} alt="" /></div>
+                    <Slider {...settings} className="main__slider genre__slider">
+                        {loading ? spinner  : error ? <ErrorMessage/> : content}
+                    </Slider>
+                </motion.div>
+            </AnimatePresence> : <div className="genreSpinner"></div>}
         </>
     );
 };

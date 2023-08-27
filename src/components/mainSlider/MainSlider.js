@@ -3,7 +3,7 @@ import Slider from "react-slick";
 import useWatchService from "../../services/WatchService";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { Link } from "react-router-dom";
-import { SwitchTransition, CSSTransition } from 'react-transition-group';
+import { motion, AnimatePresence } from "framer-motion";
 
 import Skeleton from "../skeleton/Skeleton";
 import ErrorMessage from "../errorMessage/ErorrMessage";
@@ -129,21 +129,19 @@ const MainSlider = () => {
     return (
         <>
             {modal}
-            <div style={{minHeight: '500px'}}>
-                <SwitchTransition mode="out-in">
-                    <CSSTransition
+            {films.length > 0 || error || loading ? 
+                <AnimatePresence mode="wait">
+                    <motion.div
+                        initial={{ opacity: 0}}
+                        animate={{ opacity: 1}}
+                        exit={{opacity: 0}}
                         key={loading}
-                        timeout={250}
-                        unmountOnExit
-                        unmountOnEnter
-                        classNames="poster__slider-content"
                     >
                         <Slider {...settings} className="poster__slider">
-                            {loading ? <Skeleton/>  : error ? <ErrorMessage/> : posterSlider}
+                            {loading ? <Skeleton/> : error ? <ErrorMessage/> : posterSlider}
                         </Slider>
-                    </CSSTransition>
-                </SwitchTransition>
-            </div>
+                    </motion.div>
+                </AnimatePresence> : <div className="genreSpinner"></div>}
         </>
     );
 };

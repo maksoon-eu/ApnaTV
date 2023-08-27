@@ -4,7 +4,7 @@ import useWatchService from "../../services/WatchService";
 import Slider from "react-slick";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { Link } from "react-router-dom";
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { LickedContext } from "../licked/Licked";
 
 import ModalWindow from "../modal/Modal";
@@ -230,10 +230,7 @@ const ChoseFilm = () => {
 
     const mainContent = film.map(item => {
         return (
-                <motion.div
-                initial={{ opacity: 0}}
-                animate={{ opacity: 1}}
-                className="choseFilm__content" key={filmId}>
+                <div className="choseFilm__content" key={filmId}>
                     <div className="choseFilm__backdrop" key={`1_${item.backdrop}`} style={{display: item.backdrop == null ? 'none' : 'block'}}>
                         <LazyLoadImage
                             width='100%' height='100%'
@@ -392,7 +389,7 @@ const ChoseFilm = () => {
                     </div>
 
                     <Film componentRef={ref} filmId={filmId} key={filmId}/>
-                </motion.div>
+                </div>
         )
     })
 
@@ -430,44 +427,67 @@ const ChoseFilm = () => {
     const contentSliderSimilar =  !(loading || error) ? similarMovieList : null
     const contentSliderSequel =  !(loading || error) ? sequelAndPrequelList : null
 
-    const spinner = loading ? <SkeletonChoose/> : null
-    const contentMain =  !(loading || error) ? mainContent : null
-
     const modal = url !== '' ? <ModalWindow openModal={openModal} onOpenModal={onOpenModal} url={url}/> : null
 
     return (
         <>
             {modal}
-            <div className="choseFilm">
-                {errorMessage}
-                {spinner}
-                {contentMain}
-                <div className="choseFilm__slider" style={{display: personsList.length === 0 && !loading ? 'none' : 'block'}}>
-                    <div className="genre__title">Актеры и съемочная группа</div>
-                    {personsList.length > 0 || error || loading ? <Slider {...settings} className="main__slider genre__slider"> 
-                        {errorMessage}  
-                        {spinnerSlider}  
-                        {contentSliderActor}    
-                    </Slider> : <div className="genreSpinner"></div>}
-                </div>
-                    
-                <div className="choseFilm__slider" style={{display: similarMovieList.length === 0 && !loading ? 'none' : 'block'}}>
-                    <div className="genre__title">Похожее</div>
-                    {similarMovieList.length > 0 || error || loading ? <Slider {...settings} className="main__slider genre__slider"> 
-                        {errorMessage}  
-                        {spinnerSlider}  
-                        {contentSliderSimilar}  
-                    </Slider> : <div className="genreSpinner"></div>}
-                </div>
-                
-                <div className="choseFilm__slider" style={{display: sequelAndPrequelList.length === 0 && !loading ? 'none' : 'block'}}>
-                    <div className="genre__title">Сиквелы и приквелы</div>
-                    {sequelAndPrequelList.length > 0 || error || loading ? <Slider {...settings} className="main__slider genre__slider"> 
-                        {errorMessage}  
-                        {spinnerSlider}  
-                        {contentSliderSequel}  
-                    </Slider> : <div className="genreSpinner"></div>}
-                </div>
+            <div style={{minHeight: '100vh'}}>
+                {film.length > 0 || error || loading ? 
+                <div className="choseFilm">
+                    <AnimatePresence mode="wait">
+                        <motion.div
+                            initial={{ opacity: 0}}
+                            animate={{ opacity: 1}}
+                            exit={{opacity: 0}}
+                            key={loading}
+                        >
+                            {loading ? <SkeletonChoose/> : error ? <ErrorMessage/> : mainContent}
+                        </motion.div>
+                    </AnimatePresence>
+
+                    <AnimatePresence mode="wait">
+                        <motion.div
+                            initial={{ opacity: 0}}
+                            animate={{ opacity: 1}}
+                            exit={{opacity: 0}}
+                            key={loading}
+                        >
+                            {!(loading || error) ? 
+                            <>
+                                <div className="choseFilm__slider" style={{display: personsList.length === 0 && !loading ? 'none' : 'block'}}>
+                                <div className="genre__title">Актеры и съемочная группа</div>
+                                {personsList.length > 0 || error || loading ? 
+                                    <Slider {...settings} className="main__slider genre__slider"> 
+                                        {errorMessage}  
+                                        {spinnerSlider}  
+                                        {contentSliderActor}    
+                                    </Slider> : <div className="genreSpinner"></div>}
+                                </div>
+                                
+                                <div className="choseFilm__slider" style={{display: similarMovieList.length === 0 && !loading ? 'none' : 'block'}}>
+                                    <div className="genre__title">Похожее</div>
+                                    {similarMovieList.length > 0 || error || loading ? 
+                                        <Slider {...settings} className="main__slider genre__slider"> 
+                                            {errorMessage}  
+                                            {spinnerSlider}  
+                                            {contentSliderSimilar}  
+                                        </Slider> : <div className="genreSpinner"></div>}
+                                </div>
+                                
+                                <div className="choseFilm__slider" style={{display: sequelAndPrequelList.length === 0 && !loading ? 'none' : 'block'}}>
+                                    <div className="genre__title">Сиквелы и приквелы</div>
+                                    {sequelAndPrequelList.length > 0 || error || loading ? 
+                                        <Slider {...settings} className="main__slider genre__slider"> 
+                                            {errorMessage}  
+                                            {spinnerSlider}  
+                                            {contentSliderSequel}  
+                                        </Slider>  : <div className="genreSpinner"></div>}
+                                </div> 
+                            </> : ''}
+                        </motion.div>
+                    </AnimatePresence>
+                </div> : ''}
             </div>
         </>
     );

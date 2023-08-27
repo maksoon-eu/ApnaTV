@@ -11,7 +11,7 @@ import ActorPage from "../page/ActorPage";
 import BottomPanel from "../bottomPanel/BottomPanel";
 import Footer from "../footer/Footer";
 
-import '../../style/style.scss'
+import '../../style/style.scss';
 
 const Wrapper = ({children}) => {
     const location = useLocation();

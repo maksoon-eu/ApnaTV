@@ -1,11 +1,10 @@
-import React from "react";
-import { CSSTransition } from 'react-transition-group';
+import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import Modal from 'react-modal';
 
-import close from "../../resources/img/close.svg"
+import close from "../../resources/img/close.svg";
 
-import './modal.scss'
+import './modal.scss';
 
 const ModalWindow = ({url, onOpenModal, openModal}) => {
     const [urlsList, setUrlsList] = useState(url)
@@ -45,10 +44,11 @@ const ModalWindow = ({url, onOpenModal, openModal}) => {
 
     return (
         <div className="modal">
-            <CSSTransition
-                in={openModal}
-                timeout={300}
-                classNames="dialog"
+            <motion.div
+                initial={{opacity: 0}}
+                variants={{open: {opacity: 1}, close: {opacity: 0}}}
+                animate={openModal ? 'open' : 'close'}
+                className="dialog"
             >
                 <Modal style={modalStyles} isOpen={openModal} closeTimeoutMS={300} className="modal__react">
                     <div className="modal__app">
@@ -61,7 +61,7 @@ const ModalWindow = ({url, onOpenModal, openModal}) => {
                         </div>
                     </div>
                 </Modal>
-            </CSSTransition>
+            </motion.div>
         </div>
     );
 };

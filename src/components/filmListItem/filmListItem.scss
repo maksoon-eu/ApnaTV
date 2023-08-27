@@ -26,12 +26,6 @@
             transition: .2s linear;
         }
     }
-
-    &:hover {
-        path {
-            fill: $hover-color;
-        }
-    }
 }
 
 .filmList__item {
@@ -238,6 +232,7 @@
 }
 
 @media (max-width: 415px) {
+    
     .filmList__licked {
         margin-top: 10px;
         width: 124px;

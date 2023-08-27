@@ -1,6 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import useWatchService from "../../services/WatchService";
+import { motion, AnimatePresence } from 'framer-motion';
 
 import Filter from "../filter/Filter";
 import SkeletonSliderFilms from "../skeleton/SkeletonSliderFilms";
@@ -43,8 +44,11 @@ const FilmList = () => {
     }, [fetching])
 
     useEffect(() => {
-        if (films.length) {
+        if (films.length !== 0) {
             localStorage.setItem('films', JSON.stringify(films))
+        }
+
+        if (films.length) {
             const scrollPosition = sessionStorage.getItem('scrollPosition');
             if (scrollPosition) {
                 window.scrollTo(0, parseInt(scrollPosition, 10));
@@ -82,7 +86,6 @@ const FilmList = () => {
         setTotalCount(item.total)
         if (JSON.parse(localStorage.getItem('films')) !== null && films.length === 0) {
             setFilms(JSON.parse(localStorage.getItem('films')))
-            console.log(1)
         } else { 
             setFilms(films => [...films, ...item.itemList])
         }
@@ -103,6 +106,7 @@ const FilmList = () => {
             setCountry('%21null')
             setRating('%21null')
             setType('%21null')
+            localStorage.clear('films')
         }
     }
 
@@ -140,19 +144,26 @@ const FilmList = () => {
         )
     })
 
-    const errorMessage = error ? <ErrorMessage/> : null
-    const spinner = loading && !fetching ? skeletonList : null
     const spinnerUpdate = fetching ? <img src={loadingImg} className="spinnerUpdate" alt="Loading..." /> : null
-    const content = !(error || spinner) ? filmList : null
-    const finalContent = !(totalCount || loading || error) ? <h1 className="nothing">Ничего не найдено</h1> : content
+    const finalContent = !totalCount ? <h1 className="nothing">Ничего не найдено</h1> : filmList
 
     return (
         <div>
             <Filter genreFilter={genre} typeFilter={type} yearFilter={year} ratingFilter={rating} countryFilter={country} cleanAllFilters={cleanAllFilters} fetching={fetching} filterFilm={filterFilm}/>
-            <div className="film__flex">
-                {errorMessage}  
-                {spinner}  
-                {finalContent}
+            <div className="film__minHeight">
+                {films.length > 0 || error || loading ?
+                <AnimatePresence mode="wait">
+                    <motion.div
+                        initial={{ opacity: 0}}
+                        animate={{ opacity: 1}}
+                        exit={{opacity: 0}}
+                        key={loading && !fetching}
+                        className="film__flex"
+                    >
+                    {loading && !fetching ? skeletonList : error ? <ErrorMessage/> : filmList}
+                    </motion.div>
+                </AnimatePresence> : ''}
+                {!totalCount ? <h1 className="nothing">Ничего не найдено</h1> : null}
             </div>
             {spinnerUpdate}
         </div>

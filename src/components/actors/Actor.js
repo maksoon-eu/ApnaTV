@@ -1,9 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import useWatchService from "../../services/WatchService";
 import { Link } from "react-router-dom";
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 
 import ActorsSlider from "../actorsSlider/ActorsSlider";
 import ErrorMessage from "../errorMessage/ErorrMessage";
@@ -16,8 +16,8 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import 'react-lazy-load-image-component/src/effects/blur.css';
 import 'react-lazy-load-image-component/src/effects/opacity.css';
-import './actor.scss'
-import '../genreSlider/genreSlider.scss'
+import './actor.scss';
+import '../genreSlider/genreSlider.scss';
 
 const Actor = () => {
     const [actor, setActor] = useState([]);
@@ -116,9 +116,6 @@ const Actor = () => {
     const mainContent = actor.map(item => {
         return (
             <div className="actorInfo" key={item.id}>
-                <motion.div
-                initial={{ opacity: 0}}
-                animate={{ opacity: 1}}>
                 <div className="actorInfo__flex">
                     <div className="actorInfo__flex-left">
                         <div className="actorInfo__photo">
@@ -166,21 +163,26 @@ const Actor = () => {
                         </table>
                     </div>
                 </div>
-                </motion.div>
             </div>
         )
     })
 
-    const errorMessage = error ? <ErrorMessage/> : null
-    const spinner = loading ? <SkeletonActor/> : null
-    const content =  !(loading || error) ? mainContent : null
-
     return (
         <div className="actor">
-            {errorMessage}
-            {spinner}
-            {content}
-            <ActorsSlider actorFilmList={thisActorFilms} loading={loading} error={error} name={name}/>
+            {actor.length > 0 || error || loading ?
+            <>
+                <AnimatePresence mode="wait">
+                    <motion.div
+                        initial={{ opacity: 0}}
+                        animate={{ opacity: 1}}
+                        exit={{opacity: 0}}
+                        key={loading}
+                    >
+                        {loading ? <SkeletonActor/> : error ? <ErrorMessage/> : mainContent}
+                    </motion.div>
+                </AnimatePresence>
+                <ActorsSlider actorFilmList={thisActorFilms} loading={loading} error={error} name={name}/>
+            </> : ''}
         </div>
     );
 };

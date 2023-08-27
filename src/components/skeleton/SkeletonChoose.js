@@ -1,10 +1,6 @@
-import { motion } from 'framer-motion';
-
 const SkeletonChoose = () => {
     return (
-        <motion.div
-        initial={{ opacity: 0}}
-        animate={{ opacity: 1}}>
+        <div>
             <div className="skeleton skeleton--main skeleton--choose">
                 <div className="pulse skeleton__choseFilm"></div>
                 <div className="pulse skeleton__header skeleton__header--choose">
@@ -81,7 +77,7 @@ const SkeletonChoose = () => {
                 </div>
             </div>
             <div className="skeleton__video"></div>
-        </motion.div>
+        </div>
     );
 };
 
