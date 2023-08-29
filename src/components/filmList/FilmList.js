@@ -114,20 +114,24 @@ const FilmList = () => {
         if (!fetching) {
             switch (Object.keys(filter)[0]) {
                 case 'genre':
-                    setGenre(genre => genre !== encodeURI(filter[Object.keys(filter)[0]]) && filter[Object.keys(filter)[0]] !== 'Все' ? encodeURI(filter[Object.keys(filter)[0]]) : '%21null')
+                    const encodeFilterGenre = encodeURI(filter.genre)
+                    setGenre(genre => genre !== encodeFilterGenre && filter.genre !== 'Все' ? encodeFilterGenre : '%21null')
                     break;
                 case 'year':
-                    setYear(year => year !== filter[Object.keys(filter)[0]] && filter[Object.keys(filter)[0]] !== 'Все' ? filter[Object.keys(filter)[0]] : '%21null')
+                    setYear(year => year !== filter.year && filter.year !== 'Все' ? filter.year : '%21null')
                     break;
                 case 'country':
-                    setCountry(country => country !== encodeURI(filter[Object.keys(filter)[0]]) && filter[Object.keys(filter)[0]] !== 'Все' ? encodeURI(filter[Object.keys(filter)[0]]) : '%21null')
+                    const encodeFilterCountry = encodeURI(filter.country)
+                    setCountry(country => country !== encodeFilterCountry && filter.country !== 'Все' ? encodeFilterCountry : '%21null')
                     break;
                 case 'rating':
-                    setRating(rating => rating !== `${filter[Object.keys(filter)[0]].slice(3, filter[Object.keys(filter)[0]].length-2)}-10` && filter[Object.keys(filter)[0]] !== 'Все' ? `${filter[Object.keys(filter)[0]].slice(3, filter[Object.keys(filter)[0]].length-2)}-10` : '%21null')
+                    setRating(rating => rating !== filter.ratingType && filter.rating !== 'Все' ? filter.ratingType : '%21null')
                     break;
                 case 'type':
-                    setType(type => type !== filter[Object.keys(filter)[1]] && filter[Object.keys(filter)[0]] !== 'Все' ? encodeURI(filter[Object.keys(filter)[1]]) : '%21null')
+                    setType(type => type !== filter.typeNum && filter.type !== 'Все' ? encodeURI(filter.typeNum) : '%21null')
                     break;
+                default:
+                    return
             }
         }
     }
@@ -145,7 +149,6 @@ const FilmList = () => {
     })
 
     const spinnerUpdate = fetching ? <img src={loadingImg} className="spinnerUpdate" alt="Loading..." /> : null
-    const finalContent = !totalCount ? <h1 className="nothing">Ничего не найдено</h1> : filmList
 
     return (
         <div>
@@ -160,7 +163,7 @@ const FilmList = () => {
                         key={loading && !fetching}
                         className="film__flex"
                     >
-                    {loading && !fetching ? skeletonList : error ? <ErrorMessage/> : filmList}
+                        {loading && !fetching ? skeletonList : error ? <ErrorMessage/> : filmList}
                     </motion.div>
                 </AnimatePresence> : ''}
                 {!totalCount ? <h1 className="nothing">Ничего не найдено</h1> : null}

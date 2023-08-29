@@ -24,10 +24,23 @@ const GenreSlider = ({genre, img}) => {
     const {error, loading, getGanreFilms} = useWatchService();
     const { licked, toggleLicked } = useContext(LickedContext);
 
+    const [width, setWidth] = useState(window.innerWidth);
+
+    const isMobile = width <= 768;
+
     useEffect(() => {
         onRequest()
         // eslint-disable-next-line
+
+        window.addEventListener('resize', handleWindowSizeChange);
+        return () => {
+            window.removeEventListener('resize', handleWindowSizeChange);
+        }
     }, [])
+
+    const handleWindowSizeChange = () => {
+        setWidth(window.innerWidth);
+    }
 
     const onRequest = () => {
         getGanreFilms(encodeURI(genre), Math.floor(Math.random() * 9) + 1)
@@ -92,6 +105,7 @@ const GenreSlider = ({genre, img}) => {
         slidesToShow: 6,
         swipeToSlide: true,
         slidesToScroll: 1,
+        lazyLoad: isMobile ? true : false,
         responsive: [
             {
               breakpoint: 1230,

@@ -26,11 +26,23 @@ const MainSlider = () => {
     const {error, loading, getTopFilms} = useWatchService();
 
     const [openModal, setOpenModal] = useState(false);
+    const [width, setWidth] = useState(window.innerWidth);
+
+    const isMobile = width <= 768;
 
     useEffect(() => {
         onRequest()
         // eslint-disable-next-line
+
+        window.addEventListener('resize', handleWindowSizeChange);
+        return () => {
+            window.removeEventListener('resize', handleWindowSizeChange);
+        }
     }, [])
+
+    const handleWindowSizeChange = () => {
+        setWidth(window.innerWidth);
+    }
 
     const onOpenModal = (bool, trailers) => {
         setOpenModal(bool)
@@ -119,7 +131,7 @@ const MainSlider = () => {
         slidesToScroll: 1,
         autoplay: true,
         autoplaySpeed: 4000,
-        // lazyLoad: true,
+        lazyLoad: isMobile ? true : false,
         speed: 700,
         pauseOnHover: false
     };

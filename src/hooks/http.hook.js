@@ -5,7 +5,7 @@ export const useHttp = () => {
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState(null)
 
-    const request = useCallback(async (url, method = 'GET', headers = {'Content-Type': 'application/json', 'X-API-KEY': 'H8BX044-17Y4H4J-PYP7M79-RXYNX8F', 'Accept': 'application/json'}) => {
+    const request = useCallback(async (url, method = 'GET', headers = {'Content-Type': 'application/json', 'X-API-KEY': 'H8BX044-17Y4H4J-PYP7M79-RXYNX8F', 'Accept': 'application/json', 'Access-Control-Allow-Origin' : '*'}) => {
 
     setLoading(true)
 

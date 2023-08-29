@@ -59,7 +59,7 @@ const Dropdown = ({loading, error, initCurrent, localStr, list, filterFilm, fetc
                     localStorage.setItem('viewType', e.currentTarget.textContent)
                     break;
                 case 'Рейтинг':
-                    filterFilm({rating: e.currentTarget.textContent})
+                    filterFilm({rating: e.currentTarget.textContent, ratingType: e.currentTarget.id})
                     localStorage.setItem('viewRating', e.currentTarget.textContent)
                     break;
                 case 'Год выхода':

@@ -13,7 +13,7 @@ const Filter = ({filterFilm, fetching, cleanAllFilters, genreFilter, typeFilter,
     const [country, setCountry] = useState([]);
     const type = [{filter: 'Фильмы', filterNum: 'movie'}, {filter: 'Сериалы', filterNum: 'tv-series'}, {filter: 'Мультики', filterNum: 'cartoon'}]
     const year = [{filter: '2022-2023'}, {filter: '2020-2021'}, {filter: '2018-2019'}, {filter: '2016-2017'}, {filter: '2014-2015'}, {filter: '2012-2013'}, {filter: '2000-2011'}]
-    const rating = [{filter: 'От 9.0'}, {filter: 'От 8.0'}, {filter: 'От 7.0'}, {filter: 'От 6.0'}, {filter: 'От 5.0'}, {filter: 'От 4.0'}, {filter: 'От 3.0'}]
+    const rating = [{filter: 'От 9.0', filterNum: '9-10'}, {filter: 'От 8.0', filterNum: '8-10'}, {filter: 'От 7.0', filterNum: '7-10'}, {filter: 'От 6.0', filterNum: '6-10'}, {filter: 'От 5.0', filterNum: '5-10'}, {filter: 'От 4.0', filterNum: '4-10'}, {filter: 'От 3.0', filterNum: '3-10'}]
     const {error, loading, getAllFilters} = useWatchService();
 
     useEffect(() => {
