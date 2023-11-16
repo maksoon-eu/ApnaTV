@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useContext } from "react";
+import { useState, useEffect, useRef, useContext, useLayoutEffect } from "react";
 import { useParams } from "react-router-dom";
 import useWatchService from "../../services/WatchService";
 import Slider from "react-slick";
@@ -26,21 +26,24 @@ import '../genreSlider/genreSlider.scss';
 const Film = ({filmId, componentRef}) => {
     useEffect(() => {
         const script = document.createElement('script');
-
-        script.src = "https://yohoho.cc/yo.js";
-        script.async = true;
-
+        script.src = 'https://kinobox.tv/kinobox.min.js';
+        script.defer = true;
+    
+        script.onload = () => {
+          if (window.Kinobox) {
+            new window.Kinobox('.kinobox_player', { search: { kinopoisk: filmId }, params: { all: { poster: 'https:example.org/poster.jpg' } } }).init();
+          }
+        };
+    
         document.body.appendChild(script);
-
+    
         return () => {
-            document.body.removeChild(script);
-        }
-    }, [])
+          document.body.removeChild(script);
+        };
+      }, [filmId]);
 
     return (
-        <div ref={componentRef} className="videoPlayer">
-            <div id="yohoho" data-resize="1" data-bazon="ba2b3ea3fa479d54e31b203ced60f366" style={{width: '100%'}} data-language="ru" data-country="RU" data-bg="#000" data-kinopoisk={filmId} data-loading={loadingImg}></div>
-        </div>
+        <div ref={componentRef} className="kinobox_player"></div>
     )
 }
 
@@ -388,7 +391,7 @@ const ChoseFilm = () => {
                         </table>
                     </div>
 
-                    <Film componentRef={ref} filmId={filmId} key={filmId}/>
+                    <Film componentRef={ref} filmId={filmId} image={item.backdrop ? item.backdrop : item.posterBig === '' ? image : item.posterBig} key={filmId}/>
                 </div>
         )
     })

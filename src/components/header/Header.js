@@ -21,7 +21,7 @@ const Header = () => {
     
     const [searchActive, setSearchActive] = useState(false);
     const [films, setFilms] = useState([]);
-    const [name, setName] = useState('%21null');
+    const [name, setName] = useState(' ');
 
     const ref = useRef();
     const refinput = useRef();
@@ -84,7 +84,7 @@ const Header = () => {
 
     const removeInputValue = () => {
         refinput.current.value = ''
-        setName('%21null')
+        setName(' ')
         refinput.current.focus()
     }
 
@@ -101,14 +101,14 @@ const Header = () => {
                             width='100%' height='100%'
                             effect="blur"
                             placeholderSrc={loadingImg}
-                            src={item.posterSmall === null ? image : item.posterSmall}
+                            src={!item.posterSmall ? image : item.posterSmall}
                             alt={item.name}
                         />
                     </div>
                     <div className="search__item-info">
                         <div className="search__item-name">{item.name === '' ? item.alternativeName : item.name}</div>
                         <div className="search__item-group">
-                            <div className={`search__item-rating ${item.rating >= 7 ? 'rating__green' : ''} ${item.rating <= 7 && item.rating >= 5 ? 'rating__yellow' : ''} ${item.rating <= 5 ? 'rating__red' : ''}`}>{item.rating.toFixed(1)}</div>
+                            <div className={`search__item-rating ${item.rating >= 7 ? 'rating__green' : ''} ${item.rating <= 7 && item.rating >= 5 ? 'rating__yellow' : ''} ${item.rating <= 5 ? 'rating__red' : ''}`}>{item.rating}</div>
                             <div className="search__item-year">{item.year}</div>
                         </div>
                     </div>
