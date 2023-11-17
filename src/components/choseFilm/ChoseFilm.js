@@ -23,7 +23,7 @@ import 'react-lazy-load-image-component/src/effects/opacity.css';
 import './choseFilm.scss';
 import '../genreSlider/genreSlider.scss';
 
-const Film = ({filmId, componentRef}) => {
+const Film = ({filmId, componentRef, image}) => {
     useEffect(() => {
         const script = document.createElement('script');
         script.src = 'https://kinobox.tv/kinobox.min.js';
@@ -31,7 +31,7 @@ const Film = ({filmId, componentRef}) => {
     
         script.onload = () => {
           if (window.Kinobox) {
-            new window.Kinobox('.kinobox_player', { search: { kinopoisk: filmId }, params: { all: { poster: 'https:example.org/poster.jpg' } } }).init();
+            new window.Kinobox('.kinobox_player', { search: { kinopoisk: filmId }, params: { all: { poster: image } } }).init();
           }
         };
     
