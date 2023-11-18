@@ -19,12 +19,12 @@ const useWatchService = () => {
 
     const getFilmForId = async (id) => {
         const res = await request(`${_apiBase}movie/${id}`)
-        return [res].flat().map(_transformFilmForId)
+        return [res].map(_transformFilmForId)
     }
 
     const getActorForId = async (id) => {
         const res = await request(`${_apiBase}person/${id}`)
-        return [res].flat().map(_transformActorForId)
+        return [res].map(_transformActorForId)
     }
 
     const getSearchedFilms = async (name = '%20') => {

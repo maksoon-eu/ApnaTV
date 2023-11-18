@@ -31,7 +31,7 @@ const Film = ({filmId, componentRef, image}) => {
     
         script.onload = () => {
           if (window.Kinobox) {
-            new window.Kinobox('.kinobox_player', { search: { kinopoisk: filmId }, params: { all: { poster: image } } }).init();
+            new window.Kinobox('.kinobox_player', { search: { kinopoisk: filmId, title: 'Интерстеллар' }, params: { all: { poster: image } } }).init();
           }
         };
     

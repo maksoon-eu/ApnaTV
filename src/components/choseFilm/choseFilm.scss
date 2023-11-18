@@ -39,8 +39,9 @@
 
     &__backdrop {
         position: absolute;
-        max-height: 100vh;
+        max-height: 85vh;
         top: -100px;
+        bottom: 50px;
         z-index: 1;
         right: -10px;
         left: -10px;
