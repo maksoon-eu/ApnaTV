@@ -41,8 +41,8 @@
         position: absolute;
         max-height: 85vh;
         top: -100px;
-        bottom: 50px;
-        z-index: 1;
+        bottom: 0px;
+        z-index: -1;
         right: -10px;
         left: -10px;
         text-align: center;
@@ -62,6 +62,7 @@
         img {
             width: 100%;
             max-height: 100vh;
+            object-fit: cover;
         }
 
         &:after {
@@ -105,10 +106,14 @@
     &__img {
         width: 100%;
         min-height: 500px;
+        display: flex;
+        align-items: end;
+
         img {
             width: 100%;
             height: auto;
             border-radius: 10px;
+            display: block;
         }
     }
 
@@ -118,9 +123,9 @@
         min-height: 100px;
 
         img {
-            width: 100%;
             max-height: 250px;
             height: auto;
+            object-fit: contain;
         }
     }
 

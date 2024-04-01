@@ -102,7 +102,7 @@ const MainSlider = () => {
                         <div className="activeSlider__item-title" style={{display: item.logo === null ? 'block' : 'none'}}>{item.name}</div>
                         <div className="activeSlider__item-subtitle">{item.description}</div>
                         <div className="activeSlider__item-rating">
-                            <div className="rating-imdb">{addRaiting(item.ratingImdb)}</div>
+                            <div className="rating-imdb">{addRaiting(item.rating)}</div>
                         </div>
                         <div className="btn__flex btn__flex--main">
                             <Link to={`/films/${item.id}`}>
@@ -130,7 +130,7 @@ const MainSlider = () => {
         slidesToShow: 1,
         slidesToScroll: 1,
         autoplay: true,
-        autoplaySpeed: 4000,
+        autoplaySpeed: 7000,
         lazyLoad: isMobile ? true : false,
         speed: 700,
         pauseOnHover: false

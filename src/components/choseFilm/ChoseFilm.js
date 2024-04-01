@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useContext, useLayoutEffect } from "react";
+import { useState, useEffect, useRef, useContext } from "react";
 import { useParams } from "react-router-dom";
 import useWatchService from "../../services/WatchService";
 import Slider from "react-slick";
@@ -6,6 +6,7 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from 'framer-motion';
 import { LickedContext } from "../licked/Licked";
+import moment from 'moment';
 
 import ModalWindow from "../modal/Modal";
 import SkeletonSlider from "../skeleton/SkeletonSlider";
@@ -23,6 +24,8 @@ import 'react-lazy-load-image-component/src/effects/opacity.css';
 import './choseFilm.scss';
 import '../genreSlider/genreSlider.scss';
 
+import 'moment/locale/ru';
+
 const Film = ({filmId, componentRef, image}) => {
     useEffect(() => {
         const script = document.createElement('script');
@@ -31,7 +34,7 @@ const Film = ({filmId, componentRef, image}) => {
     
         script.onload = () => {
           if (window.Kinobox) {
-            new window.Kinobox('.kinobox_player', { search: { kinopoisk: filmId, title: 'Интерстеллар' }, params: { all: { poster: image } } }).init();
+            new window.Kinobox('.kinobox_player', { search: { kinopoisk: filmId }, params: { all: { poster: image } } }).init();
           }
         };
     
@@ -80,61 +83,18 @@ const ChoseFilm = () => {
     }
 
     const onFilmLoaded = (film) => {
+        moment.locale('ru');
+
         setFilm(film)
 
         setUrl(film[0].trailers)
         setSimilarMovies(film[0].similarMovies)
         setSequelsAndPrequels(film[0].sequelsAndPrequels)
         setPersons(film[0].persons)
-        setRating(film[0].ratingKp.toFixed(1))
-        setGenres(film[0].genres.map((item, i) => {
-            return i === film[0].genres.length - 1 ? item.name : `${item.name}, `
-        }))
-        setCountry(film[0].country.map((item, i) => {
-            return i === film[0].country.length - 1 ? item.name : `${item.name}, `
-        }))
-        const premiere = film[0].premiere === undefined ? '...' : film[0].premiere.slice(0, 10).split('-')
-        switch (premiere[1]) {
-            case '01':
-                setPremiere([premiere[2], ' января ', premiere[0]])
-                break;
-            case '02':
-                setPremiere([premiere[2], ' февраля ', premiere[0]])
-                break;
-            case '03':
-                setPremiere([premiere[2], ' марта ', premiere[0]])
-                break;
-            case '04':
-                setPremiere([premiere[2], ' апреля ', premiere[0]])
-                break;
-            case '05':
-                setPremiere([premiere[2], ' мая ', premiere[0]])
-                break;
-            case '06':
-                setPremiere([premiere[2], ' июня ', premiere[0]])
-                break;
-            case '07':
-                setPremiere([premiere[2], ' июля ', premiere[0]])
-                break;
-            case '08':
-                setPremiere([premiere[2], ' августа ', premiere[0]])
-                break;
-            case '09':
-                setPremiere([premiere[2], ' сентября ', premiere[0]])
-                break;
-            case '10':
-                setPremiere([premiere[2], ' октября ', premiere[0]])
-                break;
-            case '11':
-                setPremiere([premiere[2], ' ноября ', premiere[0]])
-                break;
-            case '12':
-                setPremiere([premiere[2], ' декабря ', premiere[0]])
-                break;
-            default:
-                setPremiere('...')
-                break;
-        }
+        setRating(film[0].rating.toFixed(1))
+        setGenres(film[0].genres.map(item => item.name).join(', '))
+        setCountry(film[0].country.map(item => item.name).join(', '))
+        setPremiere(!film[0].premiere ? '...' : moment(film[0].premiere).format('LL'))
     }
 
     const onScrollToFilm = () => {
@@ -232,28 +192,29 @@ const ChoseFilm = () => {
     })
 
     const mainContent = film.map(item => {
+        const movieLength = item.typeNumber === 2 ? item.seriesLength : item.movieLength
         return (
                 <div className="choseFilm__content" key={filmId}>
-                    <div className="choseFilm__backdrop" key={`1_${item.backdrop}`} style={{display: item.backdrop == null ? 'none' : 'block'}}>
-                        <LazyLoadImage
-                            width='100%' height='100%'
-                            effect="blur"
-                            placeholderSrc={loadingImg}
-                            src={item.backdrop}
-                            alt={item.name}
-                        />
-                    </div>
-                    <div className="choseFilm__backdrop choseFilm__backdrop-none" key={item.backdrop} style={{display: item.backdrop === null ? 'block' : 'none'}}>
-                    <LazyLoadImage
-                            width='100%' height='100%'
-                            effect="blur"
-                            placeholderSrc={loadingImg}
-                            src={item.posterBig === '' ? image : item.posterBig}
-                            alt={item.name}
-                        />
-                    </div>
                     <div className="choseFilm__flex">
-                        <div className="choseFilm__left">
+                        <div className="choseFilm__backdrop" key={`1_${item.backdrop}`} style={{display: item.backdrop == null ? 'none' : 'block'}}>
+                            <LazyLoadImage
+                                width='100%' height='100%'
+                                effect="blur"
+                                placeholderSrc={loadingImg}
+                                src={item.backdrop}
+                                alt={item.name}
+                            />
+                        </div>
+                        <div className="choseFilm__backdrop choseFilm__backdrop-none" key={item.backdrop} style={{display: item.backdrop === null ? 'block' : 'none'}}>
+                            <LazyLoadImage
+                                width='100%' height='100%'
+                                effect="blur"
+                                placeholderSrc={loadingImg}
+                                src={item.posterBig === '' ? image : item.posterBig}
+                                alt={item.name}
+                            />
+                        </div>
+                    <div className="choseFilm__left">
                             <div className="choseFilm__img" key={item.posterBig}>
                                 <LazyLoadImage 
                                     width='100%' height='100%'
@@ -290,7 +251,7 @@ const ChoseFilm = () => {
                         </div>
                             </div>
                         </div>
-                        <div className={`choseFilm__rating ${item.ratingKp >= 7 ? 'greenText' : ''} ${item.ratingKp <= 7 && item.ratingKp >= 5 ? 'yellowText' : ''} ${item.ratingKp <= 5 ? 'redText' : ''}`}>
+                        <div className={`choseFilm__rating ${item.rating >= 7 ? 'greenText' : ''} ${item.rating <= 7 && item.rating >= 5 ? 'yellowText' : ''} ${item.rating <= 5 ? 'redText' : ''}`}>
                             {rating}
                         </div>
                     </div>
@@ -301,7 +262,7 @@ const ChoseFilm = () => {
                             <tbody> 
                                 <tr className="choseFilm__row">
                                     <th className="choseFilm__title">Год</th>
-                                    <td className="choseFilm__text">{item.year === null ? '...' : item.year}</td>
+                                    <td className="choseFilm__text">{item.year === null ? '...' : item.year + ' г.'}</td>
                                 </tr>
                                 <tr className="choseFilm__row">
                                     <th className="choseFilm__title">Страна</th>
@@ -312,12 +273,12 @@ const ChoseFilm = () => {
                                     <td className="choseFilm__text">{genres}</td>
                                 </tr>
                                 <tr className="choseFilm__row">
-                                    <th className="choseFilm__title">Длительность</th>
-                                    <td className="choseFilm__text">{item.movieLength === null ? '...' : item.movieLength + ' мин / ' + Math.floor(item.movieLength / 60) + ' ч ' + item.movieLength % 60 + ' мин'}</td>
+                                    <th className="choseFilm__title">{item.typeNumber === 2 ? 'Длительность серии' : 'Длительность'}</th>
+                                    <td className="choseFilm__text">{!movieLength ? '...' : movieLength + ' мин / ' + Math.floor(movieLength / 60) + ' ч ' + movieLength % 60 + ' мин'}</td>
                                 </tr>
                                 <tr className="choseFilm__row">
-                                    <th className="choseFilm__title">Бюджет</th>
-                                    <td className="choseFilm__text">{item.budget === 'undefined undefined' ? '...' : item.budget}</td>
+                                    <th className="choseFilm__title">{item.typeNumber === 2 ? 'Конец' : 'Бюджет'}</th>
+                                    <td className="choseFilm__text">{item.typeNumber === 2 && item.status === 'completed' ? item.typeNumber === 2 && item.status !== 'completed' ? 'Не завершен' : item.endYear + ' г.' : item.budget === 'undefined undefined' ? '...' : item.budget}</td>
                                 </tr>
                                 <tr className="choseFilm__row">
                                     <th className="choseFilm__title">Сборы в мире</th>

@@ -55,7 +55,7 @@ const useWatchService = () => {
             name: item.name,
             alternativeName: item.alternativeName,
             posterSmall: item.poster ? item.poster.previewUrl : null,
-            rating: item.rating.imdb ? item.rating.imdb : item.rating.await,
+            rating: item.rating.imdb || item.rating.kp || item.rating.filmCritics,
             year: item.year,
             id: item.id
         }
@@ -64,13 +64,11 @@ const useWatchService = () => {
     const _transformFilmForId = (item) => {
         return {
             name: item.name,
-            posterBig: item.poster === null ? '' : item.poster.url,
+            posterBig: !item.poster ? '' : item.poster.url,
             id: item.id,
-            logo: item.logo === undefined ? null : item.logo.url,
-            trailers: item.videos  === undefined ? [] : item.videos.trailers,
-            ratingImdb: item.rating.imdb, 
-            ratingKp: item.rating.kp,
-            ratingFilmCritics: item.rating.filmCritics,
+            logo: !item.logo ? null : item.logo.url,
+            trailers: !item.videos ? [] : item.videos.trailers,
+            rating: item.rating.imdb || item.rating.kp || item.rating.filmCritics,
             year: item.year,
             country: item.countries,
             genres: item.genres,
@@ -78,13 +76,17 @@ const useWatchService = () => {
             budget: `${item.budget.value} ${item.budget.currency}`,
             movieLength: item.movieLength,
             ageRating: item.ageRating,
-            fees: item.fees.world === undefined ? '...' : `${item.fees.world.value} ${item.fees.world.currency}`,
+            fees: !item.fees.world ? '...' : `${item.fees.world.value} ${item.fees.world.currency}`,
             persons: item.persons,
             backdrop: item.backdrop.url,
             similarMovies: item.similarMovies,
             sequelsAndPrequels: item.sequelsAndPrequels,
             alternativeName: item.alternativeName,
-            premiere: item.premiere === undefined ? '...' : item.premiere.world
+            premiere: !item.premiere ? '...' : item.premiere.world,
+            typeNumber: item.typeNumber,
+            seriesLength: item.seriesLength,
+            endYear: item.typeNumber === 2 ? item.releaseYears[0].end : '...',
+            status: item.status
         }
     }
 
@@ -107,8 +109,7 @@ const useWatchService = () => {
     const _transformTopFilms = (item) => {
         return {
             name: item.name, 
-            ratingImdb: item.rating.imdb, 
-            ratingKp: item.rating.kp, 
+            rating: item.rating.imdb || item.rating.kp || item.rating.filmCritics,
             description: item.shortDescription, 
             posterBig: item.poster.url, 
             posterSmall: item.poster.previewUrl,
@@ -124,7 +125,7 @@ const useWatchService = () => {
             name: item.name,
             posterSmall: item.poster.previewUrl,
             alternativeName: item.alternativeName,
-            ratingImdb: item.rating.imdb, 
+            rating: item.rating.imdb || item.rating.kp || item.rating.filmCritics,
             year: item.year,
             country: item.countries,
             genre: item.genres,
